@@ -38,6 +38,10 @@ Route::group(['prefix' => 'aMahasiswa'], function () {
     Route::get('/{id}/show_ajax', [aMahasiswaController::class, 'show_ajax']);
     Route::get('/create_ajax', [aMahasiswaController::class, 'create_ajax']);
     Route::post('/ajax', [aMahasiswaController::class, 'store_ajax']);
+    Route::get('{id}/edit_ajax', [aMahasiswaController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [aMahasiswaController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [aMahasiswaController::class, 'confirm_ajax']);
+    Route::delete('/{id}/delete_ajax', [aMahasiswaController::class, 'delete_ajax']);
 });
 
 // user admin

@@ -1,15 +1,32 @@
-<form action="{{ url('/aMahasiswa/update_ajax/' . $aMahasiswa->id_mahasiswa) }}" method="POST" id="form-edit">
+@empty($aMahasiswa)
+<div id="modal-master" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Kesalahan</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-danger">
+                <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
+                Data yang anda cari tidak ditemukan
+            </div>
+            <a href="{{ url('/aMahasiswa') }}" class="btn btn-warning">Kembali</a>
+        </div>
+    </div>
+</div>
+@else
+<form action="{{ url('/aMahasiswa/' . $aMahasiswa->id_mahasiswa . '/update_ajax') }}" method="POST" id="form-edit">
     @csrf
+    @method('PUT')
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Edit Data Mahasiswa</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="close" data-dismiss="modal" aria label="Close"><span
+                        aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <!-- Input level_id disembunyikan, sudah otomatis mahasiswa -->
                 <input type="hidden" name="id_level" id="id_level" value="4">
 
                 <div class="form-group">
@@ -54,24 +71,28 @@
                 </div>
                 <div class="form-group">
                     <label>Avatar</label>
-                    <input value="{{ $aMahasiswa->avatar }}" type="file" name="avatar" id="avatar" class="form-control" required>
+                    <input value="" type="file" name="avatar" id="avatar" class="form-control" required>
                     <small id="error-avatar" class="error-text form-text text-danger"></small>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
         </div>
+    </div>
 </form>
-
 <script>
     $(document).ready(function() {
         $("#form-edit").validate({
             rules: {
                 username: {
                     required: true,
-                    minlength:5,
-                    maxlength:30
+                    minlength: 5,
+                    maxlength: 30
                 },
                 password: {
-                    required: true,
+                    required: false,
                     minlength: 5,
                     maxlength: 20
                 },
@@ -83,7 +104,6 @@
                 prodi: {
                     required: true,
                     minlength: 5,
-                    maxlength: 20
                 },
                 email: {
                     required: true,
@@ -118,7 +138,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataMahasiswa.ajax.reload();
+                            dataUser.ajax.reload();
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {
@@ -148,3 +168,4 @@
         });
     });
 </script>
+@endempty

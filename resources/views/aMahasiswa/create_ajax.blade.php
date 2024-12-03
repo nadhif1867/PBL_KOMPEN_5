@@ -89,7 +89,6 @@
                 prodi: {
                     required: true,
                     minlength: 5,
-                    maxlength: 20
                 },
                 email: {
                     required: true,

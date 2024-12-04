@@ -105,69 +105,6 @@ class aMahasiswaController extends Controller
         return redirect('/aMahasiswa');
     }
 
-    // public function edit_ajax(String $id)
-    // {
-    //     // Cari data mahasiswa berdasarkan ID
-    //     $aMahasiswa = MahasiswaModel::find($id);
-
-    //     return view('aMahasiswa.edit_ajax', ['$aMahasiswa' => $aMahasiswa]);
-    // }
-
-    // public function update_ajax(Request $request, $id)
-    // {
-    //     // Cek apakah request dari ajax
-    //     if ($request->ajax() || $request->wantsJson()) {
-    //         $rules = [
-    //             'id_level' => 'required|integer',
-    //             'username' => 'required|string|max:30|unique:m_mahasiswa,username' . $id . 'id_mahasiswa',
-    //             'password' => 'nullable|min:5',
-    //             'nim' => 'required|string|min:3|unique:m_mahasiswa,nim' . $id . 'id_mahasiswa',
-    //             'prodi' => 'required|string|min:3',
-    //             'email' => 'required|string|',
-    //             'tahun_masuk' => 'required|integer|',
-    //             'no_telepon' => 'required|string|',
-    //             'nama' => 'required|string|max:100',
-    //             'avatar' => 'nullable'
-    //         ];
-
-    //         // Validasi input
-    //         $validator = Validator::make($request->all(), $rules);
-
-    //         if ($validator->fails()) {
-    //             return response()->json([
-    //                 'status' => false,
-    //                 'message' => 'Validasi Gagal',
-    //                 'msgField' => $validator->errors(),
-    //             ]);
-    //         }
-
-    //         $aMahasiswa = MahasiswaModel::find($id);
-    //         if ($aMahasiswa) {
-    //             if (!$request->filled('password')) {
-    //                 // Jika password tidak diisi, hapus dari request
-    //                 $request->request->remove('password');
-    //             } else {
-    //                 // Hash password jika ada
-    //                 $request->merge(['password' => bcrypt($request->password)]);
-    //             }
-
-    //             $aMahasiswa->update($request->all());
-
-    //             return response()->json([
-    //                 'status' => true,
-    //                 'message' => 'Data mahasiswa berhasil diupdate'
-    //             ]);
-    //         } else {
-    //             return response()->json([
-    //                 'status' => false,
-    //                 'message' => 'Data mahasiswa tidak ditemukan'
-    //             ]);
-    //         }
-    //     }
-
-    //     return redirect('/aMahasiswa');
-    // }
-
     public function edit_ajax(String $id)
     {
         $aMahasiswa = MahasiswaModel::find($id);

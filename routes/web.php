@@ -49,6 +49,12 @@ Route::group(['prefix' => 'aAdmin'], function () {
     Route::get('/', [aAdminController::class, 'index']);
     Route::post('/list', [aAdminController::class, 'list']);
     Route::get('/{id}/show_ajax', [aAdminController::class, 'show_ajax']);
+    Route::get('/create_ajax', [aAdminController::class, 'create_ajax']);
+    Route::post('/ajax', [aAdminController::class, 'store_ajax']);
+    Route::get('{id}/edit_ajax', [aAdminController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [aAdminController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [aAdminController::class, 'confirm_ajax']);
+    Route::delete('/{id}/delete_ajax', [aAdminController::class, 'delete_ajax']);
 });
 
 // user dosen
@@ -56,6 +62,12 @@ Route::group(['prefix' => 'aDosen'], function () {
     Route::get('/', [aDosenController::class, 'index']);
     Route::post('/list', [aDosenController::class, 'list']);
     Route::get('/{id}/show_ajax', [aDosenController::class, 'show_ajax']);
+    Route::get('/create_ajax', [aDosenController::class, 'create_ajax']);
+    Route::post('/ajax', [aDosenController::class, 'store_ajax']);
+    Route::get('{id}/edit_ajax', [aDosenController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [aDosenController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [aDosenController::class, 'confirm_ajax']);
+    Route::delete('/{id}/delete_ajax', [aDosenController::class, 'delete_ajax']);
 });
 
 // user tendik
@@ -63,6 +75,12 @@ Route::group(['prefix' => 'aTendik'], function () {
     Route::get('/', [aTendikController::class, 'index']);
     Route::post('/list', [aTendikController::class, 'list']);
     Route::get('/{id}/show_ajax', [aTendikController::class, 'show_ajax']);
+    Route::get('/create_ajax', [aTendikController::class, 'create_ajax']);
+    Route::post('/ajax', [aTendikController::class, 'store_ajax']);
+    Route::get('{id}/edit_ajax', [aTendikController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [aTendikController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [aTendikController::class, 'confirm_ajax']);
+    Route::delete('/{id}/delete_ajax', [aTendikController::class, 'delete_ajax']);
 });
 
 // daftar mahasiswa alpha
@@ -70,6 +88,8 @@ Route::group(['prefix' => 'aMahasiswaAlpha'], function () {
     Route::get('/', [aMahasiswaAlphaController::class, 'index']);
     Route::post('/list', [aMahasiswaAlphaController::class, 'list']);
     Route::get('/{id}/show_ajax', [aMahasiswaAlphaController::class, 'show_ajax']);
+    Route::get('/import', [aMahasiswaAlphaController::class, 'import']);
+    Route::post('/import_ajax', [aMahasiswaAlphaController::class, 'import_ajax']);
 });
 
 // manage bidang kompetensi

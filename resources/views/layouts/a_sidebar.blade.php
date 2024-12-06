@@ -103,7 +103,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('/aDaftarMahasiswaKompen') }}" class="nav-link {{ ($activeMenu == 'aDMKompen')?
+                        <a href="{{ url('/aMahasiswaKompen') }}" class="nav-link {{ ($activeMenu == 'aMahasiswaKompen')?
 'active' : '' }} ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Daftar Mahasiswa Kompen</p>

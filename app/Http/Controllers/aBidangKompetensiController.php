@@ -105,7 +105,7 @@ class aBidangKompetensiController extends Controller
             $rules =
                 [
                     'nama_bidkom' => 'required|string|min:2',
-                    'tag_bidkom' => 'required|string|min:2|unique:m_bidang_kompetensi,tag_bidkom',
+                    'tag_bidkom' => 'required|string|min:2',
                 ];
 
             $validator = Validator::make($request->all(), $rules);
@@ -142,7 +142,7 @@ class aBidangKompetensiController extends Controller
         } {
             $rules = [
                 'nama_bidkom' => 'required|string|min:2',
-                'tag_bidkom' => 'required|string|min:2|unique:m_bidang_kompetensi,tag_bidkom,' . $id . ',id_bidkom',
+                'tag_bidkom' => 'required|string|min:2',
             ];
 
             // use Illuminate\Support\Facades\vaidator

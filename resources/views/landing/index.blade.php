@@ -140,7 +140,7 @@
     <div class="content">
         <p class="login-text">Login Sebagai:</p>
         <div class="btn-container">
-            <a href="{{ url('login/admin') }}" class="btn admin">Admin</a>
+            <a href="{{ url('admin_login') }}" class="btn admin">Admin</a>
             <a href="{{ url('login/dosentendik') }}" class="btn dosen">Dosen/Tendik</a>
             <a href="{{ url('login/mahasiswa') }}" class="btn mahasiswa">Mahasiswa</a>
         </div>

@@ -6,10 +6,12 @@ use App\Http\Controllers\aDosenController;
 use App\Http\Controllers\aLevelController;
 use App\Http\Controllers\aMahasiswaAlphaController;
 use App\Http\Controllers\aMahasiswaController;
+use App\Http\Controllers\aMahasiswaKompenController;
 use App\Http\Controllers\aTendikController;
 use App\Http\Controllers\aWelcomeController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,23 +28,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LandingController::class, 'index']);
 
 // login admin
-use App\Http\Controllers\AuthController;
+
 
 // Route Login Admin
-Route::group(['prefix' => 'aLevel'], function (){
-    Route::get('/login', [AuthController::class, 'adminLogin'])->name('admin.login');
-    Route::post('/login', [AuthController::class, 'adminAuthenticate'])->name('admin.login.auth');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
-});
+// Route::pattern('id', '[0-9]+');
 
+// Route::get('admin_login', [AuthController::class, 'adminlogin'])->name('adminlogin');
+// Route::post('admin_login', [AuthController::class, 'adminpostlogin']);
+// Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 
-// Route Welcome Page Admin
-Route::get('/a_welcome', function () {
-    $user = session('user');
-    return view('a_welcome', compact('user'));
-})->name('a_welcome')->middleware('auth');
-
-
+// Route::middleware(['auth'])->group(function () {
 
 // {{ For Admin }}
 // dashboard
@@ -115,6 +110,17 @@ Route::group(['prefix' => 'aMahasiswaAlpha'], function () {
     Route::post('/import_ajax', [aMahasiswaAlphaController::class, 'import_ajax']);
 });
 
+// daftar mahasiswa alpha
+Route::group(['prefix' => 'aMahasiswaKompen'], function () {
+    Route::get('/', [aMahasiswaKompenController::class, 'index']);
+    Route::post('/list', [aMahasiswaKompenController::class, 'list']);
+    Route::get('/{id}/show_ajax', [aMahasiswaKompenController::class, 'show_ajax']);
+    Route::get('{id}/edit_ajax', [aMahasiswaKompenController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [aMahasiswaKompenController::class, 'update_ajax']);
+    Route::get('/import', [aMahasiswaKompenController::class, 'import']);
+    Route::post('/import_ajax', [aMahasiswaKompenController::class, 'import_ajax']);
+});
+
 // manage bidang kompetensi
 Route::group(['prefix' => 'aBidangKompetensi'], function () {
     Route::get('/', [aBidangKompetensiController::class, 'index']);
@@ -127,3 +133,4 @@ Route::group(['prefix' => 'aBidangKompetensi'], function () {
     Route::get('/{id}/delete_ajax', [aBidangKompetensiController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [aBidangKompetensiController::class, 'delete_ajax']);
 });
+// });

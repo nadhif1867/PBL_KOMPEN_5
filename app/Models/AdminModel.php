@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class AdminModel extends Model
 {
@@ -25,10 +25,6 @@ class AdminModel extends Model
     {
         return $this->belongsTo(LevelModel::class, 'id_level', 'id_level');
     }
-
-    // public function tugas(): HasMany {
-    //     return $this->hasMany()
-    // }
 
     public function getRoleName(): string
     {

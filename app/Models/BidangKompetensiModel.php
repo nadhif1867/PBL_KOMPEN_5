@@ -15,4 +15,5 @@ class BidangKompetensiModel extends Model
     protected $primaryKey = 'id_bidkom'; // Mendefinisikan primary key
 
     protected $fillable = ['nama_bidkom', 'tag_bidkom'];
+
 }

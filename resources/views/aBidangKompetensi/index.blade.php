@@ -4,6 +4,9 @@
 <div class="card card-outline card-primary">
     <div class="card-header">
         <h3 class="card-title">{{ $page->title }}</h3>
+        <div class="card-tools">
+            <button onclick="modalAction('{{ url('aBidangKompetensi/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah</button>
+        </div>
     </div>
     <div class="card-body">
         @if (session('success'))
@@ -12,7 +15,7 @@
         @if (session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
-        <table class="table-bordered table-striped table-hover table-sm table" id="tabel_bidkom">
+        <table class="table table-bordered table-striped table-hover table-sm" id="table_bidang_kompetensi">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -24,60 +27,61 @@
         </table>
     </div>
 </div>
-<div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
+<div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data backdrop="static"
+    data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
 
-@push('css')
-@endpush
 
 @push('js')
 <script>
     function modalAction(url = '') {
         $('#myModal').load(url, function() {
             $('#myModal').modal('show');
-        })
+        });
     }
-    var dataBidKom;
+
+    var dataUser;
     $(document).ready(function() {
-        dataBidKom = $('#tabel_bidkom').DataTable({
-            serverSide: true, // Menggunakan server-side processing
+        dataUser = $('#table_bidang_kompetensi').DataTable({
+            // serverSide: true, jika ingin menggunakan server side processing 
+            serverSide: true,
             ajax: {
-                "url": "{{ url('aBidangKompetensi/list') }}", // Endpoint untuk mengambil data kategori
+                "url": "{{ url('aBidangKompetensi/list') }}",
                 "dataType": "json",
                 "type": "POST",
                 "data": function(d) {
-                    d.kode_level = $('#kode_level').val(); // Mengirim data filter kategori_kode
+                    d.bidkom_id = $('#bidkom_id').val();
                 }
             },
             columns: [{
-                    data: "DT_RowIndex", // Menampilkan nomor urut dari Laravel DataTables addIndexColumn()
-                    className: "text-center",
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: "nama_bidkom",
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: "tag_bidkom",
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: "aksi", // Kolom aksi (Edit, Hapus)
-                    className: "text-center",
-                    orderable: false,
-                    searchable: false
-                }
-            ]
+                // nomor urut dari laravel datatable addIndexColumn() 
+                data: "DT_RowIndex",
+                className: "text-center",
+                orderable: false,
+                searchable: false
+            }, {
+                data: "nama_bidkom",
+                className: "",
+                // orderable: true, jika ingin kolom ini bisa diurutkan  
+                orderable: true,
+                // searchable: true, jika ingin kolom ini bisa dicari 
+                searchable: true
+            }, {
+                data: "tag_bidkom",
+                className: "",
+                orderable: false,
+                searchable: true
+            }, {
+                data: "aksi",
+                className: "text-center",
+                orderable: false,
+                searchable: false
+            }]
         });
+    });
 
-        // Reload tabel saat filter kategori diubah
-        $('#kode_level').on('change', function() {
-            dataLevel.ajax.reload(); // Memuat ulang tabel berdasarkan filter yang dipilih
-        });
+    $('#level_id').on('change', function() {
+        dataUser.ajax.reload();
     });
 </script>
 @endpush

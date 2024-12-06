@@ -105,7 +105,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataMahasiswa.ajax.reload();
+                            dataDosen.ajax.reload();
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {

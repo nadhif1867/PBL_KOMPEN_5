@@ -3,65 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login()
+    public function adminLogin()
     {
-        if (Auth::guard('web') || Auth::guard('admin') || Auth::guard('dosen') || Auth::guard('tendik')->check()) {
-            return redirect('/');
-        }
-        return view('auth.login');
+        return view('auth.admin_login'); // Form login admin
     }
 
-    public function postlogin(Request $request)
+    public function adminAuthenticate(Request $request)
     {
-        if ($request->ajax() || $request->wantsJson()) {
-            $credentials = $request->only('username', 'password');
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
 
-            if ($request->user_role == 'mahasiswa') {
-                if (Auth::guard('web')->attempt($credentials)) {
-                    return response()->json([
-                        'status' => true,
-                        'message' => 'Login Mahasiswa berhasil',
-                        'redirect' => url('/')
-                    ]);
-                } else if (Auth::guard('admin')->attempt($credentials)) {
-                    return response()->json([
-                        'status' => true,
-                        'message' => 'Login Admin Berhasil',
-                        'redirect' => url('/')
-                    ]);
-                } else if (Auth::guard('dosen')->attempt($credentials)) {
-                    return response()->json([
-                        'status' => true,
-                        'message' => 'Login Dosen Berhasil',
-                        'redirect' => url('/')
-                    ]);
-                } else if (Auth::guard('tendik')->attempt($credentials)) {
-                    return response()->json([
-                        'status' => true,
-                        'message' => 'Login Tendik Berhasil',
-                        'redirect' => url('/')
-                    ]);
-                }
-            }
+        // Cari data admin berdasarkan username
+        $admin = DB::table('m_admin')->where('username', $request->username)->first();
 
-            return response()->json([
-                'status' => false,
-                'message' => 'Login Gagal'
-            ]);
+        if ($admin && Hash::check($request->password, $admin->password)) {
+            // Simpan data admin ke session
+            session(['user' => $admin, 'role' => 'admin']);
+            return redirect()->route('a_welcome');
         }
-        return response('login');
+
+        // Jika username/password salah
+        return back()->withErrors(['loginError' => 'Username atau Password salah!']);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('login');
+        session()->flush();
+        return redirect()->route('landing.index');
     }
 }

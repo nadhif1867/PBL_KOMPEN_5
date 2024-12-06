@@ -8,6 +8,7 @@ use App\Http\Controllers\aMahasiswaAlphaController;
 use App\Http\Controllers\aMahasiswaController;
 use App\Http\Controllers\aTendikController;
 use App\Http\Controllers\aWelcomeController;
+use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,28 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// landing page
+Route::get('/', [LandingController::class, 'index']);
+
+// login admin
+use App\Http\Controllers\AuthController;
+
+// Route Login Admin
+Route::group(['prefix' => 'aLevel'], function (){
+    Route::get('/login', [AuthController::class, 'adminLogin'])->name('admin.login');
+    Route::post('/login', [AuthController::class, 'adminAuthenticate'])->name('admin.login.auth');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+});
+
+
+// Route Welcome Page Admin
+Route::get('/a_welcome', function () {
+    $user = session('user');
+    return view('a_welcome', compact('user'));
+})->name('a_welcome')->middleware('auth');
+
+
 
 // {{ For Admin }}
 // dashboard
@@ -97,4 +120,10 @@ Route::group(['prefix' => 'aBidangKompetensi'], function () {
     Route::get('/', [aBidangKompetensiController::class, 'index']);
     Route::post('/list', [aBidangKompetensiController::class, 'list']);
     Route::get('/{id}/show_ajax', [aBidangKompetensiController::class, 'show_ajax']);
+    Route::get('/create_ajax', [aBidangKompetensiController::class, 'create_ajax']);
+    Route::post('/ajax', [aBidangKompetensiController::class, 'store_ajax']);
+    Route::get('{id}/edit_ajax', [aBidangKompetensiController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [aBidangKompetensiController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [aBidangKompetensiController::class, 'confirm_ajax']);
+    Route::delete('/{id}/delete_ajax', [aBidangKompetensiController::class, 'delete_ajax']);
 });

@@ -25,12 +25,12 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Level Kode</label>
+                    <label>Nama Bidang Kompetensi</label>
                     <input value="{{ $aBidangKompetensi->nama_bidkom }}" type="text" name="nama_bidkom" id="nama_bidkom" class="form-control" required>
                     <small id="error-nama_bidkom" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Level Nama</label>
+                    <label>Tag Bidang Kompetensi</label>
                     <input value="{{ $aBidangKompetensi->tag_bidkom }}" type="text" name="tag_bidkom" id="tag_bidkom" class="form-control" required>
                     <small id="error-nama" class="error-text form-text text-danger"></small>
                 </div>

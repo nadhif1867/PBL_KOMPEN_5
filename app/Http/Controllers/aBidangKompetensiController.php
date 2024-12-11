@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BidangKompetensiModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -93,20 +94,16 @@ class aBidangKompetensiController extends Controller
 
     public function create_ajax()
     {
-        $aBidangKompetensi = BidangKompetensiModel::select('id_bidkom', 'nama_bidkom', 'tag_bidkom')->get();
-
-        return view('aBidangKompetensi.create_ajax')
-            ->with('aBidangKompetensi', $aBidangKompetensi);
+        return view('aBidangKompetensi.create_ajax');
     }
 
     public function store_ajax(Request $request)
     {
         if ($request->ajax() || $request->wantsJson()) {
-            $rules =
-                [
-                    'nama_bidkom' => 'required|string|min:2',
-                    'tag_bidkom' => 'required|string|min:2',
-                ];
+            $rules = [
+                'nama_bidkom' => 'required|string|min:2',
+                'tag_bidkom' => 'required|string|min:2'
+            ];
 
             $validator = Validator::make($request->all(), $rules);
 
@@ -122,7 +119,7 @@ class aBidangKompetensiController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Data berhasil disimpan',
+                'message' => 'Data tendik berhasil disimpan'
             ]);
         }
         return redirect('/aBidangKompetensi');

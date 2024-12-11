@@ -26,7 +26,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
             role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ url('/DosenTeknisi') }}" class="nav-link {{ ($activeMenu == 'dashboard')?
+                <a href="{{ url('/dosen') }}" class="nav-link {{ ($activeMenu == 'dashboard')?
 'active' : '' }} ">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>Dashboard</p>
@@ -42,7 +42,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('/dtDaftarMahasiswaAlpha') }}" class="nav-link {{ ($activeMenu == 'dtDMAlpha')?
+                        <a href="{{ url('/dMahasiswaAlpha') }}" class="nav-link {{ ($activeMenu == 'dMahasiswaAlpha')?
 'active' : '' }} ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Daftar Mahasiswa Alpha</p>
@@ -51,7 +51,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('/dtDaftarMahasiswaKompen') }}" class="nav-link {{ ($activeMenu == 'dtDMKompen')?
+                        <a href="{{ url('/dMahasiswaKompen') }}" class="nav-link {{ ($activeMenu == 'dMahasiswaKompen')?
 'active' : '' }} ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Daftar Mahasiswa Kompen</p>
@@ -59,7 +59,7 @@
                     </li>
                 </ul>
             <li class="nav-item">
-                <a href="{{ url('/dtManageKompen') }}" class="nav-link {{ ($activeMenu == 'dtManageKompen')? 'active' : '' }} ">
+                <a href="{{ url('/dManageKompen') }}" class="nav-link {{ ($activeMenu == 'dManageKompen')? 'active' : '' }} ">
                     <i class="nav-icon fas fa-book"></i>
                     <p>Manage Kompen</p>
                 </a>
@@ -71,7 +71,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{url('logout')}}" class="btn btn-sm btn-danger">Logout</a>
+                <a href="{{url('/')}}" class="btn btn-sm btn-danger">Logout</a>
             </li>
         </ul>
     </nav>

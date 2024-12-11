@@ -6,8 +6,9 @@ use App;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AdminModel extends Model
+class AdminModel extends Authenticatable
 {
     use HasFactory;
 
@@ -39,5 +40,53 @@ class AdminModel extends Model
     public function getRole()
     {
         return $this->level->level_kode;
+    }
+
+    /**
+     * Mendapatkan identitas unik dari pengguna.
+     */
+    public function getAuthIdentifierName()
+    {
+        return $this->primaryKey;
+    }
+
+    /**
+     * Mendapatkan nilai identitas unik dari pengguna.
+     */
+    public function getAuthIdentifier()
+    {
+        return $this->getAttribute($this->getAuthIdentifierName());
+    }
+
+    /**
+     * Mendapatkan hash dari password pengguna.
+     */
+    public function getAuthPassword()
+    {
+        return $this->getAttribute('password');
+    }
+
+    /**
+     * Mendapatkan token untuk mengingat pengguna.
+     */
+    public function getRememberToken()
+    {
+        return $this->getAttribute('remember_token');
+    }
+
+    /**
+     * Mengatur token untuk mengingat pengguna.
+     */
+    public function setRememberToken($value)
+    {
+        $this->setAttribute('remember_token', $value);
+    }
+
+    /**
+     * Mendapatkan nama kolom untuk token pengingat.
+     */
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
     }
 }

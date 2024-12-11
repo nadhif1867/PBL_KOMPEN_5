@@ -16,4 +16,14 @@ class BidangKompetensiModel extends Model
 
     protected $fillable = ['nama_bidkom', 'tag_bidkom'];
 
+    public function detailbidkom(): HasMany
+    {
+        return $this->hasMany(DetailBidKomModel::class, 'id_bidkom', 'id_bidkom');
+    }
+
+    public function detailjekom(): HasMany
+    {
+        return $this->hasMany(DetailJenisKompenModel::class, 'id_bidkom', 'id_bidkom');
+    }
+
 }

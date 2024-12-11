@@ -26,7 +26,6 @@
                     <th>Tahun Masuk</th>
                     <th>No Telepon</th>
                     <th>Nama</th>
-                    <th>Avatar</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -96,11 +95,6 @@
                 },
                 {
                     data: "nama",
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: "avatar",
                     orderable: true,
                     searchable: true
                 },

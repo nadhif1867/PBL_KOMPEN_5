@@ -95,7 +95,8 @@ class aMahasiswaAlphaController extends Controller
                             'id_alpha' => $value['A'],
                             'id_mahasiswa' => $value['B'],
                             'jumlah_alpha' => $value['C'],
-                            'id_periode' => $value['D'],
+                            'kompen_dibayar' => $value['D'],
+                            'id_periode' => $value['E'],
                         ];
                     }
                 }

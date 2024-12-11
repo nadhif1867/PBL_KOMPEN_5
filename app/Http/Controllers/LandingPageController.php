@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LandingController extends Controller
+class LandingPageController extends Controller
 {
     public function index()
     {

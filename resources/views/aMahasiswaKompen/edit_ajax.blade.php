@@ -16,9 +16,9 @@
     </div>
 </div>
 @else
-<form action="{{ url('/aMahasiswaKompen/' . $aMahasiswaKompen->id_mahasiswa . '/update_ajax') }}" method="POST" id="form-edit">
+<form action="{{ url('/aMahasiswaKompen/' . $aMahasiswaKompen->id_mahasiswa . '/update_ajax') }}" method="post" id="form-edit">
     @csrf
-    @method('PUT')
+    @method('put')
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -42,16 +42,6 @@
                     <input value="{{ $aMahasiswaKompen->kompen_dibayar }}" type="text" name="kompen_dibayar" id="kompen_dibayar" class="form-control" required>
                     <small id="error-kompen_dibayar" class="error-text form-text text-danger"></small>
                 </div>
-                <div class="form-group">
-                    <label>Semester</label>
-                    <input value="{{ $aMahasiswaKompen->periode->semester }}" type="text" name="semester" id="semester" class="form-control" required>
-                    <small id="error-semester" class="error-text form-text text-danger"></small>
-                </div>
-                <div class="form-group">
-                    <label>Tahun Ajaran</label>
-                    <input value="{{ $aMahasiswaKompen->periode->tahun_ajaran }}" type="text" name="tahun_ajaran" id="tahun_ajaran" class="form-control" required>
-                    <small id="error-tahun_ajaran" class="error-text form-text text-danger"></small>
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
@@ -64,6 +54,12 @@
     $(document).ready(function() {
         $("#form-edit").validate({
             rules: {
+                username : {
+                    required: true,
+                },
+                jumlah_alpha : {
+                    required: false,
+                },
                 kompen_dibayar : {
                     required: true,
                 },

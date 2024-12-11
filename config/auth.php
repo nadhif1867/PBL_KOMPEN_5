@@ -36,13 +36,17 @@ return [
     */
 
     'guards' => [
-        'mahasiswa' => [
+        'web' => [
             'driver' => 'session',
-            'provider' => 'mahasiswa',
+            'provider' => 'users', // Menggunakan model User
         ],
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admin',
+            'provider' => 'admins',
+        ],
+        'mahasiswa' => [
+            'driver' => 'session',
+            'provider' => 'mahasiswa',
         ],
         'dosen' => [
             'driver' => 'session',
@@ -50,8 +54,8 @@ return [
         ],
         'tendik' => [
             'driver' => 'session',
-            'provider' => 'tendik'
-        ]
+            'provider' => 'tendik',
+        ],
     ],
 
     /*
@@ -72,27 +76,26 @@ return [
     */
 
     'providers' => [
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminModel::class,
+            'table' => 'm_admin', // Tabel yang sesuai
+        ],
         'mahasiswa' => [
             'driver' => 'eloquent',
             'model' => App\Models\MahasiswaModel::class,
-        ],
-        'admin' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\AdminModel::class,
+            'table' => 'm_mahasiswa',
         ],
         'dosen' => [
             'driver' => 'eloquent',
             'model' => App\Models\DosenModel::class,
+            'table' => 'm_dosen',
         ],
         'tendik' => [
             'driver' => 'eloquent',
             'model' => App\Models\TendikModel::class,
+            'table' => 'm_tendik',
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
@@ -114,14 +117,14 @@ return [
     |
     */
 
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-    ],
+    // 'passwords' => [
+    //     'users' => [
+    //         'provider' => 'users',
+    //         'table' => 'password_reset_tokens',
+    //         'expire' => 60,
+    //         'throttle' => 60,
+    //     ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------

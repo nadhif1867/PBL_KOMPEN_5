@@ -6,6 +6,7 @@ use App\Models\AlphaModel;
 use App\Models\MahasiswaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Yajra\DataTables\Facades\DataTables;
 
 class aMahasiswaKompenController extends Controller
@@ -42,7 +43,6 @@ class aMahasiswaKompenController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($aMahasiswaKompen) {
                 $btn = '<button onclick="modalAction(\'' . url('/aMahasiswaKompen/' . $aMahasiswaKompen->id_alpha . '/show_ajax') . '\')" class="btn btn-info btn-sm" style="margin-right: 10px;">Detail</button>';
-                $btn .= '<button onclick="modalAction(\'' . url('/aMahasiswaKompen/' . $aMahasiswaKompen->id_alpha . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button>';
                 return $btn;
             })
             ->rawColumns(['aksi'])
@@ -56,44 +56,64 @@ class aMahasiswaKompenController extends Controller
         return view('aMahasiswaKompen.show_ajax', ['aMahasiswaKompen' => $aMahasiswaKompen]);
     }
 
-    public function edit_ajax(String $id)
+    public function import()
     {
-        $aMahasiswaKompen = AlphaModel::find($id);
-
-        return view('aMahasiswaKompen.edit_ajax', ['aMahasiswaKompen' => $aMahasiswaKompen]);
+        return view('aMahasiswaKompen.import');
     }
 
-    public function update_ajax(Request $request, $id)
+    public function import_ajax(Request $request)
     {
-        // Cek apakah request dari ajax
         if ($request->ajax() || $request->wantsJson()) {
-        } {
             $rules = [
-                'kompen_dibayar' => 'required|integer'
+                // validasi file harus xls atau xlsx, max 1MB
+                'file_kompen' => ['required', 'mimes:xlsx', 'max:2048']
             ];
 
-            // use Illuminate\Support\Facades\vaidator
             $validator = Validator::make($request->all(), $rules);
-
             if ($validator->fails()) {
                 return response()->json([
-                    'status' => false, // response status, false: error/gagal, true: berhasil
+                    'status' => false,
                     'message' => 'Validasi Gagal',
-                    'msgField' => $validator->errors(),
+                    'msgField' => $validator->errors()
                 ]);
             }
 
-            $check = AlphaModel::find($id);
-            if ($check) {
-                $check->update($request->all());
+            $file = $request->file('file_kompen');  // ambil file dari request
+
+            $reader = IOFactory::createReader('Xlsx');  // load reader file excel
+            $reader->setReadDataOnly(true);             // hanya membaca data
+            $spreadsheet = $reader->load($file->getRealPath()); // load file excel
+            $sheet = $spreadsheet->getActiveSheet();    // ambil sheet yang aktif
+
+            $data = $sheet->toArray(null, false, true, true);   // ambil data excel
+
+            $insert = [];
+            if (count($data) > 1) { // jika data lebih dari 1 baris
+                foreach ($data as $baris => $value) {
+                    if ($baris > 1) { // baris ke 1 adalah header, maka lewati
+                        $insert[] = [
+                            'id_alpha' => $value['A'],
+                            'id_mahasiswa' => $value['B'],
+                            'jumlah_alpha' => $value['C'],
+                            'kompen_dibayar' => $value['D'],
+                            'id_periode' => $value['E'],
+                        ];
+                    }
+                }
+
+                if (count($insert) > 0) {
+                    // insert data ke database, jika data sudah ada, maka diabaikan
+                    AlphaModel::insertOrIgnore($insert);
+                }
+
                 return response()->json([
                     'status' => true,
-                    'message' => 'Data berhasil diupdate'
+                    'message' => 'Data berhasil diimport'
                 ]);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Data tidak ditemukan'
+                    'message' => 'Tidak ada data yang diimport'
                 ]);
             }
         }

@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class MahasiswaModel extends Model
+class MahasiswaModel extends Authenticatable
 {
     use HasFactory;
 
@@ -37,5 +38,35 @@ class MahasiswaModel extends Model
     public function getRole()
     {
         return $this->level->level_kode;
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'id_mahasiswa';
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    public function getRememberToken()
+    {
+        return null; // Jika tidak digunakan
+    }
+
+    public function setRememberToken($value)
+    {
+        // Tidak perlu diimplementasikan jika tidak digunakan
+    }
+
+    public function getRememberTokenName()
+    {
+        return null; // Jika tidak digunakan
     }
 }

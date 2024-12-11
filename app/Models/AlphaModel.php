@@ -14,7 +14,7 @@ class AlphaModel extends Model
 
     protected $primaryKey = 'id_alpha'; // Mendefinisikan primary key
 
-    protected $fillable = ['id_mahasiswa', 'jumlah_alpha', 'kompen_dibayar', 'id_periode'];
+    protected $fillable = ['id_mahasiswa', 'jumlah_alpha', 'kompen_dibayar', 'id_periode', 'create_at', 'update_at'];
 
     public function mahasiswa(): BelongsTo
     {

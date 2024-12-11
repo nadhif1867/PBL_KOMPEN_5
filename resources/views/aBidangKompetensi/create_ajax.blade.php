@@ -1,9 +1,9 @@
-<form action="{{ url('/aBidangKompetensi') }}" method="POST" id="form-tambah">
+<form action="{{ url('/aBidangKompetensi/ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Mahasiswa</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -34,12 +34,10 @@
             rules: {
                 nama_bidkom: {
                     required: true,
-                    minlength: 2,
                 },
                 tag_bidkom: {
-                    required: true,
-                    minlength: 2,
-                },
+                    required:true
+                }
             },
             submitHandler: function(form) {
                 $.ajax({
@@ -54,7 +52,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataDosen.ajax.reload();
+                            dataBidangKompetensi.ajax.reload();
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {

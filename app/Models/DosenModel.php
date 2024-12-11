@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class DosenModel extends Model
+class DosenModel extends Authenticatable
 {
     use HasFactory;
 
@@ -38,5 +39,35 @@ class DosenModel extends Model
     public function getRole()
     {
         return $this->level->level_kode;
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'id_dosen'; // Sesuaikan sesuai dengan field primary key
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    public function getRememberToken()
+    {
+        // Implementasikan jika diperlukan untuk autentikasi berbasis token
+    }
+
+    public function setRememberToken($value)
+    {
+        // Implementasikan jika diperlukan untuk autentikasi berbasis token
+    }
+
+    public function getRememberTokenName()
+    {
+        // Implementasikan jika diperlukan untuk autentikasi berbasis token
     }
 }

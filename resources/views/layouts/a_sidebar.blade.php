@@ -12,11 +12,10 @@
             <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" alt="user" class="img-circle elevation-2">
         </div>
         <div class="info">
-            <li class="nav" style="color: white;">
-                <p>Moch. Nadhif Alkautsar</p>
-            </li>
+            <div class=" text-center" style="color: white;">
+            </div>
             <li class="nav">
-                <a href="/" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
+                <a href="{{ url('/aProfile') }}" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
             </li>
         </div>
     </div>
@@ -121,7 +120,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('/aDaftarTugasDosen') }}" class="nav-link {{ ($activeMenu == 'aDTDosen')?
+                        <a href="{{ url('/aTugasDosen') }}" class="nav-link {{ ($activeMenu == 'aTugasDosen')?
 'active' : '' }} ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Dosen</p>
@@ -130,7 +129,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('/aDaftarTugasTeknisi') }}" class="nav-link {{ ($activeMenu == 'aDTTeknisi')?
+                        <a href="{{ url('/aTugasTendik') }}" class="nav-link {{ ($activeMenu == 'aTugasTendik')?
 'active' : '' }} ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Tendik</p>
@@ -139,7 +138,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('/aDaftarTugasAdmin') }}" class="nav-link {{ ($activeMenu == 'aDTAdmin')?
+                        <a href="{{ url('/aTugasAdmin') }}" class="nav-link {{ ($activeMenu == 'aTugasAdmin')?
 'active' : '' }} ">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Admin</p>
@@ -154,7 +153,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/aManageDataMahasiswaKompen') }}" class="nav-link {{ ($activeMenu =='aManageDaMaKom')? 'active' : '' }} ">
+                <a href="{{ url('/aManageMahasiswaKompen') }}" class="nav-link {{ ($activeMenu =='aManageMahasiswaKompen')? 'active' : '' }} ">
                     <i class="nav-icon fa fa-newspaper"></i>
                     <p>Manage Data Mahasiswa Kompen</p>
                 </a>
@@ -178,13 +177,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/') }}" class="nav-link {{ ($activeMenu =='')? 'active' : '' }} ">
+                <a href="{{ url('/aJenisKompen') }}" class="nav-link {{ ($activeMenu =='aJenisKompen')? 'active' : '' }} ">
                     <i class="nav-icon fas fa-file"></i>
                     <p>Manage Jenis Penugasan</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{url('logout')}}" class="btn btn-sm btn-danger">Logout</a>
+                <a href="{{url('/')}}" class="btn btn-sm btn-danger">Logout</a>
             </li>
         </ul>
         </nav>

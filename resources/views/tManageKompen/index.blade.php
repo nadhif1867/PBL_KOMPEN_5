@@ -1,9 +1,12 @@
-@extends('layouts.a_template')
+@extends('layouts.t_template')
 
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header">
         <h3 class="card-title">{{ $page->title }}</h3>
+        <div class="card-tools">
+            <button onclick="modalAction('{{ url('tManageKompen/create_ajax') }}')" class="btn btn-sm btn-success mt-1 fa fa-user"> Tambah</button>
+        </div>
     </div>
     <div class="card-body">
         @if (session('success'))
@@ -17,7 +20,15 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Jenis Kompen</th>
+                    <th>Pemberi Kompen</th>
+                    <th>Jenis Tugas Kompen</th>
+                    <th>Deskripsi</th>
+                    <th>Kuota</th>
+                    <th>Jam Kompen</th>
+                    <th>Status</th>
+                    <th>Waktu Pengerjaan Mulai</th>
+                    <th>Waktu Pengerjaan Selesai</th>
+                    <th>Tag Kompetensi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -42,7 +53,7 @@
         dataLevel = $('#tabel_kompen').DataTable({
             serverSide: true, // Menggunakan server-side processing
             ajax: {
-                "url": "{{ url('aJenisKompen/list') }}", // Endpoint untuk mengambil data kategori
+                "url": "{{ url('tManageKompen/list') }}", // Endpoint untuk mengambil data kategori
                 "dataType": "json",
                 "type": "POST",
                 "data": function(d) {
@@ -56,7 +67,47 @@
                     searchable: false
                 },
                 {
-                    data: "jenis_kompen",
+                    data: "tendik.nama",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "nama_tugas",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "deskripsi",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "kuota",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "jam_kompen",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "status",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "tanggal_mulai",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "tanggal_selesai",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "bidangkompetensi.tag_bidkom",
                     orderable: true,
                     searchable: true
                 },

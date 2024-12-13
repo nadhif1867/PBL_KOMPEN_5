@@ -55,10 +55,6 @@
                         <th class="text-right col-3">Nama</th>
                         <td class="col-9">{{ $aDosen->nama}}</td>
                     </tr>
-                    <tr>
-                        <th class="text-right col-3">Avatar</th>
-                        <td class="col-9">{{ $aDosen->avatar}}</td>
-                    </tr>
                 </table>
             </div>
             <div class="modal-footer">

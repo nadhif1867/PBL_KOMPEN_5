@@ -165,7 +165,7 @@
         <form action="{{ route('register') }}" method="POST">
             @csrf
             <input type="text" name="username" class="form-control" placeholder="Username" required minlength="3" maxlength="50">
-            <input type="password" name="password" class="form-control" placeholder="Password" required minlength="6">
+            <input type="password" name="password" class="form-control" placeholder="Password" required minlength="5">
             <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password" required>
             <input type="text" name="nim" class="form-control" placeholder="NIM" required pattern="[0-9]{9}">
             <input type="text" name="prodi" class="form-control" placeholder="Program Studi" required>

@@ -42,11 +42,6 @@
                     <input value="" type="text" name="nama" id="nama" class="form-control" required>
                     <small id="error-nama" class="error-text form-text text-danger"></small>
                 </div>
-                <div class="form-group">
-                    <label>Avatar</label>
-                    <input value="" type="file" name="avatar" id="avatar" class="form-control" required>
-                    <small id="error-avatar" class="error-text form-text text-danger"></small>
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>

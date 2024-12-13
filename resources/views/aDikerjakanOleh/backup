@@ -1,0 +1,180 @@
+@extends('layouts.a_template')
+
+@section('content')
+<div class="card card-outline card-primary">
+    <div class="card-header">
+        <h3 class="card-title">{{ $page->title }}</h3>
+        <!-- <div class="card-tools">
+            <button onclick="modalAction('{{ url('aManageKompen/create_ajax') }}')" class="btn btn-sm btn-success mt-1 fa fa-user"> Tambah</button>
+        </div> -->
+    </div>
+    <div class="card-body">
+        <div id="alert-container">
+            @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+        </div>
+
+        <table class="table-bordered table-striped table-hover table-sm table" id="tabel_kompen">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Mahasiswa</th>
+                    <th>Nama Tugas</th>
+                    <th>Deskripsi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
+@endsection
+
+@push('css')
+@endpush
+
+@push('js')
+<script>
+    function modalAction(url = '') {
+        $('#myModal').load(url, function() {
+            $('#myModal').modal('show');
+        })
+    }
+    var dataLevel;
+    $(document).ready(function() {
+        dataLevel = $('#tabel_kompen').DataTable({
+            serverSide: true, // Menggunakan server-side processing
+            ajax: {
+                "url": "{{ url('aDikerjakanOleh/list') }}", // Endpoint untuk mengambil data kategori
+                "dataType": "json",
+                "type": "POST",
+                "data": function(d) {
+                    d.kode_level = $('#kode_level').val(); // Mengirim data filter kategori_kode
+                }
+            },
+            columns: [{
+                    data: "DT_RowIndex", // Menampilkan nomor urut dari Laravel DataTables addIndexColumn()
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: "mahasiswa.nama",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "tugasadmin.nama_tugas",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "tugasadmin.deskripsi",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "aksi", // Kolom aksi (Edit, Hapus)
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false
+                }
+            ]
+        });
+
+        // Reload tabel saat filter kategori diubah
+        $('#kode_level').on('change', function() {
+            dataLevel.ajax.reload(); // Memuat ulang tabel berdasarkan filter yang dipilih
+        });
+    });
+</script>
+
+<!-- <script>
+    function updateStatus(id, status) {
+        // Konfirmasi sebelum mengubah status
+        if (confirm('Apakah Anda yakin ingin mengubah status menjadi ' + status + '?')) {
+            $.ajax({
+                url: "{{ url('aDikerjakanOleh/updateStatus') }}",
+                type: "POST",
+                data: {
+                    id: id,
+                    status: status,
+                    _token: '{{ csrf_token() }}' // Pastikan CSRF token dikirim
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert(response.message);
+                        dataLevel.ajax.reload(); // Refresh tabel setelah update
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    alert('Terjadi kesalahan saat memperbarui status.');
+                }
+            });
+        }
+    }
+</script> -->
+
+
+<script>
+    function updateStatus(id, status) {
+        if (confirm('Apakah Anda yakin ingin mengubah status menjadi ' + status + '?')) {
+            $.ajax({
+                url: "{{ url('aDikerjakanOleh/updateStatus') }}",
+                type: "POST",
+                data: {
+                    id: id,
+                    status: status,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    // Hapus semua alert yang ada sebelumnya
+                    $('#alert-container').empty();
+
+                    if (response.success) {
+                        // Tampilkan alert sukses
+                        $('#alert-container').html(`
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                ${response.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        `);
+                    } else {
+                        // Tampilkan alert error
+                        $('#alert-container').html(`
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                ${response.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        `);
+                    }
+
+                    // Reload tabel setelah operasi
+                    $('#tabel_kompen').DataTable().ajax.reload();
+                },
+                error: function(xhr) {
+                    // Tampilkan pesan error saat AJAX gagal
+                    $('#alert-container').html(`
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Terjadi kesalahan. Silakan coba lagi.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    `);
+                }
+            });
+        }
+    }
+</script>
+@endpush

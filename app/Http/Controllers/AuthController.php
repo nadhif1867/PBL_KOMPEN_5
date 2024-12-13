@@ -40,7 +40,7 @@ class AuthController extends Controller
      */
     public function showMahasiswaRegister()
     {
-        return view('auth.mRegister'); // Halaman untuk form registrasi mahasiswa
+        return view('auth.Register'); // Halaman untuk form registrasi mahasiswa
     }
 
     /**
@@ -50,7 +50,7 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'username'     => 'required|string|min:3|max:50|unique:m_mahasiswa,username',
-            'password'     => 'required|string|confirmed|min:6|max:50',
+            'password'     => 'required|string|confirmed|min:5|max:50',
             'nama'         => 'required|string|max:100',
             'email'        => 'required|email|unique:m_mahasiswa,email|max:100',
             'nim'          => 'required|numeric|digits:9|unique:m_mahasiswa,nim',
@@ -111,17 +111,43 @@ class AuthController extends Controller
 
 
     /**
+     * Tampilkan halaman login dosen.
+     */
+    public function showDosenLogin()
+    {
+        return view('auth.dLogin'); // Tampilan login khusus dosen/tendik
+    }
+
+    /**
+     * Proses login dosen.
+     */
+    public function dosenLogin(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        if (Auth::guard('dosen')->attempt($request->only('username', 'password'))) {
+            return redirect()->route('dosen.dashboard');
+        }
+
+        return back()->withErrors(['loginError' => 'Username atau password salah.']);
+    }
+
+    
+    /**
      * Tampilkan halaman login dosen/tendik.
      */
-    public function showDosentendikLogin()
+    public function showTendikLogin()
     {
-        return view('auth.dtLogin'); // Tampilan login khusus dosen/tendik
+        return view('auth.tLogin'); // Tampilan login khusus dosen/tendik
     }
 
     /**
      * Proses login dosen/tendik.
      */
-    public function dosentendikLogin(Request $request)
+    public function tendikLogin(Request $request)
     {
         $request->validate([
             'username' => 'required|string',
@@ -129,7 +155,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::guard('tendik')->attempt($request->only('username', 'password'))) {
-            return redirect()->route('dosenTeknisi.dashboard');
+            return redirect()->route('tendik.dashboard');
         }
 
         return back()->withErrors(['loginError' => 'Username atau password salah.']);

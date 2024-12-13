@@ -15,22 +15,6 @@
         @if (session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
-        <!-- <div class="row">
-            <div class="col-md-12">
-                <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Filter</label>
-                    <div class="col-3">
-                        <select type="text" class="form-control" id="kode_level" name="kode_level" required>
-                            <option value="">- Semua -</option>
-                            @foreach ($aLevel as $item)
-                            <option value="{{ $item->kode_level }}">{{ $item->kode_level }}</option>
-                            @endforeach
-                        </select>
-                        <small class="form-text text-muted">Kode Level</small>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <table class="table-bordered table-striped table-hover table-sm table" id="tabel_admin">
             <thead>
                 <tr>
@@ -40,7 +24,6 @@
                     <th>No Telepon</th>
                     <th>Email</th>
                     <th>Nama</th>
-                    <th>Avatar</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -100,11 +83,6 @@
                 },
                 {
                     data: "nama",
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: "avatar",
                     orderable: false,
                     searchable: false
                 },

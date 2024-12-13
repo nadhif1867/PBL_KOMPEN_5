@@ -49,10 +49,6 @@
                     <th>Nama</th>
                     <td>{{ $aDosen->nama}}</td>
                 </tr>
-                <tr>
-                    <th>Avatar</th>
-                    <td>{{ $aDosen->avatar}}</td>
-                </tr>
             </table>
         </div>
         <div class="modal-footer">

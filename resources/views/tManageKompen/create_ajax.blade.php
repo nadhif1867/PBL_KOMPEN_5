@@ -1,4 +1,4 @@
-<form action="{{ url('/aManageKompen/ajax') }}" method="POST" id="form-tambah">
+<form action="{{ url('/tManageKompen/ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -9,14 +9,14 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Admin</label>
-                    <select name="id_admin" id="id_admin" class="form-control" required>
+                    <label>Tendik</label>
+                    <select name="id_tendik" id="id_tendik" class="form-control" required>
                         <option value="">- Pilih Kompen -</option>
-                        @foreach ($aAdmin as $a)
-                        <option value="{{ $a->id_admin }}">{{ $a->nama }}</option>
+                        @foreach ($aTendik as $t)
+                        <option value="{{ $t->id_tendik }}">{{ $t->nama }}</option>
                         @endforeach
                     </select>
-                    <small id="error-id_admin" class="error-text form-text text-danger"></small>
+                    <small id="error-id_tendik" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
                     <label>Nama Tugas</label>
@@ -61,7 +61,7 @@
                     <small id="error-kuota" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Nama Admin</label>
+                    <label>Bidang Kompetensi</label>
                     <select name="id_bidkom" id="id_bidkom" class="form-control" required>
                         <option value="">- Pilih User -</option>
                         @foreach ($aBidangKompetensi as $b)
@@ -92,7 +92,7 @@
     $(document).ready(function() {
         $("#form-tambah").validate({
             rules: {
-                id_admin: {
+                id_tendik: {
                     required: true,
                     number: true,
                 },

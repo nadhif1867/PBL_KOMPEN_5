@@ -158,12 +158,54 @@
                     <p>Manage Data Mahasiswa Kompen</p>
                 </a>
             </li>
+
             <li class="nav-item">
-                <a href="{{ url('/aManageKompen') }}" class="nav-link {{ ($activeMenu =='aManageKompen')? 'active' : '' }} ">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-address-book"></i>
+                    <p>
+                        Manage Kompen
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('/aManageKompen') }}" class="nav-link {{ ($activeMenu == 'aManageKompen') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Tambah Tugas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/aDikerjakanOleh') }}" class="nav-link {{ ($activeMenu == 'aDikerjakanOleh') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Dikerjakan Oleh</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <!-- <li class="nav-item">
                     <i class="nav-icon fa fa-address-book"></i>
                     <p>Manage Kompen</p>
                 </a>
-            </li>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                    <a href="{{ url('/aManageKompen') }}" class="nav-link {{ ($activeMenu =='aManageKompen')? 'active' : '' }} ">
+                    <i class="far fa-circle nav-icon"></i>
+                            <p>Tambah Tugas</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('/aDikerjakanOleh') }}" class="nav-link {{ ($activeMenu == 'aDikerjakanOleh')? 'active' : '' }} ">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Dikerjakan Oleh</p>
+                        </a>
+                    </li>
+                </ul>
+            </li> -->
+
             <li class="nav-item">
                 <a href="{{ url('/aUpdateKompenSelesai') }}" class="nav-link {{ ($activeMenu =='aUpdateKompen')? 'active' : '' }} ">
                     <i class="nav-icon fas fa-check-square"></i>

@@ -1,4 +1,4 @@
-@empty($aTugasAdmin)
+@empty($aTugasDosen)
 <div id="modal-master" class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -9,12 +9,12 @@
             <div class="alert alert-danger">
                 <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>Data yang anda cari tidak ditemukan
             </div>
-            <a href="{{ url('/aManageKompen') }}" class="btn btn-warning">Kembali</a>
+            <a href="{{ url('/dManageKompen') }}" class="btn btn-warning">Kembali</a>
         </div>
     </div>
 </div>
 @else
-<form action="{{ url('/aManageKompen/' . $aTugasAdmin->id_tugas_admin . '/update_ajax') }}" method="POST" id="form-edit">
+<form action="{{ url('/dManageKompen/' . $aTugasDosen->id_tugas_dosen . '/update_ajax') }}" method="POST" id="form-edit">
     @csrf
     @method('PUT')
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
@@ -26,49 +26,49 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Nama Tugas</label>
-                    <input value="{{ $aTugasAdmin->nama_tugas }}" type="text" name="nama_tugas" id="nama_tugas" class="form-control" required>
+                    <input value="{{ $aTugasDosen->nama_tugas }}" type="text" name="nama_tugas" id="nama_tugas" class="form-control" required>
                     <small id="error-nama_tugas" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label>Deskripsi</label>
-                    <input value="{{ $aTugasAdmin->deskripsi }}" type="text" name="deskripsi" id="deskripsi" class="form-control" required>
+                    <input value="{{ $aTugasDosen->deskripsi }}" type="text" name="deskripsi" id="deskripsi" class="form-control" required>
                     <small id="error-jumlah_alpha" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label>Kuota</label>
-                    <input value="{{ $aTugasAdmin->kuota }}" type="text" name="kuota" id="kuota" class="form-control" required>
+                    <input value="{{ $aTugasDosen->kuota }}" type="text" name="kuota" id="kuota" class="form-control" required>
                     <small id="error-kuota" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label>Jam Kompen</label>
-                    <input value="{{ $aTugasAdmin->jam_kompen }}" type="text" name="jam_kompen" id="jam_kompen" class="form-control" required>
+                    <input value="{{ $aTugasDosen->jam_kompen }}" type="text" name="jam_kompen" id="jam_kompen" class="form-control" required>
                     <small id="error-jam_kompen" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label>Status</label>
-                    <input value="{{ $aTugasAdmin->status }}" type="text" name="status" id="status" class="form-control" required>
+                    <input value="{{ $aTugasDosen->status }}" type="text" name="status" id="status" class="form-control" required>
                     <small id="error-status" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label>Waktu Mulai Pengerjaan</label>
-                    <input value="{{ $aTugasAdmin->tanggal_mulai }}" type="datetime-local" name="tanggal_mulai" id="tanggal_mulai" class="form-control">
+                    <input value="{{ $aTugasDosen->tanggal_mulai }}" type="datetime-local" name="tanggal_mulai" id="tanggal_mulai" class="form-control">
                     <small id="error-tanggal_mulai" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label>Waktu Selesai Pengerjaan</label>
-                    <input value="{{ $aTugasAdmin->tanggal_selesai }}" type="datetime-local" name="tanggal_selesai" id="tanggal_selesai" class="form-control">
+                    <input value="{{ $aTugasDosen->tanggal_selesai }}" type="datetime-local" name="tanggal_selesai" id="tanggal_selesai" class="form-control">
                     <small id="error-tanggal_selesai" class="error-text form-text text-danger"></small>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                 deskripsi: {
                     required: true,
                 },
-                kuota:{
+                kuota: {
                     required: true,
                 },
                 jam_kompen: {

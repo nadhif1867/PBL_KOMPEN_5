@@ -108,6 +108,10 @@
             background-color: #ff6f00;
         }
 
+        .btn.tendik {
+            background-color: #ff6f00;
+        }
+
         .btn.mahasiswa {
             background-color: #ffab00;
         }
@@ -141,7 +145,8 @@
         <p class="login-text">Login Sebagai:</p>
         <div class="btn-container">
             <a href="{{ url('login/admin') }}" class="btn admin">Admin</a>
-            <a href="{{ url('login/dosen') }}" class="btn dosen">Dosen/Tendik</a>
+            <a href="{{ url('login/dosen') }}" class="btn dosen">Dosen</a>
+            <a href="{{ url('login/tendik') }}" class="btn tendik">Tendik</a>
             <a href="{{ url('login/mahasiswa') }}" class="btn mahasiswa">Mahasiswa</a>
         </div>
     </div>

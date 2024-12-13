@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\aAdminController;
 use App\Http\Controllers\aBidangKompetensiController;
+use App\Http\Controllers\aDikerjakanOlehController;
 use App\Http\Controllers\aDosenController;
 use App\Http\Controllers\aJenisKompenController;
 use App\Http\Controllers\aLevelController;
@@ -25,7 +26,12 @@ use App\Http\Controllers\dMahasiswaKompenController;
 use App\Http\Controllers\dManageKompenController;
 use App\Http\Controllers\dWelcomeController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\LihatPilihKompenController;
 use App\Http\Controllers\mWelcomeController;
+use App\Http\Controllers\tMahasiswaAlphaController;
+use App\Http\Controllers\tMahasiswaKompenController;
+use App\Http\Controllers\tManageKompenController;
+use App\Http\Controllers\tWelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,8 +67,8 @@ Route::get('/login/mahasiswa', [AuthController::class, 'showMahasiswaLogin'])->n
 Route::post('/login/mahasiswa', [AuthController::class, 'loginMahasiswa']);
 
 // Register Mahasiswa
-Route::get('/register', [AuthController::class, 'showMahasiswaRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'registerMahasiswa'])->name('register');
+Route::get('/login/register', [AuthController::class, 'showMahasiswaRegister'])->name('register');
+Route::post('/login/register', [AuthController::class, 'registerMahasiswa'])->name('register');
 
 // Login Admin
 Route::get('/login/admin', [AuthController::class, 'showAdminLogin'])->name('login.admin');
@@ -74,7 +80,11 @@ Route::get('/login/dosen', [AuthController::class, 'showDosenLogin'])->name('log
 // Proses login dosen/teknisi
 Route::post('/login/dosen', [AuthController::class, 'dosenLogin'])->name('login.dosen');
 
+// Tampilkan halaman login dosen/teknisi
+Route::get('/login/tendik', [AuthController::class, 'showTendikLogin'])->name('login.tendik');
 
+// Proses login dosen/teknisi
+Route::post('/login/tendik', [AuthController::class, 'tendikLogin'])->name('login.tendik');
 // Welcome for Mahasiswa
 // Route::get('/Mahasiswa', [WelcomeController::class, 'index'])->name('mahasiswa.dashboard');
 
@@ -246,6 +256,14 @@ Route::group(['prefix' => 'aManageKompen'], function () {
     Route::delete('/{id}/delete_ajax', [aManageKompenController::class, 'delete_ajax']);
 });
 
+Route::group(['prefix' => 'aDikerjakanOleh'], function () {
+    Route::get('/', [aDikerjakanOlehController::class, 'index']);
+    Route::post('/list', [aDikerjakanOlehController::class, 'list']);
+    Route::get('/{id}/show_ajax', [aDikerjakanOlehController::class, 'show_ajax']);
+    Route::post('/updateStatus', [aDikerjakanOlehController::class, 'updateStatus']);
+
+});
+
 Route::group(['prefix' => 'aManageMahasiswaKompen'], function () {
     Route::get('/', [aManageMahasiswaKompenController::class, 'index']);
     Route::post('/list', [aManageMahasiswaKompenController::class, 'list']);
@@ -282,13 +300,64 @@ Route::group(['prefix' => 'dMahasiswaKompen'], function () {
 });
 
 // manage kompen
-Route::group(['prefix' => 'dManageKompen'], function () {
+Route::group(['prefix' => 't'], function () {
     Route::get('/', [dManageKompenController::class, 'index']);
     Route::post('/list', [dManageKompenController::class, 'list']);
     Route::get('/{id}/show_ajax', [dManageKompenController::class, 'show_ajax']);
+    Route::get('/create_ajax', [dManageKompenController::class, 'create_ajax']);
+    Route::post('/ajax', [dManageKompenController::class, 'store_ajax']);
+    Route::get('{id}/edit_ajax', [dManageKompenController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [dManageKompenController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [dManageKompenController::class, 'confirm_ajax']);
+    Route::delete('/{id}/delete_ajax', [dManageKompenController::class, 'delete_ajax']);
 });
 
 
 // {{ mahasiswa }}
 // dashboard
 Route::get('/mahasiswa', [mWelcomeController::class, 'index'])->name('mahasiswa.dashboard');
+
+// {{ tendik }}
+// dashboard
+Route::get('/tendik', [tWelcomeController::class, 'index'])->name('tendik.dashboard');
+
+// daftar mahasiswa alpha
+Route::group(['prefix' => 'tMahasiswaAlpha'], function () {
+    Route::get('/', [tMahasiswaAlphaController::class, 'index']);
+    Route::post('/list', [tMahasiswaAlphaController::class, 'list']);
+    Route::get('/{id}/show_ajax', [tMahasiswaAlphaController::class, 'show_ajax']);
+    Route::get('/import', [tMahasiswaAlphaController::class, 'import']);
+    Route::post('/import_ajax', [tMahasiswaAlphaController::class, 'import_ajax']);
+});
+
+// daftar mahasiswa kompen
+Route::group(['prefix' => 'tMahasiswaKompen'], function () {
+    Route::get('/', [tMahasiswaKompenController::class, 'index']);
+    Route::post('/list', [tMahasiswaKompenController::class, 'list']);
+    Route::get('/{id}/show_ajax', [tMahasiswaKompenController::class, 'show_ajax']);
+    Route::get('{id}/edit_ajax', [tMahasiswaKompenController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [tMahasiswaKompenController::class, 'update_ajax']);
+    Route::get('/import', [tMahasiswaKompenController::class, 'import']);
+    Route::post('/import_ajax', [tMahasiswaKompenController::class, 'import_ajax']);
+});
+
+// manage kompen
+Route::group(['prefix' => 'tManageKompen'], function () {
+    Route::get('/', [tManageKompenController::class, 'index']);
+    Route::post('/list', [tManageKompenController::class, 'list']);
+    Route::get('/{id}/show_ajax', [tManageKompenController::class, 'show_ajax']);
+    Route::get('/create_ajax', [tManageKompenController::class, 'create_ajax']);
+    Route::post('/ajax', [tManageKompenController::class, 'store_ajax']);
+    Route::get('{id}/edit_ajax', [tManageKompenController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [tManageKompenController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [tManageKompenController::class, 'confirm_ajax']);
+    Route::delete('/{id}/delete_ajax', [tManageKompenController::class, 'delete_ajax']);
+});
+
+
+// ROUTE
+// user as Mahasiswa
+// Lihat dan Pilih Kompen
+Route::get('/mLihatPilihKompen', [LihatPilihKompenController::class, 'index'])->name('lihatPilihKompen.index');
+Route::get('/tugas-kompen/data', [LihatPilihKompenController::class, 'getTugasReady']);
+Route::get('apply/{id}', [LihatPilihKompenController::class, 'applyTugas'])->name('tugas-kompen.apply');

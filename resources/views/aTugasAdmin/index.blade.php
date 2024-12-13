@@ -26,7 +26,7 @@
                     <th>Tanggal Selesai</th>
                     <th>Pemberi Tugas</th>
                     <th>Jenis Kompen</th>  
-                    <th>Aksi</th>                                      
+                                   
                 </tr>
             </thead>
         </table>
@@ -97,11 +97,7 @@
                     data: "jeniskompen.jenis_kompen",
                     orderable: false,
                     searchable: false
-                },    
-                {
-                    data: "aksi",
-                    orderable: false
-                }           
+                },         
             ]
         });
 

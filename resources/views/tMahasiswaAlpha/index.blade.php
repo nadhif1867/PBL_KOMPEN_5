@@ -1,9 +1,12 @@
-@extends('layouts.a_template')
+@extends('layouts.t_template')
 
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header">
         <h3 class="card-title">{{ $page->title }}</h3>
+        <!-- <div class="card-tools">
+            <button onclick="modalAction('{{ url('/aMahasiswaAlpha/import') }}')" class="btn btn-success fa fa-plus-square "> Import Data</button>
+        </div> -->
     </div>
     <div class="card-body">
         @if (session('success'))
@@ -12,12 +15,14 @@
         @if (session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
-
-        <table class="table-bordered table-striped table-hover table-sm table" id="tabel_kompen">
+        <table class="table-bordered table-striped table-hover table-sm table" id="tabel_alpha">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Jenis Kompen</th>
+                    <th>Nama Mahasiswa</th>
+                    <th>Jumlah Alpha</th>
+                    <th>Semester</th>
+                    <th>Tahun Ajaran</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -37,12 +42,12 @@
             $('#myModal').modal('show');
         })
     }
-    var dataLevel;
+    var dataMAlpha;
     $(document).ready(function() {
-        dataLevel = $('#tabel_kompen').DataTable({
+        dataMAlpha = $('#tabel_alpha').DataTable({
             serverSide: true, // Menggunakan server-side processing
             ajax: {
-                "url": "{{ url('aJenisKompen/list') }}", // Endpoint untuk mengambil data kategori
+                "url": "{{ url('tMahasiswaAlpha/list') }}", // Endpoint untuk mengambil data kategori
                 "dataType": "json",
                 "type": "POST",
                 "data": function(d) {
@@ -56,7 +61,22 @@
                     searchable: false
                 },
                 {
-                    data: "jenis_kompen",
+                    data: "mahasiswa.nama",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "jumlah_alpha",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "periode.semester",
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: "periode.tahun_ajaran",
                     orderable: true,
                     searchable: true
                 },

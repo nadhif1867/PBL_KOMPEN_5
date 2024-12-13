@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\BidangKompetensiModel;
-use App\Models\DosenModel;
 use App\Models\JenisKompenModel;
-use App\Models\TugasDosenModel;
-use App\Models\TugasKompenModel;
+use App\Models\TendikModel;
+use App\Models\TugasTendikModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
-class dManageKompenController extends Controller
+class tManageKompenController extends Controller
 {
     public function index()
     {
@@ -24,26 +23,26 @@ class dManageKompenController extends Controller
             'title' => 'Manage Kompen',
         ];
 
-        $activeMenu = 'dManageKompen';
+        $activeMenu = 'tManageKompen';
         // Return view untuk halaman manajemen Tugas Kompen
-        return view('dManageKompen.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        return view('tManageKompen.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
     public function list(Request $request)
     {
-        $dManageKompens = TugasDosenModel::select('id_tugas_dosen', 'nama_tugas', 'deskripsi', 'status', 'tanggal_mulai', 'tanggal_selesai', 'jam_kompen', 'kuota', 'id_bidkom', 'id_jenis_kompen', 'id_dosen')
-            ->with('dosen')
+        $tManageKompens = TugasTendikModel::select('id_tugas_tendik', 'nama_tugas', 'deskripsi', 'status', 'tanggal_mulai', 'tanggal_selesai', 'jam_kompen', 'kuota', 'id_bidkom', 'id_jenis_kompen', 'id_tendik')
+            ->with('tendik')
             ->with('jeniskompen')
             ->with('bidangkompetensi');
 
-        return DataTables::of($dManageKompens)
+        return DataTables::of($tManageKompens)
             ->addIndexColumn()
-            ->addColumn('aksi', function ($dManageKompen) {
-                $btn = '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/show_ajax') . '\')" class="btn btn-info btn-sm" style="margin-right: 5px;">Detail</button>';
-                $btn .= '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/delete_ajax') . '\')"  class="btn btn-danger btn-sm" style="margin-left: 5px;">Hapus</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/apply') . '\')"  class="btn btn-success btn-sm" style="margin-top: 5px;">Dikerjakan Oleh</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/close') . '\')"  class="btn btn-warning btn-sm" style="margin-top: 1px;">Tugas Ditutup</button> ';
+            ->addColumn('aksi', function ($tManageKompen) {
+                $btn = '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/show_ajax') . '\')" class="btn btn-info btn-sm" style="margin-right: 5px;">Detail</button>';
+                $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';
+                $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/delete_ajax') . '\')"  class="btn btn-danger btn-sm" style="margin-left: 5px;">Hapus</button> ';
+                $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/apply') . '\')"  class="btn btn-success btn-sm" style="margin-top: 5px;">Dikerjakan Oleh</button> ';
+                $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/close') . '\')"  class="btn btn-warning btn-sm" style="margin-top: 1px;">Tugas Ditutup</button> ';
                 return $btn;
             })
             ->rawColumns(['aksi'])
@@ -52,12 +51,12 @@ class dManageKompenController extends Controller
 
     public function create_ajax()
     {
-        $aDosen = DosenModel::select('id_dosen', 'nama')->get();
+        $aTendik = TendikModel::select('id_tendik', 'nama')->get();
         $aJenisKompen = JenisKompenModel::select('id_jenis_kompen', 'jenis_kompen')->get();
         $aBidangKompetensi = BidangKompetensiModel::select('id_bidkom', 'tag_bidkom')->get();
 
-        return view('dManageKompen.create_ajax')
-            ->with('aDosen', $aDosen)
+        return view('tManageKompen.create_ajax')
+            ->with('aTendik', $aTendik)
             ->with('aJenisKompen', $aJenisKompen)
             ->with('aBidangKompetensi', $aBidangKompetensi);
     }
@@ -66,7 +65,7 @@ class dManageKompenController extends Controller
     {
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
-                'id_dosen' => 'required|integer',
+                'id_tendik' => 'required|integer',
                 'nama_tugas' => 'required|string',
                 'deskripsi' => 'required|string',
                 'status' => 'required',
@@ -88,21 +87,21 @@ class dManageKompenController extends Controller
                 ]);
             }
 
-            TugasDosenModel::create($request->all());
+            TugasTendikModel::create($request->all());
 
             return response()->json([
                 'status' => true,
                 'message' => 'Data berhasil disimpan',
             ]);
         }
-        return redirect('/dManageKompen');
+        return redirect('/tManageKompen');
     }
 
     public function edit_ajax(String $id)
     {
-        $aTugasDosen = TugasDosenModel::find($id);
+        $tTugasTendik = TugasTendikModel::find($id);
 
-        return view('dManageKompen.edit_ajax', ['aTugasDosen' => $aTugasDosen]);
+        return view('tManageKompen.edit_ajax', ['tTugasTendik' => $tTugasTendik]);
     }
 
     public function update_ajax(Request $request, $id)
@@ -134,7 +133,7 @@ class dManageKompenController extends Controller
                 ]);
             }
 
-            $check = TugasDosenModel::find($id);
+            $check = TugasTendikModel::find($id);
             if ($check) {
                 $check->update($request->all());
                 return response()->json([
@@ -148,23 +147,23 @@ class dManageKompenController extends Controller
                 ]);
             }
         }
-        return redirect('/dManageKompen');
+        return redirect('/tManageKompen');
     }
 
     public function confirm_ajax(String $id)
     {
-        $aTugasDosen = TugasDosenModel::find($id);
+        $aTugasTendik = TugasTendikModel::find($id);
 
-        return view('dManageKompen.confirm_ajax', ['aTugasDosen' => $aTugasDosen]);
+        return view('tManageKompen.confirm_ajax', ['aTugasTendik' => $aTugasTendik]);
     }
 
     public function delete_ajax(Request $request, $id)
     {
         // cek apakah requset dari ajax
         if ($request->ajax() || $request->wantsJson()) {
-            $aTugasDosen = TugasDosenModel::find($id);
-            if ($aTugasDosen) {
-                $aTugasDosen->delete();
+            $aTugasTendik = TugasTendikModel::find($id);
+            if ($aTugasTendik) {
+                $aTugasTendik->delete();
                 return response()->json([
                     'status' => true,
                     'message' => 'Data berhasil dihapus'
@@ -176,6 +175,6 @@ class dManageKompenController extends Controller
                 ]);
             }
         }
-        return redirect('/dManageKompen');
+        return redirect('/tManageKompen');
     }
 }

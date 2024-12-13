@@ -25,18 +25,6 @@
         </div>
         @endif
 
-        {{-- Profile Info --}}
-        <!-- <div class="row mb-4">
-            <div class="col-md-12 d-flex justify-content-center">
-                <div class="avatar-container position-relative">
-                    <img src="{{ $user->avatar ? asset('storage/avatars/' . $user->avatar) : asset('default-avatar.png') }}"
-                        alt="Profile Avatar"
-                        class="rounded-circle img-thumbnail shadow"
-                        style="max-width: 220px; width: 220px; height: 220px; object-fit: cover; border: 5px solid white;">
-                    <div class="avatar-bg"></div>
-                </div>
-            </div>
-        </div> -->
 
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -48,19 +36,40 @@
                     </div>
                 </div>
                 <hr>
-                <div class="mb-4 d-flex align-items-center">
-                    <i class="fas fa-id-card mr-2 text-success"></i>
-                    <div>
-                        <span class="text-muted">Nama</span>
-                        <h5>{{ $user->nama }}</h5>
-                    </div>
-                </div>
                 <hr>
                 <div class="mb-4 d-flex align-items-center">
                     <i class="fas fa-layer-group mr-2 text-warning"></i>
                     <div>
                         <span class="text-muted">Level</span>
+                        <h5>{{ $user->nama }}</h5>
+                    </div>
+                </div>
+                <div class="mb-4 d-flex align-items-center">
+                    <i class="fas fa-layer-group mr-2 text-warning"></i>
+                    <div>
+                        <span class="text-muted">Level</span>
                         <h5>{{ $user->level->level_nama }}</h5>
+                    </div>
+                </div>
+                <div class="mb-4 d-flex align-items-center">
+                    <i class="fas fa-layer-group mr-2 text-warning"></i>
+                    <div>
+                        <span class="text-muted">NIM</span>
+                        <h5>{{ $user->nip }}</h5>
+                    </div>
+                </div>
+                <div class="mb-4 d-flex align-items-center">
+                    <i class="fas fa-layer-group mr-2 text-warning"></i>
+                    <div>
+                        <span class="text-muted">Email</span>
+                        <h5>{{ $user->email }}</h5>
+                    </div>
+                </div>
+                <div class="mb-4 d-flex align-items-center">
+                    <i class="fas fa-layer-group mr-2 text-warning"></i>
+                    <div>
+                        <span class="text-muted">No Telepon</span>
+                        <h5>{{ $user->no_telepon }}</h5>
                     </div>
                 </div>
             </div>

@@ -73,7 +73,7 @@ class aManageKompenController extends Controller
     public function store_ajax(Request $request)
     {
         if ($request->ajax() || $request->wantsJson()) {
-            $rules = [
+            $rules = [ 
                 'id_admin' => 'required|integer',
                 'nama_tugas' => 'required|string',
                 'deskripsi' => 'required|string',
@@ -85,9 +85,9 @@ class aManageKompenController extends Controller
                 'id_bidkom' => 'required|integer',
                 'id_jenis_kompen' => 'required|integer',
             ];
-    
+
             $validator = Validator::make($request->all(), $rules);
-    
+
             if ($validator->fails()) {
                 return response()->json([
                     'status' => false,
@@ -95,13 +95,18 @@ class aManageKompenController extends Controller
                     'msgField' => $validator->errors(),
                 ]);
             }
-    
-            // Tetapkan id_admin berdasarkan admin yang sedang login
-            // $data = $request->all();
-            // $data['id_admin'] = Auth::user()->id_admin;
-    
+
+            // $tugasAdmin = 
             TugasAdminModel::create($request->all());
-    
+
+            // tugasKompenModel::create([
+            //     'id_tugas_kompen' => $tugasAdmin->id_tugas_admin, // atau key unik lain
+            //     'id_mahasiswa' => null, // Null jika belum ada mahasiswa terkait
+            //     'id_tugas_admin' => $tugasAdmin->id_tugas_admin,
+            //     'status_penerimaan' => 'request', // Status awal
+            //     'tanggal_apply' => now(),
+            // ]);
+
             return response()->json([
                 'status' => true,
                 'message' => 'Data berhasil disimpan',
@@ -123,14 +128,13 @@ class aManageKompenController extends Controller
         if ($request->ajax() || $request->wantsJson()) {
         } {
             $rules = [
-                // 'nama_tugas' => 'required|string',
+                'nama_tugas' => 'required|string',
                 'deskripsi' => 'required|string',
-                // 'status' => 'required',
-                // 'tanggal_mulai' => 'required',
-                // 'tanggal_selesai' => 'required',
-                // 'jam_kompen' => 'required|string',
-                // 'kuota' => 'required|integer',
-                // 'id_bidkom' => 'required|integer',
+                'status' => 'required',
+                'tanggal_mulai' => 'required',
+                'tanggal_selesai' => 'required',
+                'jam_kompen' => 'required|string',
+                'kuota' => 'required|integer',
             ];
 
             // use Illuminate\Support\Facades\vaidator
@@ -164,8 +168,14 @@ class aManageKompenController extends Controller
     public function confirm_ajax(String $id)
     {
         $aTugasAdmin = TugasAdminModel::find($id);
+        $aAdmin = AdminModel::select('id_admin', 'nama')->get();
+        $aJenisKompen = JenisKompenModel::select('id_jenis_kompen', 'jenis_kompen')->get();
+        $aBidangKompetensi = BidangKompetensiModel::select('id_bidkom', 'tag_bidkom')->get();
 
-        return view('aTugasAdmin.confirm_ajax', ['aTugasAdmin' => $aTugasAdmin]);
+        return view('aManageKompen.confirm_ajax', ['aTugasAdmin' => $aTugasAdmin])
+            ->with('admin')
+            ->with('jeniskompen')
+            ->with('bidangkompetensi', $aBidangKompetensi);;
     }
 
     public function delete_ajax(Request $request, $id)
@@ -186,6 +196,6 @@ class aManageKompenController extends Controller
                 ]);
             }
         }
-        return redirect('/');
+        return redirect('/aManageKompen');
     }
 }

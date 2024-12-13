@@ -24,7 +24,6 @@
                     <th>No Telepon</th>
                     <th>Email</th>
                     <th>Nama</th>
-                    <th>Avatar</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -84,11 +83,6 @@
                 },
                 {
                     data: "nama",
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: "avatar",
                     orderable: false,
                     searchable: false
                 },

@@ -21,7 +21,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Pemberi Kompen</th>
-                    <th>Jenis Tugas Kompen</th>
+                    <th>Nama Tugas</th>
                     <th>Deskripsi</th>
                     <th>Kuota</th>
                     <th>Jam Kompen</th>

@@ -1,4 +1,4 @@
-@empty($aAdmin)
+@empty($aTugasDosen)
 <div id="modal-master" class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -11,49 +11,54 @@
                 <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                 Data yang anda cari tidak ditemukan
             </div>
-            <a href="{{ url('/aAdmin') }}" class="btn btn-warning">Kembali</a>
+            <a href="{{ url('/dManageKompen') }}" class="btn btn-warning">Kembali</a>
         </div>
     </div>
 </div>
 @else
-<form action="{{ url('/aAdmin/' . $aAdmin->id_admin . '/delete_ajax') }}" method="POST" id="form-delete">
+<form action="{{ url('/dManageKompen/' . $aTugasDosen->id_tugas_dosen . '/delete_ajax') }}" method="POST" id="form-delete">
     @csrf
     @method('DELETE')
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Data Admin</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-warning">
-                    <h5><i class="icon fas fa-ban"></i> Konfirmasi !!!</h5>Apakah Anda ingin menghapus data seperti di bawah ini?
+                    <h5><i class="icon fas fa-ban"></i> Konfirmasi !!!</h5>
+                    Apakah Anda ingin menghapus data seperti di bawah ini?
                 </div>
                 <table class="table table-sm table-bordered table-striped">
                     <tr>
-                        <th class="text-right col-3">ID</th>
-                        <td class="col-9">{{ $aAdmin->id_admin}}</td>
+                        <th class="text-right col-3">Nama Tugas :</th>
+                        <td class="col-9">{{ $aTugasDosen->nama_tugas }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Username</th>
-                        <td class="col-9">{{ $aAdmin->username}}</td>
+                        <th class="text-right col-3">Deskripsi :</th>
+                        <td class="col-9">{{ $aTugasDosen->deskripsi }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">NIP</th>
-                        <td class="col-9">{{ $aAdmin->nip}}</td>
+                        <th class="text-right col-3">Kuota :</th>
+                        <td class="col-9">{{ $aTugasDosen->kuota }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">No Telepon</th>
-                        <td class="col-9">{{ $aAdmin->no_telepon}}</td>
+                        <th class="text-right col-3">Jam Kompen :</th>
+                        <td class="col-9">{{ $aTugasDosen->jam_kompen }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Email</th>
-                        <td class="col-9">{{ $aAdmin->email}}</td>
+                        <th class="text-right col-3">Status :</th>
+                        <td class="col-9">{{ $aTugasDosen->status }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Nama</th>
-                        <td class="col-9">{{ $aAdmin->nama}}</td>
+                        <th class="text-right col-3">Waktu Mulai Pengerjaan :</th>
+                        <td class="col-9">{{ $aTugasDosen->tanggal_mulai }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right col-3">Waktu Selesai Pengerjaan :</th>
+                        <td class="col-9">{{ $aTugasDosen->tanggal_selesai }}</td>
                     </tr>
                 </table>
             </div>
@@ -81,7 +86,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataLevel.ajax.reload();
+                            dataUser.ajax.reload();
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {

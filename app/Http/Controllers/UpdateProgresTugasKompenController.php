@@ -33,20 +33,16 @@ class UpdateProgresTugasKompenController extends Controller
 
         $activeMenu = 'mUpdateProgressTugasKompen';
 
-        // Hardcoded ID mahasiswa (misalnya 1)
-        $userId = 3; // Ganti dengan ID yang sesuai (1, 2, atau 3)
-
-        // Ambil data progres tugas
+        $userId = 3;
+        
         $progressData = ProgresTugasModel::select('id_tugas_kompen', 'progress')
             ->get();
 
-        // Ambil semua data tugas yang diterima oleh mahasiswa (status 'diterima')
         $tugasKompen = TugasKompenModel::select('id_tugas_kompen', 'id_mahasiswa', 'id_tugas_admin', 'id_tugas_dosen', 'id_tugas_tendik', 'status_penerimaan', 'tanggal_apply')
             ->where('id_mahasiswa', $userId)
             ->where('status_penerimaan', 'diterima')
             ->get();
 
-        // Gabungkan data dari tabel progres tugas dan tugas
         $data = [];
         foreach ($progressData as $progress) {
             $tugas = $tugasKompen->first(function ($item) use ($progress) {
@@ -59,7 +55,6 @@ class UpdateProgresTugasKompenController extends Controller
                 $jamKompen = '';
                 $waktuPengerjaan = '';
 
-                // Tentukan pemberi tugas dan informasi lainnya berdasarkan id_tugas
                 if ($tugas->id_tugas_admin) {
                     $task = TugasAdminModel::find($tugas->id_tugas_admin);
                     $pemberiTugas = $task->admin->nama ?? 'Unknown Admin';
@@ -80,7 +75,6 @@ class UpdateProgresTugasKompenController extends Controller
                     $waktuPengerjaan = Carbon::parse($task->tanggal_mulai)->format('d-m-Y') . ' - ' . Carbon::parse($task->tanggal_selesai)->format('d-m-Y');
                 }
 
-                // Gabungkan data untuk view
                 $data[] = (object)[
                     'no' => count($data) + 1,
                     'pemberi_kompen' => $pemberiTugas,
@@ -105,12 +99,10 @@ class UpdateProgresTugasKompenController extends Controller
     {
         $task = TugasKompenModel::find($id);
 
-        // Ensure task exists
         if (!$task) {
             return response()->json(['error' => 'Task not found'], 404);
         }
 
-        // Return modal content
         return view('mUpdateProgresTugasKompen.update_progres', compact('task'));
     }
 
@@ -125,7 +117,6 @@ class UpdateProgresTugasKompenController extends Controller
             return response()->json(['error' => 'Task not found'], 404);
         }
 
-        // Update progress
         $task->progress = $request->input('progress');
         $task->save();
 
@@ -134,30 +125,24 @@ class UpdateProgresTugasKompenController extends Controller
 
     public function qrcodeGenerate($id)
 {
-    // Ambil data tugas berdasarkan ID
     $tugasKompen = TugasKompenModel::find($id);
     if (!$tugasKompen) {
         return response()->json(['error' => 'Tugas tidak ditemukan'], 404);
     }
 
-    // Ambil data mahasiswa berdasarkan ID
     $mahasiswa = MahasiswaModel::find($tugasKompen->id_mahasiswa);
     if (!$mahasiswa) {
         return response()->json(['error' => 'Mahasiswa tidak ditemukan'], 404);
     }
 
-    // Nama file PDF yang mengandung NIM mahasiswa
     $nim = $mahasiswa->nim;
     $fileName = 'surat_berita_acara_' . $nim . '.pdf';
 
-    // Path file surat berita acara
-    $fileUrl = Storage::url('surat_berita_acara/' . $fileName); // File ini harus sudah ada di storage
+    $fileUrl = Storage::url('surat_berita_acara/' . $fileName);
 
-    // Membuat QR Code yang mengarah ke URL file
     $qrCodePath = 'public/qr_codes/qr_code_' . $nim . '.png';
     $qrCodeUrl = Storage::url($qrCodePath);
 
-    // Generate QR Code jika belum ada
     if (!Storage::exists($qrCodePath)) {
         $qrCode = QrCode::size(250)->generate(url($fileUrl));
         Storage::put($qrCodePath, $qrCode);
@@ -165,28 +150,26 @@ class UpdateProgresTugasKompenController extends Controller
 
     // Kembalikan view dengan QR Code URL
     return view('mUpdateProgresTugasKompen.cetak_berita_acara', [
-        'qrCode' => url($qrCode), // Pastikan ini dikirim ke view
-        'nama_pengajar' => 'Nama Pengajar', // Ganti dengan data yang sesuai
-        'nip_pengajar' => 'NIP Pengajar', // Ganti dengan data yang sesuai
-        'nama_mahasiswa' => $mahasiswa->nama, // Nama mahasiswa
-        'nim' => $mahasiswa->nim, // NIM mahasiswa
-        'kelas' => $mahasiswa->kelas, // Kelas mahasiswa
-        'semester' => $mahasiswa->semester, // Semester mahasiswa
-        'pekerjaan' => 'Nama Tugas', // Nama tugas
-        'jumlah_jam' => 'Jumlah Jam', // Jumlah jam
-        'tanggal' => now()->format('d F Y') // Tanggal saat ini
+        'qrCode' => url($qrCode),
+        'nama_pengajar' => 'Nama Pengajar',
+        'nip_pengajar' => 'NIP Pengajar',
+        'nama_mahasiswa' => $mahasiswa->nama,
+        'nim' => $mahasiswa->nim,
+        'kelas' => $mahasiswa->kelas,
+        'semester' => $mahasiswa->semester,
+        'pekerjaan' => 'Nama Tugas',
+        'jumlah_jam' => 'Jumlah Jam',
+        'tanggal' => now()->format('d F Y')
 
     ]);
 }
     public function export_pdf($id)
     {
-        // Ambil data tugas berdasarkan ID
         $tugasKompen = TugasKompenModel::find($id);
         if (!$tugasKompen) {
             abort(404, 'Data tugas tidak ditemukan');
         }
 
-        // Ambil data mahasiswa berdasarkan id_mahasiswa
         $mahasiswa = MahasiswaModel::find($tugasKompen->id_mahasiswa);
         // $mahasiswa = \DB::table('m_mahasiswa')->where('id', $tugasKompen->id_mahasiswa)->first();
         if (!$mahasiswa) {
@@ -234,7 +217,6 @@ class UpdateProgresTugasKompenController extends Controller
             }
         }
 
-        // Data untuk view PDF
         $data = [
             'nama_pengajar' => $namaPemberiTugas,
             'nip_pengajar' => $nipPemberiTugas,
@@ -248,38 +230,27 @@ class UpdateProgresTugasKompenController extends Controller
             'qrCode' => $qrCode
         ];
 
-
-        // Load view untuk PDF
         $pdf = Pdf::loadView('mUpdateProgresTugasKompen.cetak_berita_acara', $data);
-
-        // Set ukuran kertas dan orientasi
         $pdf->setPaper('a4', 'portrait');
-
-        // Stream atau download PDF
         return $pdf->stream('Berita Acara Kompensasi.pdf');
     }
 
     public function show($id)
 {
-    // Ambil data tugas berdasarkan ID
     $tugasKompen = TugasKompenModel::find($id);
     if (!$tugasKompen) {
         abort(404, 'Data tugas tidak ditemukan');
     }
 
-    // Ambil data mahasiswa
     $mahasiswa = MahasiswaModel::find($tugasKompen->id_mahasiswa);
     if (!$mahasiswa) {
         abort(404, 'Data mahasiswa tidak ditemukan');
     }
 
-    // URL file PDF atau informasi lainnya yang akan dimasukkan dalam QR Code
     $fileUrl = url('/storage/surat_berita_acara/surat_berita_acara_' . $mahasiswa->nim . '.pdf');
 
-    // Generate QR Code sebagai SVG
     $qrCode = QrCode::size(200)->generate($fileUrl);
 
-    // Kirim QR Code ke view
     return view('mUpdateProgresTugasKompen.qr_code_view', compact('qrCode', 'fileUrl'));
 }
 

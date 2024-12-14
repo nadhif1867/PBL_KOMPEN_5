@@ -64,21 +64,17 @@
         data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
 
-<!-- Include jQuery first -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<!-- Include SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function() {
-        // Open modal to edit progress
         $(document).on('click', '.edit-progress-btn', function() {
-            const taskId = $(this).data('id'); // Get the task ID
+            const taskId = $(this).data('id');
 
-            // Fetch the task data dynamically via AJAX
             $.ajax({
-                url: `/fetch-tugas-data/${taskId}`, // Define this route to fetch data
+                url: `/fetch-tugas-data/${taskId}`,
                 type: 'GET',
                 success: function(data) {
                     $('#myModal').html(data).modal('show');
@@ -94,7 +90,7 @@
             });
         });
 
-        // Save updated progress
+
         $(document).on('click', '#save-progress-btn', function() {
             const taskId = $('#task-id').val();
             const progress = $('#progress-input').val();
@@ -107,17 +103,14 @@
                     progress: progress
                 },
                 success: function(response) {
-                    // Close the modal first
                     $('#myModal').modal('hide');
 
-                    // Show SweetAlert confirmation
                     Swal.fire({
                         icon: 'success',
                         title: 'Berhasil',
                         text: 'Update Progres Tugas Kompen',
                         confirmButtonText: 'OK'
                     }).then(() => {
-                        // Optionally update the UI dynamically
                         $(`tr[data-id="${taskId}"] .editable-progress`).text(
                             progress);
                     });

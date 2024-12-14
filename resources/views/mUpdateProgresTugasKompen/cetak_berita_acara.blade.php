@@ -104,10 +104,8 @@
     </table>
     <div class="line"></div>
 
-    <!-- Title -->
     <h3 class="document-title">BERITA ACARA KOMPENSASI PRESENSI</h3>
 
-    <!-- Content -->
     <table class="content-table">
         <tr>
             <td>Nama Pemberi Tugas</td>

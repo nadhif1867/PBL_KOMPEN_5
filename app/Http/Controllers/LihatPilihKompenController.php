@@ -61,7 +61,7 @@ class LihatPilihKompenController extends Controller
 
             return (object)[
                 'id_tugas_kompen' => 'admin_' . $task->id_tugas_admin,
-                'pemberi_tugas' => 'Admin',
+                'pemberi_tugas' =>  $task->admin->nama ?? 'Unknown Admin',
                 'nama_tugas' => $task->nama_tugas,
                 'deskripsi' => $task->deskripsi,
                 'status' => $task->status,
@@ -82,7 +82,7 @@ class LihatPilihKompenController extends Controller
 
             return (object)[
                 'id_tugas_kompen' => 'dosen_' . $task->id_tugas_dosen,
-                'pemberi_tugas' => 'Dosen',
+                'pemberi_tugas' =>  $task->dosen->nama ?? 'Unknown Dosen',
                 'nama_tugas' => $task->nama_tugas,
                 'deskripsi' => $task->deskripsi,
                 'status' => $task->status,
@@ -103,7 +103,7 @@ class LihatPilihKompenController extends Controller
 
             return (object)[
                 'id_tugas_kompen' => 'tendik_' . $task->id_tugas_tendik,
-                'pemberi_tugas' => 'Tendik',
+                'pemberi_tugas' =>  $task->tendik->nama ?? 'Unknown Tendik',
                 'nama_tugas' => $task->nama_tugas,
                 'deskripsi' => $task->deskripsi,
                 'status' => $task->status,

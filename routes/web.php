@@ -27,6 +27,7 @@ use App\Http\Controllers\dManageKompenController;
 use App\Http\Controllers\dWelcomeController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LihatPilihKompenController;
+use App\Http\Controllers\UpdateKompenSelesaiController;
 use App\Http\Controllers\mWelcomeController;
 use App\Http\Controllers\tMahasiswaAlphaController;
 use App\Http\Controllers\tMahasiswaKompenController;
@@ -361,3 +362,7 @@ Route::group(['prefix' => 'tManageKompen'], function () {
 Route::get('/mLihatPilihKompen', [LihatPilihKompenController::class, 'index'])->name('lihatPilihKompen.index');
 Route::get('/tugas-kompen/data', [LihatPilihKompenController::class, 'getTugasReady']);
 Route::get('apply/{id}', [LihatPilihKompenController::class, 'applyTugas'])->name('tugas-kompen.apply');
+
+// Update Kompen Selesai
+Route::get('/mUpdateKompenSelesai', [UpdateKompenSelesaiController::class, 'index'])->name('mUpdateKompenSelesai.index');
+Route::post('/upload-berita-acara/{id_riwayat}', [UpdateKompenSelesaiController::class, 'upload'])->name('upload_berita_acara');

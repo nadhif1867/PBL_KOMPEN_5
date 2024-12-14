@@ -47,7 +47,7 @@
             <li class="nav-item">
                 <a href="{{ url('/mUpdateKompenSelesai') }}" class="nav-link {{ ($activeMenu =='mUpdateKompenSelesai')? 'active' : '' }} ">
                     <i class="nav-icon fas fa-history"></i>
-                    <p>Update Kompen Selesai</p>
+                    <p>Upload Berita Acara</p>
                 </a>
             </li>
             <li class="nav-item">

@@ -28,6 +28,7 @@ use App\Http\Controllers\dWelcomeController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LihatPilihKompenController;
 use App\Http\Controllers\UpdateKompenSelesaiController;
+use App\Http\Controllers\UpdateProgresTugasKompenController;
 use App\Http\Controllers\mWelcomeController;
 use App\Http\Controllers\tMahasiswaAlphaController;
 use App\Http\Controllers\tMahasiswaKompenController;
@@ -362,6 +363,15 @@ Route::group(['prefix' => 'tManageKompen'], function () {
 Route::get('/mLihatPilihKompen', [LihatPilihKompenController::class, 'index'])->name('lihatPilihKompen.index');
 Route::get('/tugas-kompen/data', [LihatPilihKompenController::class, 'getTugasReady']);
 Route::get('apply/{id}', [LihatPilihKompenController::class, 'applyTugas'])->name('tugas-kompen.apply');
+
+// Update Progres Tugas Kompen
+Route::get('/mUpdateProgresTugasKompen', [UpdateProgresTugasKompenController::class, 'index'])->name('update-progres.index');
+Route::post('/update-progress/{id}', [UpdateProgresTugasKompenController::class, 'updateProgress'])->name('update-progress');
+Route::get('/fetch-tugas-data/{id}', [UpdateProgresTugasKompenController::class, 'fetchTugasData'])->name('fetch-tugas-data');
+Route::get('/cetak-berita-acara/{id}', [UpdateProgresTugasKompenController::class, 'export_pdf'])->name('cetak.berita.acara');
+Route::get('/generate-qrcode/{id}', [UpdateProgresTugasKompenController::class, 'qrcodeGenerate'])->name('generate.qrcode');
+Route::get('/qrcode/{id}', [UpdateProgresTugasKompenController::class, 'show'])->name('qrcode.show');
+
 
 // Update Kompen Selesai
 Route::get('/mUpdateKompenSelesai', [UpdateKompenSelesaiController::class, 'index'])->name('mUpdateKompenSelesai.index');

@@ -269,6 +269,8 @@ Route::group(['prefix' => 'aDikerjakanOleh'], function () {
 
 Route::group(['prefix' => 'aUpdateKompenSelesai'], function () {
     Route::get('/', [aUpdateKompenController::class, 'index']);
+    Route::post('/TugasSelesai/{idProgres}', [aUpdateKompenController::class, 'TugasSelesai'])->name('aUpdateKompen.TugasSelesai');
+Route::post('/KompenDiterima/{idRiwayat}', [aUpdateKompenController::class, 'KompenDiterima'])->name('aUpdateKompen.KompenDiterima');
 });
 
 

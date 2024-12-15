@@ -17,6 +17,7 @@ use App\Http\Controllers\aTugasAdminController;
 use App\Http\Controllers\aTugasDosenController;
 use App\Http\Controllers\aTugasKompenController;
 use App\Http\Controllers\aTugasTendikController;
+use App\Http\Controllers\aUpdateKompenController;
 use App\Http\Controllers\aWelcomeController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
@@ -265,6 +266,11 @@ Route::group(['prefix' => 'aDikerjakanOleh'], function () {
     Route::post('/updateStatus', [aDikerjakanOlehController::class, 'updateStatus']);
 
 });
+
+Route::group(['prefix' => 'aUpdateKompenSelesai'], function () {
+    Route::get('/', [aUpdateKompenController::class, 'index']);
+});
+
 
 Route::group(['prefix' => 'aManageMahasiswaKompen'], function () {
     Route::get('/', [aManageMahasiswaKompenController::class, 'index']);

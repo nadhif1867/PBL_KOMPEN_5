@@ -39,7 +39,7 @@ class LihatPilihKompenController extends Controller
         // Get the currently logged-in user's ID
         // $userId = auth()->user()->id;
         //paksa hardcoded
-        $userId = 3;
+        $userId = 4;
 
         $existingApplications = TugasKompenModel::where('id_mahasiswa', $userId)->get();
 
@@ -120,7 +120,7 @@ class LihatPilihKompenController extends Controller
 
             $tugasKompen = new TugasKompenModel();
             $tugasKompen->id_tugas_admin = $taskId;
-            $tugasKompen->id_mahasiswa = 3;
+            $tugasKompen->id_mahasiswa = 4;
             // $tugasKompen->id_mahasiswa = auth()->user()->id;
             $tugasKompen->status_penerimaan = 'request';
             $tugasKompen->tanggal_apply = Carbon::now();
@@ -135,7 +135,7 @@ class LihatPilihKompenController extends Controller
 
             $tugasKompen = new TugasKompenModel();
             $tugasKompen->id_tugas_dosen = $taskId;
-            $tugasKompen->id_mahasiswa = 3;
+            $tugasKompen->id_mahasiswa = 4;
             // $tugasKompen->id_mahasiswa = auth()->user()->id;
             $tugasKompen->status_penerimaan = 'request';
             $tugasKompen->tanggal_apply = Carbon::now();
@@ -150,7 +150,7 @@ class LihatPilihKompenController extends Controller
 
             $tugasKompen = new TugasKompenModel();
             $tugasKompen->id_tugas_tendik = $taskId;
-            $tugasKompen->id_mahasiswa = 3;
+            $tugasKompen->id_mahasiswa = 4;
             // $tugasKompen->id_mahasiswa = auth()->user()->id;
             $tugasKompen->status_penerimaan = 'request';
             $tugasKompen->tanggal_apply = Carbon::now();

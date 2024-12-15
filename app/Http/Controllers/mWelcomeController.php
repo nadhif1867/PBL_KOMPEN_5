@@ -10,7 +10,7 @@ class mWelcomeController extends Controller
     public function index()
     {
         // Hardcoded user ID
-        $userId = 3;
+        $userId = 4;
         //$userId = auth()->user()->id;
 
         $alphaData = AlphaModel::where('id_mahasiswa', $userId)->first();

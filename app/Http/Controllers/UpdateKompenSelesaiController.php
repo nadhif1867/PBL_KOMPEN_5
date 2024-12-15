@@ -26,8 +26,8 @@ class UpdateKompenSelesaiController extends Controller
         ];
 
         $activeMenu = 'mUpdateKompenSelesai';
-
-        $userId = 5;
+        
+        $userId = 4;
         // $userId = auth()->user()->id;
 
         $tugasKompen = TugasKompenModel::where('id_mahasiswa', $userId)

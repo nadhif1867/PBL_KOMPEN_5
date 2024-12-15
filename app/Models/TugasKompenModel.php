@@ -45,3 +45,4 @@ class TugasKompenModel extends Model
         return $this->belongsTo(MahasiswaModel::class, 'id_mahasiswa', 'id_mahasiswa');
     }
 }
+

@@ -1,7 +1,6 @@
 @extends('layouts.m_template')
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"
-    integrity="sha384-oWB6aKicF9NxLpVd+IFpKzHZLt9aN8zrZvvOA43Ry1c7fTBKaxUboog5YZaJ+8+X" crossorigin="anonymous">
-</script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 @section('content')
     <div class="card card-outline card-primary">
@@ -15,7 +14,7 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-
+            
             <table class="table table-bordered table-striped table-hover table-sm" id="table_user">
                 <thead>
                     <tr>
@@ -65,7 +64,6 @@
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>

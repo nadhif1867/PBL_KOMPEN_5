@@ -35,5 +35,6 @@ class LevelSeeder extends Seeder
                 'nama_level' => 'Mahasiswa'
             ]
         ];
+        DB::table('m_level')->insert($data);
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('t_progres_tugas', function (Blueprint $table) {
             $table->id('id_progres_tugas');
             $table->enum('status_progres', array('selesai', 'progres'));
-            $table->string('progres');
+            $table->string('progress');
             $table->unsignedBigInteger('id_tugas_kompen')->index();
             $table->timestamps();
 

@@ -12,6 +12,9 @@
             <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" alt="user" class="img-circle elevation-2">
         </div>
         <div class="info">
+            <li class="nav" style="color: white;">
+                <p>{{ Auth::guard('mahasiswa')->user()->nama ?? 'Guest' }}</p>
+            </li>
             <li class="nav">
                 <a href="{{ url('/mProfile') }}" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
             </li>

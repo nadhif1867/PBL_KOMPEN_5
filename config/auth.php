@@ -99,23 +99,27 @@ return [
     // ],
 
     'providers' => [
-    'admins' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\AdminModel::class,
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminModel::class,
+        ],
+        'mahasiswa' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\MahasiswaModel::class,
+        ],
+        'dosen' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\DosenModel::class,
+        ],
+        'tendik' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\TendikModel::class,
+        ],
+        'users' => [
+            'driver' => 'token',
+            'provider' => 'users',
+        ],
     ],
-    'mahasiswa' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\MahasiswaModel::class,
-    ],
-    'dosen' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\DosenModel::class,
-    ],
-    'tendik' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\TendikModel::class,
-    ],
-],
 
     /*
     |--------------------------------------------------------------------------

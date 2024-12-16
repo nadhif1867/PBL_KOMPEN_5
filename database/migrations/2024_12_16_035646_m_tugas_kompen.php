@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_tugas_tendik')->nullable()->index();
             $table->enum('status_penerimaan', array('request', 'diterima', 'dibuka'));
             $table->dateTime('tanggal_apply');
-            $table->integer('kuota');
+            $table->integer('kuota')->nullable();
             $table->timestamps();
 
             $table->foreign('id_mahasiswa')->references('id_mahasiswa')->on('m_mahasiswa');

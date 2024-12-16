@@ -69,9 +69,9 @@ class aDosenController extends Controller
         if ($request->ajax() || $request->wantsJson()) {
             $rules = [
                 'id_level' => 'required|integer',
-                'username' => 'required|string|max:30|unique:m_tendik,username',
+                'username' => 'required|string|max:30|unique:m_dosen,username',
                 'password' => 'nullable|min:5',
-                'nip' => 'required|string|min:3|unique:m_tendik,nip',
+                'nip' => 'required|string|min:3|unique:m_dosen,nip',
                 'no_telepon' => 'required|string|',
                 'email' => 'required|string|',
                 'nama' => 'required|string|max:100',
@@ -96,7 +96,7 @@ class aDosenController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Data tendik berhasil disimpan'
+                'message' => 'Data dosen berhasil disimpan'
             ]);
         }
         return redirect('/aDosen');
@@ -116,9 +116,9 @@ class aDosenController extends Controller
         } {
             $rules = [
                 'id_level' => 'required|integer',
-                'username' => 'required|string|max:30|unique:m_tendik,username,' . $id . ',id_tendik',
+                'username' => 'required|string|max:30|unique:m_dosen,username,' . $id . ',id_dosen',
                 'password' => 'nullable|min:5',
-                'nip' => 'required|string|min:3|unique:m_tendik,nip,' . $id . ',id_tendik',
+                'nip' => 'required|string|min:3|unique:m_dosen,nip,' . $id . ',id_dosen',
                 'no_telepon' => 'required|string|',
                 'email' => 'required|string|',
                 'nama' => 'required|string|max:100',

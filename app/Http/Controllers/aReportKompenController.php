@@ -40,10 +40,8 @@ class aReportKompenController extends Controller
 
     public function exportPDF($id_periode)
 {
-    // Validasi periode akademik
     $periode = PeriodeAkademikModel::findOrFail($id_periode);
 
-    // Ambil data presensi dengan join yang benar dan filter berdasarkan id_periode yang ada pada tugas admin, dosen, atau tendik
     $dataPresensi = TugasKompenModel::leftJoin('t_riwayat_kompen', 'm_tugas_kompen.id_tugas_kompen', '=', 't_riwayat_kompen.id_tugas_kompen')
         ->leftJoin('m_mahasiswa', 'm_tugas_kompen.id_mahasiswa', '=', 'm_mahasiswa.id_mahasiswa')
         ->leftJoin('tugas_admin', 'm_tugas_kompen.id_tugas_admin', '=', 'tugas_admin.id_tugas_admin')
@@ -61,7 +59,7 @@ class aReportKompenController extends Controller
             DB::raw('COALESCE(tugas_admin.jam_kompen, tugas_dosen.jam_kompen, tugas_tendik.jam_kompen) as jumlah_jam'),
             DB::raw('COALESCE(tugas_admin.tanggal_mulai, tugas_dosen.tanggal_mulai, tugas_tendik.tanggal_mulai) as tanggal_mulai'),
             DB::raw('COALESCE(tugas_admin.tanggal_selesai, tugas_dosen.tanggal_selesai, tugas_tendik.tanggal_selesai) as tanggal_selesai'),
-            DB::raw('COALESCE(m_admin.nama, m_dosen.nama, m_tendik.nama) as pemberi_tugas') 
+            DB::raw('COALESCE(m_admin.nama, m_dosen.nama, m_tendik.nama) as pemberi_tugas')
         )
         ->where('m_tugas_kompen.status_penerimaan', 'diterima')
         ->whereNotNull('t_riwayat_kompen.status')

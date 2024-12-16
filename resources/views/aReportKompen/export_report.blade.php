@@ -33,7 +33,7 @@
     <h3>LAPORAN KOMPENSASI SEMESTER {{ $periode }}</h3>
     <p>Tanggal Cetak: {{ $tanggalCetak }}</p>
 
-    <!-- Tabel Data -->
+  
     <table>
         <thead>
             <tr>
@@ -69,6 +69,6 @@
             @endforelse
         </tbody>
     </table>
-    
+
 </body>
 </html>

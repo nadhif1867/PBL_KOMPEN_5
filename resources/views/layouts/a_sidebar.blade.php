@@ -5,20 +5,17 @@
         }
         .username {
             color: white;
-            font-family:'Times New Roman', Times, serif
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
     </style>
 </head>
 <div class="sidebar">
     <!-- Profile Menu -->
-    <div class="user-panel mt-2 pb-3 d-flex">
+    <div class="user-panel mt-3 pb-3 d-flex">
         <div class="image">
             <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" alt="user" class="img-circle elevation-2">
         </div>
         <div class="info">
-            <div class="username">
-            <h5>{{ $user->username }}</h5>
-            </div>
             <li class="nav">
                 <a href="{{ url('/aProfile') }}" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
             </li>

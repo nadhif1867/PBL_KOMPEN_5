@@ -4,9 +4,9 @@
 <div class="card card-outline card-primary">
     <div class="card-header">
         <h3 class="card-title">{{ $page->title }}</h3>
-        <!-- <div class="card-tools">
+        <div class="card-tools">
             <button onclick="modalAction('{{ url('/aMahasiswaAlpha/import') }}')" class="btn btn-success fa fa-plus-square "> Import Data</button>
-        </div> -->
+        </div>
     </div>
     <div class="card-body">
         @if (session('success'))
@@ -22,7 +22,6 @@
                     <th>Nama Mahasiswa</th>
                     <th>Jumlah Alpha</th>
                     <th>Semester</th>
-                    <th>Tahun Ajaran</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -72,11 +71,6 @@
                 },
                 {
                     data: "periode.semester",
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: "periode.tahun_ajaran",
                     orderable: true,
                     searchable: true
                 },

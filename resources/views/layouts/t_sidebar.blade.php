@@ -16,7 +16,7 @@
                 <p>Moch. Nadhif Alkautsar</p>
             </li>
             <li class="nav">
-                <a href="/" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
+                <a href="{{ url('/mProfile') }}" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
             </li>
         </div>
     </div>
@@ -59,15 +59,32 @@
                     </li>
                 </ul>
             <li class="nav-item">
-                <a href="{{ url('/tManageKompen') }}" class="nav-link {{ ($activeMenu == 'tManageKompen')? 'active' : '' }} ">
-                    <i class="nav-icon fas fa-book"></i>
-                    <p>Manage Kompen</p>
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fa fa-address-book"></i>
+                    <p>
+                        Manage Kompen
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('/tManageKompen') }}" class="nav-link {{ ($activeMenu == 'tManageKompen') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Tambah Tugas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/tDikerjakanOleh') }}" class="nav-link {{ ($activeMenu == 'tDikerjakanOleh') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Dikerjakan Oleh</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/tUpdateKompen') }}" class="nav-link {{ ($activeMenu =='tUpdateKompen')? 'active' : '' }} ">
-                    <i class="nav-icon fas fa-history"></i>
-                    <p>Update Kompen</p>
+                <a href="{{ url('/tUpdateKompenSelesai') }}" class="nav-link {{ ($activeMenu =='tUpdateKompen')? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-check-square"></i>
+                    <p>Update Kompen Selesai</p>
                 </a>
             </li>
             <li class="nav-item">

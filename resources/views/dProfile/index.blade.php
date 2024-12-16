@@ -1,4 +1,4 @@
-@extends('layouts.a_template')
+@extends('layouts.d_template')
 
 @section('content')
 <div class="card shadow-lg">
@@ -81,7 +81,7 @@
 
         {{-- Actions --}}
         <div class="text-center mt-4">
-            <button onclick="modalAction('{{ url('/aProfile/edit_ajax') }}')"
+            <button onclick="modalAction('{{ url('/dProfile/edit_ajax') }}')"
                 class="btn btn-warning btn-lg px-4 py-2 shadow">
                 <i class="fas fa-edit"></i> Edit Profile
             </button>

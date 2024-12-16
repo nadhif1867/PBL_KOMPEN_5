@@ -36,6 +36,7 @@ class LihatPilihKompenController extends Controller
 
     public function getTugasReady()
     {
+
         $userId = auth('mahasiswa')->id();
 
         $existingApplications = TugasKompenModel::where('id_mahasiswa', $userId)->get();
@@ -118,7 +119,10 @@ class LihatPilihKompenController extends Controller
 
             $tugasKompen = new TugasKompenModel();
             $tugasKompen->id_tugas_admin = $taskId;
-            $tugasKompen->id_mahasiswa = $userId;
+
+            //$tugasKompen->id_mahasiswa = $userId;
+            $tugasKompen->id_mahasiswa = auth()->user()->id;
+
             $tugasKompen->status_penerimaan = 'request';
             $tugasKompen->tanggal_apply = Carbon::now();
             $tugasKompen->save();
@@ -132,7 +136,7 @@ class LihatPilihKompenController extends Controller
 
             $tugasKompen = new TugasKompenModel();
             $tugasKompen->id_tugas_dosen = $taskId;
-            $tugasKompen->id_mahasiswa = $userId;
+            $tugasKompen->id_mahasiswa = auth()->user()->id;
             $tugasKompen->status_penerimaan = 'request';
             $tugasKompen->tanggal_apply = Carbon::now();
             $tugasKompen->save();
@@ -141,12 +145,14 @@ class LihatPilihKompenController extends Controller
         }
 
         if (strpos($id, 'tendik_') === 0) {
-            $taskId = substr($id, 7); // Remove 'tendik_' prefix
+            $taskId = substr($id, 7);
             $task = TugasTendikModel::find($taskId);
 
             $tugasKompen = new TugasKompenModel();
             $tugasKompen->id_tugas_tendik = $taskId;
+
             $tugasKompen->id_mahasiswa = $userId;
+            $tugasKompen->id_mahasiswa = auth()->user()->id;
             $tugasKompen->status_penerimaan = 'request';
             $tugasKompen->tanggal_apply = Carbon::now();
             $tugasKompen->save();

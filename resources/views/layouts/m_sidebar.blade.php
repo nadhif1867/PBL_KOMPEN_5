@@ -16,7 +16,7 @@
                 <p>Moch. Nadhif Alkautsar</p>
             </li>
             <li class="nav">
-                <a href="/" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
+                <a href="{{ url('/mProfile') }}" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
             </li>
         </div>
     </div>

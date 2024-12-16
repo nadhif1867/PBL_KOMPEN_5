@@ -1,4 +1,4 @@
-@extends('layouts.a_template')
+@extends('layouts.m_template')
 
 @section('content')
 <div class="card shadow-lg">
@@ -58,8 +58,8 @@
                 <div class="mb-4 d-flex align-items-center">
                     <i class="fas fa-id-badge mr-2 text-secondary"></i>
                     <div>
-                        <span class="text-muted">NIP</span>
-                        <h5>{{ $user->nip }}</h5>
+                        <span class="text-muted">NIM</span>
+                        <h5>{{ $user->nim }}</h5>
                     </div>
                 </div>
                 <div class="mb-4 d-flex align-items-center">
@@ -81,7 +81,7 @@
 
         {{-- Actions --}}
         <div class="text-center mt-4">
-            <button onclick="modalAction('{{ url('/aProfile/edit_ajax') }}')"
+            <button onclick="modalAction('{{ url('/mProfile/edit_ajax') }}')"
                 class="btn btn-warning btn-lg px-4 py-2 shadow">
                 <i class="fas fa-edit"></i> Edit Profile
             </button>

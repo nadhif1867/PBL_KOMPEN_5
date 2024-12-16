@@ -23,18 +23,25 @@ use App\Http\Controllers\aWelcomeController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\dDikerjakanOlehController;
 use App\Http\Controllers\dMahasiswaAlphaController;
 use App\Http\Controllers\dMahasiswaKompenController;
 use App\Http\Controllers\dManageKompenController;
+use App\Http\Controllers\dProfileController;
+use App\Http\Controllers\dUpdateKompenController;
 use App\Http\Controllers\dWelcomeController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LihatPilihKompenController;
+use App\Http\Controllers\mProfileController;
 use App\Http\Controllers\UpdateKompenSelesaiController;
 use App\Http\Controllers\UpdateProgresTugasKompenController;
 use App\Http\Controllers\mWelcomeController;
+use App\Http\Controllers\tDikerjakanOlehController;
 use App\Http\Controllers\tMahasiswaAlphaController;
 use App\Http\Controllers\tMahasiswaKompenController;
 use App\Http\Controllers\tManageKompenController;
+use App\Http\Controllers\tProfileController;
+use App\Http\Controllers\tUpdateKompenController;
 use App\Http\Controllers\tWelcomeController;
 
 /*
@@ -114,6 +121,24 @@ Route::group(['prefix' => 'aProfile'], function () {
     Route::get('/', [aProfileController::class, 'index']);
     Route::get('/edit_ajax', [aProfileController::class, 'edit_ajax']);
     Route::post('/update_ajax', [aProfileController::class, 'update_ajax']);
+});
+
+Route::group(['prefix' => 'dProfile'], function () {
+    Route::get('/', [dProfileController::class, 'index']);
+    Route::get('/edit_ajax', [dProfileController::class, 'edit_ajax']);
+    Route::post('/update_ajax', [dProfileController::class, 'update_ajax']);
+});
+
+Route::group(['prefix' => 'mProfile'], function () {
+    Route::get('/', [mProfileController::class, 'index']);
+    Route::get('/edit_ajax', [mProfileController::class, 'edit_ajax']);
+    Route::post('/update_ajax', [mProfileController::class, 'update_ajax']);
+});
+
+Route::group(['prefix' => 'tProfile'], function () {
+    Route::get('/', [tProfileController::class, 'index']);
+    Route::get('/edit_ajax', [tProfileController::class, 'edit_ajax']);
+    Route::post('/update_ajax', [tProfileController::class, 'update_ajax']);
 });
 
 // level
@@ -265,7 +290,6 @@ Route::group(['prefix' => 'aDikerjakanOleh'], function () {
     Route::post('/list', [aDikerjakanOlehController::class, 'list']);
     Route::get('/{id}/show_ajax', [aDikerjakanOlehController::class, 'show_ajax']);
     Route::post('/updateStatus', [aDikerjakanOlehController::class, 'updateStatus']);
-
 });
 
 Route::group(['prefix' => 'aUpdateKompenSelesai'], function () {
@@ -315,7 +339,7 @@ Route::group(['prefix' => 'dMahasiswaKompen'], function () {
 });
 
 // manage kompen
-Route::group(['prefix' => 't'], function () {
+Route::group(['prefix' => 'dManageKompen'], function () {
     Route::get('/', [dManageKompenController::class, 'index']);
     Route::post('/list', [dManageKompenController::class, 'list']);
     Route::get('/{id}/show_ajax', [dManageKompenController::class, 'show_ajax']);
@@ -327,7 +351,18 @@ Route::group(['prefix' => 't'], function () {
     Route::delete('/{id}/delete_ajax', [dManageKompenController::class, 'delete_ajax']);
 });
 
+Route::group(['prefix' => 'dDikerjakanOleh'], function () {
+    Route::get('/', [dDikerjakanOlehController::class, 'index']);
+    Route::post('/list', [dDikerjakanOlehController::class, 'list']);
+    Route::get('/{id}/show_ajax', [dDikerjakanOlehController::class, 'show_ajax']);
+    Route::post('/updateStatus', [dDikerjakanOlehController::class, 'updateStatus']);
+});
 
+Route::group(['prefix' => 'dUpdateKompenSelesai'], function () {
+    Route::get('/', [dUpdateKompenController::class, 'index']);
+    Route::post('/TugasSelesai/{idProgres}', [dUpdateKompenController::class, 'TugasSelesai'])->name('dUpdateKompen.TugasSelesai');
+    Route::post('/KompenDiterima/{idRiwayat}', [dUpdateKompenController::class, 'KompenDiterima'])->name('dUpdateKompen.KompenDiterima');
+});
 // {{ mahasiswa }}
 // dashboard
 Route::get('/mahasiswa', [mWelcomeController::class, 'index'])->name('mahasiswa.dashboard');
@@ -369,6 +404,18 @@ Route::group(['prefix' => 'tManageKompen'], function () {
     Route::delete('/{id}/delete_ajax', [tManageKompenController::class, 'delete_ajax']);
 });
 
+Route::group(['prefix' => 'tDikerjakanOleh'], function () {
+    Route::get('/', [tDikerjakanOlehController::class, 'index']);
+    Route::post('/list', [tDikerjakanOlehController::class, 'list']);
+    Route::get('/{id}/show_ajax', [tDikerjakanOlehController::class, 'show_ajax']);
+    Route::post('/updateStatus', [tDikerjakanOlehController::class, 'updateStatus']);
+});
+
+Route::group(['prefix' => 'tUpdateKompenSelesai'], function () {
+    Route::get('/', [tUpdateKompenController::class, 'index']);
+    Route::post('/TugasSelesai/{idProgres}', [tUpdateKompenController::class, 'TugasSelesai'])->name('tUpdateKompen.TugasSelesai');
+    Route::post('/KompenDiterima/{idRiwayat}', [tUpdateKompenController::class, 'KompenDiterima'])->name('tUpdateKompen.KompenDiterima');
+});
 
 // ROUTE
 // user as Mahasiswa
@@ -384,7 +431,7 @@ Route::get('/fetch-tugas-data/{id}', [UpdateProgresTugasKompenController::class,
 Route::get('/cetak-berita-acara/{id}', [UpdateProgresTugasKompenController::class, 'export_pdf'])->name('cetak.berita.acara');
 Route::get('/generate-qrcode/{id}', [UpdateProgresTugasKompenController::class, 'qrcodeGenerate'])->name('generate.qrcode');
 Route::get('/qrcode/{id}', [UpdateProgresTugasKompenController::class, 'show'])->name('qrcode.show');
-
+// Route::get('/fetch-tugas-data/{id}', [UpdateProgresTugasKompenController::class, 'fetchTugasData']);
 
 // Update Kompen Selesai
 Route::get('/mUpdateKompenSelesai', [UpdateKompenSelesaiController::class, 'index'])->name('mUpdateKompenSelesai.index');

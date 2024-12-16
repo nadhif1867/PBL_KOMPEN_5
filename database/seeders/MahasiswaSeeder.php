@@ -26,7 +26,9 @@ class MahasiswaSeeder extends Seeder
                 'tahun_masuk' => 2022,
                 'no_telepon' => '081233334444',
                 'nama' => 'Kenneth',
-                'avatar' => ''
+                'avatar' => '',
+                'kelas' => 'SIB 1C',
+                'semester' => '1'
             ],
             [
                 'id_mahasiswa' => 2,
@@ -39,7 +41,9 @@ class MahasiswaSeeder extends Seeder
                 'tahun_masuk' => 2022,
                 'no_telepon' => '081255556666',
                 'nama' => 'Brandon',
-                'avatar' => ''
+                'avatar' => '',
+                'kelas' => 'SIB 1C',
+                'semester' => '1'
             ],
             [
                 'id_mahasiswa' => 3,
@@ -52,7 +56,9 @@ class MahasiswaSeeder extends Seeder
                 'tahun_masuk' => 2022,
                 'no_telepon' => '081299998888',
                 'nama' => 'Jocelyn',
-                'avatar' => ''
+                'avatar' => '',
+                'kelas' => 'SIB 1C',
+                'semester' => '1'
             ],
             [
                 'id_mahasiswa' => 4,
@@ -65,7 +71,9 @@ class MahasiswaSeeder extends Seeder
                 'tahun_masuk' => 2022,
                 'no_telepon' => '081299998888',
                 'nama' => 'Aileen',
-                'avatar' => ''
+                'avatar' => '',
+                'kelas' => 'SIB 1C',
+                'semester' => '1'
             ],
         ];
         DB::table('m_mahasiswa')->insert($data);

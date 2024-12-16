@@ -11,7 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('m_dosen', function (Blueprint $table) {
+            $table->id('id_dosen');
+            $table->unsignedBigInteger('id_level')->index();
+            $table->string('username');
+            $table->string('password');
+            $table->string('nip');
+            $table->string('email');
+            $table->string('nama');
+            $table->string('avatar');
+            $table->timestamps();
+
+            $table->foreign('id_level')->references('id_level')->on('m_level');
+        });
     }
 
     /**
@@ -19,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('m_dosen');
     }
 };

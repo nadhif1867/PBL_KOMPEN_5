@@ -25,7 +25,8 @@ class TugasDosenSeeder extends Seeder
                 'kuota' => 1,
                 'id_bidkom' => 4,
                 'id_jenis_kompen' => 1,
-                'id_dosen' => 1
+                'id_dosen' => 1,
+                'id_periode' => 5
             ]
         ];
         DB::table('tugas_dosen')->insert($data);

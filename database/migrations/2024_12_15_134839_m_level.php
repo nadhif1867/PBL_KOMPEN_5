@@ -11,7 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('m_level', function (Blueprint $table) {
+            $table->id('id_level');
+            $table->string('kode_level');
+            $table->string('nama_level');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('m_level');
     }
 };

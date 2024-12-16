@@ -25,7 +25,8 @@ class TugasTendikSeeder extends Seeder
                 'kuota' => 2,
                 'id_bidkom' => 7,
                 'id_jenis_kompen' => 1,
-                'id_tendik' => 1
+                'id_tendik' => 1,
+                'id_periode' => 5
             ]
         ];
         DB::table('tugas_tendik')->insert($data);

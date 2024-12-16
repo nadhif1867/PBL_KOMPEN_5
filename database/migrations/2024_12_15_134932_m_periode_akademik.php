@@ -11,7 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('m_periode_akademik', function (Blueprint $table) {
+            $table->id('id_periode');
+            $table->enum('semester', array('ganjil', 'genap'));
+            $table->integer('tahun_ajaran');
+            $table->enum('status', array('dibuka', 'ditutup'))->default('dibuka');;
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('m_periode_akademik');
     }
 };

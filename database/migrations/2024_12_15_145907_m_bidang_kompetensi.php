@@ -11,7 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('m_bidang_kompetensi', function (Blueprint $table) {
+            $table->id('id_bidkom');
+            $table->string('nama_bidkom');
+            $table->string('tag_bidkom');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('m_bidang_kompetensi');
     }
 };

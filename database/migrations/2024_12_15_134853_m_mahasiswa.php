@@ -11,7 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('m_mahasiswa', function (Blueprint $table) {
+            $table->id('id_mahasiswa');
+            $table->unsignedBigInteger('id_level')->index();
+            $table->string('username');
+            $table->string('password');
+            $table->string('nim');
+            $table->string('prodi');
+            $table->string('email');
+            $table->integer('tahun_masuk');
+            $table->string('nama');
+            $table->string('avatar');
+            $table->string('kelas');
+            $table->string('semester');
+            $table->timestamps();
+
+            $table->foreign('id_level')->references('id_level')->on('m_level');
+        });
     }
 
     /**
@@ -19,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('m_mahasiswa');
     }
 };

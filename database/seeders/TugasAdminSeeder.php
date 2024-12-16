@@ -25,7 +25,8 @@ class TugasAdminSeeder extends Seeder
                 'kuota' => 2, 
                 'id_bidkom' => 16, 
                 'id_jenis_kompen' => 3, 
-                'id_admin' => 1
+                'id_admin' => 1,
+                'id_periode' => 5
             ]
         ];
         DB::table('tugas_admin')->insert($data);

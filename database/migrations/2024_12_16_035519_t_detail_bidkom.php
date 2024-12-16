@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('m_alpha', function (Blueprint $table) {
-            $table->id('id_alpha');
+        Schema::create('t_detail_bidkom', function (Blueprint $table) {
+            $table->id('id_detail_bidkom');
             $table->unsignedBigInteger('id_mahasiswa')->index();
-            $table->unsignedBigInteger('id_periode')->index();
-            $table->string('jumlah_alpha');
-            $table->string('kompen_dibayar');
+            $table->unsignedBigInteger('id_bidkom')->index();
             $table->timestamps();
 
             $table->foreign('id_mahasiswa')->references('id_mahasiswa')->on('m_mahasiswa');
-            $table->foreign('id_periode')->references('id_periode')->on('m_periode_akademik');
+            $table->foreign('id_bidkom')->references('id_bidkom')->on('m_bidang_kompetensi');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('m_alpha');
+        Schema::dropIfExists('t_detail_bidkom');
     }
 };

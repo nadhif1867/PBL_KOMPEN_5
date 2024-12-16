@@ -32,8 +32,11 @@
                 </div>
                 <div class="form-group">
                     <label>Status</label>
-                    <input value="" type="text" name="status" id="status" class="form-control"
-                        required>
+                    <select name="status" id="status" class="form-control" required>
+                        <option value="">- Pilih Status -</option>
+                        <option value="dibuka">Dibuka</option>
+                        <option value="ditutup">Ditutup</option>
+                    </select>
                     <small id="error-status" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">

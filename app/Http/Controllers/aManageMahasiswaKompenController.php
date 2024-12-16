@@ -8,6 +8,7 @@ use App\Models\MahasiswaModel;
 use App\Models\PeriodeAkademikModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Yajra\DataTables\Facades\DataTables;
 
 class aManageMahasiswaKompenController extends Controller
@@ -28,7 +29,7 @@ class aManageMahasiswaKompenController extends Controller
 
         $activeMenu = 'aManageMahasiswaKompen';
 
-        return view('aManageMahasiswaKompen.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'aMahasiswa' => $aMahasiswa, 'aPeriodeAkademik' => $aPeriodeAkademik,'activeMenu' => $activeMenu]);
+        return view('aManageMahasiswaKompen.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'aMahasiswa' => $aMahasiswa, 'aPeriodeAkademik' => $aPeriodeAkademik, 'activeMenu' => $activeMenu]);
     }
 
     public function list(Request $request)
@@ -61,7 +62,7 @@ class aManageMahasiswaKompenController extends Controller
     }
 
     public function create_ajax()
-    {   
+    {
         // $aManageMahasiswaKompen = AlphaModel::select('id_alpha', 'id_mahasiswa', 'jumlah_alpha', 'kompen_dibayar', 'periode')->get();
         $aMahasiswa = MahasiswaModel::select('id_mahasiswa', 'nama')->get();
         $aPeriodeAkademik = PeriodeAkademikModel::select('id_periode', 'tahun_ajaran')->get();
@@ -149,15 +150,17 @@ class aManageMahasiswaKompenController extends Controller
     public function confirm_ajax(String $id)
     {
         $aManageMahasiswaKompen = AlphaModel::find($id);
+        $aMahasiswa = MahasiswaModel::select('id_mahasiswa', 'nama', 'nim', 'prodi')->get();
 
-        return view('aManageMahasiswaKompen.confirm_ajax', ['aManageMahasiswaKompen' => $aManageMahasiswaKompen]);
+        return view('aManageMahasiswaKompen.confirm_ajax', ['aManageMahasiswaKompen' => $aManageMahasiswaKompen])
+            ->with('mahasiswa');
     }
 
     public function delete_ajax(Request $request, $id)
     {
         // cek apakah requset dari ajax
         if ($request->ajax() || $request->wantsJson()) {
-            $aManageMahasiswaKompen = MahasiswaModel::find($id);
+            $aManageMahasiswaKompen = AlphaModel::find($id);
             if ($aManageMahasiswaKompen) {
                 $aManageMahasiswaKompen->delete();
                 return response()->json([
@@ -168,6 +171,70 @@ class aManageMahasiswaKompenController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => 'Data tidak ditemukan'
+                ]);
+            }
+        }
+        return redirect('/aManageMahasiswaKompen');
+    }
+
+    public function import()
+    {
+        return view('aManageMahasiswaKompen.import');
+    }
+
+    public function import_ajax(Request $request)
+    {
+        if ($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                // validasi file harus xls atau xlsx, max 1MB
+                'file_kompen' => ['required', 'mimes:xlsx', 'max:2048']
+            ];
+
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors()
+                ]);
+            }
+
+            $file = $request->file('file_kompen');  // ambil file dari request
+
+            $reader = IOFactory::createReader('Xlsx');  // load reader file excel
+            $reader->setReadDataOnly(true);             // hanya membaca data
+            $spreadsheet = $reader->load($file->getRealPath()); // load file excel
+            $sheet = $spreadsheet->getActiveSheet();    // ambil sheet yang aktif
+
+            $data = $sheet->toArray(null, false, true, true);   // ambil data excel
+
+            $insert = [];
+            if (count($data) > 1) { // jika data lebih dari 1 baris
+                foreach ($data as $baris => $value) {
+                    if ($baris > 1) { // baris ke 1 adalah header, maka lewati
+                        $insert[] = [
+                            'id_alpha' => $value['A'],
+                            'id_mahasiswa' => $value['B'],
+                            'jumlah_alpha' => $value['C'],
+                            'kompen_dibayar' => $value['D'],
+                            'id_periode' => $value['E'],
+                        ];
+                    }
+                }
+
+                if (count($insert) > 0) {
+                    // insert data ke database, jika data sudah ada, maka diabaikan
+                    AlphaModel::insertOrIgnore($insert);
+                }
+
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data berhasil diimport'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Tidak ada data yang diimport'
                 ]);
             }
         }

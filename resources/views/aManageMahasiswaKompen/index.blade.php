@@ -6,6 +6,7 @@
         <h3 class="card-title">{{ $page->title }}</h3>
         <div class="card-tools">
             <button onclick="modalAction('{{ url('aManageMahasiswaKompen/create_ajax') }}')" class="btn btn-sm btn-success mt-1 fa fa-user"> Tambah</button>
+            <button onclick="modalAction('{{ url('/aManageMahasiswaKompen/import') }}')" class="btn btn-sm btn-primary fa fa-plus-square "> Import Data</button>
         </div>
     </div>
     <div class="card-body">

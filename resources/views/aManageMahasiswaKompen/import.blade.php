@@ -1,75 +1,58 @@
-@empty($aBidangKompetensi)
-<div id="modal-master" class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Kesalahan</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-            <div class="alert alert-danger">
-                <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>Data yang anda cari tidak ditemukan
-            </div>
-            <a href="{{ url('/aBidangKompetensi') }}" class="btn btn-warning">Kembali</a>
-        </div>
-    </div>
-</div>
-@else
-<form action="{{ url('/aBidangKompetensi/' . $aBidangKompetensi->id_bidkom . '/update_ajax') }}" method="POST" id="form-edit">
+<form action="{{ url('/aManageMahasiswaKompen/import_ajax') }}" method="POST" id="form-import" enctype="multipart/form-data">
     @csrf
-    @method('PUT')
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Data Bidang Kompetensi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Import Data Mahasiswa Kompen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Nama Bidang Kompetensi</label>
-                    <input value="{{ $aBidangKompetensi->nama_bidkom }}" type="text" name="nama_bidkom" id="nama_bidkom" class="form-control" required>
-                    <small id="error-nama_bidkom" class="error-text form-text text-danger"></small>
+                    <label>Download Template</label>
+                    <a href="{{ asset('template_kompen.xlsx') }}" class="btn btn-success btn-sm" download><i class="fa fa-file-excel"></i> Download</a>
+                    <small id="error-kategori_id" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Tag Bidang Kompetensi</label>
-                    <input value="{{ $aBidangKompetensi->tag_bidkom }}" type="text" name="tag_bidkom" id="tag_bidkom" class="form-control" required>
-                    <small id="error-nama" class="error-text form-text text-danger"></small>
+                    <label>Pilih File</label>
+                    <input type="file" name="file_kompen" id="file_kompen" class="form-control" required>
+                    <small id="error-file_kompen" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary">Upload</button>
             </div>
         </div>
     </div>
 </form>
 <script>
     $(document).ready(function() {
-        $("#form-edit").validate({
+        $("#form-import").validate({
             rules: {
-                nama_bidkom: {
+                file_kompen: {
                     required: true,
-                    minlength: 2,
-                },
-                tag_bidkom: {
-                    required: true,
-                    minlength: 2,
+                    extension: "xlsx"
                 },
             },
             submitHandler: function(form) {
+                var formData = new FormData(form); // Jadikan form ke FormData untuk menghandle file
+
                 $.ajax({
                     url: form.action,
                     type: form.method,
-                    data: $(form).serialize(),
+                    data: formData, // Data yang dikirim berupa FormData
+                    processData: false, // setting processData dan contentType ke false, untuk menghandle file
+                    contentType: false,
                     success: function(response) {
-                        if (response.status) {
+                        if (response.status) { // jika sukses
                             $('#myModal').modal('hide');
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataLevel.ajax.reload();
-                        } else {
+                            tableaMahasiswaKompen.ajax.reload(); // reload datatable
+                        } else { // jika error
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {
                                 $('#error-' + prefix).text(val[0]);
@@ -98,4 +81,3 @@
         });
     });
 </script>
-@endempty

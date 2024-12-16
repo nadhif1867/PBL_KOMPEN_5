@@ -1,4 +1,4 @@
-@empty($aTugasAdmin)
+@empty($aTugasDosen)
 <div id="modal-master" class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -11,7 +11,7 @@
                 <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                 Data yang anda cari tidak ditemukan
             </div>
-            <a href="{{ url('/aManageKompen') }}" class="btn btn-warning">Kembali</a>
+            <a href="{{ url('/dManageKompen') }}" class="btn btn-warning">Kembali</a>
         </div>
     </div>
 </div>
@@ -27,43 +27,43 @@
             <table class="table table-bordered table-striped table-hover table-sm">
                 <tr>
                     <th>ID</th>
-                    <td>{{ $aTugasAdmin->id_tugas_admin}}</td>
+                    <td>{{ $aTugasDosen->id_tugas_dosen}}</td>
                 </tr>
                 <tr>
                     <th>Jenis Kompen</th>
-                    <td>{{ $aTugasAdmin->admin->nama }}</td>
+                    <td>{{ $aTugasDosen->dosen->nama }}</td>
                 </tr>
                 <tr>
                     <th>Deskripsi</th>
-                    <td>{{ $aTugasAdmin->deskripsi}}</td>
+                    <td>{{ $aTugasDosen->deskripsi}}</td>
                 </tr>
                 <tr>
                     <th>Kuota</th>
-                    <td>{{ $aTugasAdmin->kuota}}</td>
+                    <td>{{ $aTugasDosen->kuota}}</td>
                 </tr>
                 <tr>
                     <th>Jam Kompen</th>
-                    <td>{{ $aTugasAdmin->jam_kompen}}</td>
+                    <td>{{ $aTugasDosen->jam_kompen}}</td>
                 </tr>
                 <tr>
                     <th>Status</th>
-                    <td>{{ $aTugasAdmin->status}}</td>
+                    <td>{{ $aTugasDosen->status}}</td>
                 </tr>
                 <tr>
                     <th>Tanggal Mulai</th>
-                    <td>{{ $aTugasAdmin->tanggal_mulai}}</td>
+                    <td>{{ $aTugasDosen->tanggal_mulai}}</td>
                 </tr>
                 <tr>
                     <th>Tanggal Selesai</th>
-                    <td>{{ $aTugasAdmin->tanggal_selesai}}</td>
+                    <td>{{ $aTugasDosen->tanggal_selesai}}</td>
                 </tr>
                 <tr>
                     <th>Bidang Kompetensi</th>
-                    <td>{{ $aTugasAdmin->bidangkompetensi->tag_bidkom}}</td>
+                    <td>{{ $aTugasDosen->bidangkompetensi->tag_bidkom}}</td>
                 </tr>
                 <tr>
                     <th>Jenis Tugas</th>
-                    <td>{{ $aTugasAdmin->jeniskompen->jenis_kompen}}</td>
+                    <td>{{ $aTugasDosen->jeniskompen->jenis_kompen}}</td>
                 </tr>
             </table>
         </div>

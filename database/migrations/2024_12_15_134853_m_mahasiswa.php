@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email');
             $table->integer('tahun_masuk');
             $table->string('nama');
+            $table->string('no_telepon');
             $table->string('avatar');
             $table->string('kelas');
             $table->string('semester');

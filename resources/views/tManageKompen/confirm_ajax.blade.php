@@ -1,4 +1,4 @@
-@empty($aManageMahasiswaKompen)
+@empty($aTugasTendik)
 <div id="modal-master" class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -11,49 +11,54 @@
                 <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
                 Data yang anda cari tidak ditemukan
             </div>
-            <a href="{{ url('/aManageMahasiswaKompen') }}" class="btn btn-warning">Kembali</a>
+            <a href="{{ url('/dManageKompen') }}" class="btn btn-warning">Kembali</a>
         </div>
     </div>
 </div>
 @else
-<form action="{{ url('/aManageMahasiswaKompen/' . $aManageMahasiswaKompen->id_alpha . '/delete_ajax') }}" method="POST" id="form-delete">
+<form action="{{ url('/dManageKompen/' . $aTugasTendik->id_tugas_tendik . '/delete_ajax') }}" method="POST" id="form-delete">
     @csrf
     @method('DELETE')
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Data Mahasiswa</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-warning">
-                    <h5><i class="icon fas fa-ban"></i> Konfirmasi !!!</h5>Apakah Anda ingin menghapus data seperti di bawah ini?
+                    <h5><i class="icon fas fa-ban"></i> Konfirmasi !!!</h5>
+                    Apakah Anda ingin menghapus data seperti di bawah ini?
                 </div>
                 <table class="table table-sm table-bordered table-striped">
                     <tr>
-                        <th class="text-right col-3">ID</th>
-                        <td class="col-9">{{ $aManageMahasiswaKompen->id_alpha}}</td>
+                        <th class="text-right col-3">Nama Tugas :</th>
+                        <td class="col-9">{{ $aTugasTendik->nama_tugas }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Nama Mahasiswa</th>
-                        <td class="col-9">{{ $aManageMahasiswaKompen->mahasiswa->nama}}</td>
+                        <th class="text-right col-3">Deskripsi :</th>
+                        <td class="col-9">{{ $aTugasTendik->deskripsi }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">NIM</th>
-                        <td class="col-9">{{ $aManageMahasiswaKompen->mahasiswa->nim}}</td>
+                        <th class="text-right col-3">Kuota :</th>
+                        <td class="col-9">{{ $aTugasTendik->kuota }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Jumlah Jam Kompen</th>
-                        <td class="col-9">{{ $aManageMahasiswaKompen->jumlah_alpha}}</td>
+                        <th class="text-right col-3">Jam Kompen :</th>
+                        <td class="col-9">{{ $aTugasTendik->jam_kompen }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Jumlah Jam Kompen Terbayar</th>
-                        <td class="col-9">{{ $aManageMahasiswaKompen->kompen_dibayar}}</td>
+                        <th class="text-right col-3">Status :</th>
+                        <td class="col-9">{{ $aTugasTendik->status }}</td>
                     </tr>
                     <tr>
-                        <th class="text-right col-3">Prodi</th>
-                        <td class="col-9">{{ $aManageMahasiswaKompen->mahasiswa->prodi}}</td>
+                        <th class="text-right col-3">Waktu Mulai Pengerjaan :</th>
+                        <td class="col-9">{{ $aTugasTendik->tanggal_mulai }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right col-3">Waktu Selesai Pengerjaan :</th>
+                        <td class="col-9">{{ $aTugasTendik->tanggal_selesai }}</td>
                     </tr>
                 </table>
             </div>
@@ -81,7 +86,7 @@
                                 title: 'Berhasil',
                                 text: response.message
                             });
-                            dataLevel.ajax.reload();
+                            dataUser.ajax.reload();
                         } else {
                             $('.error-text').text('');
                             $.each(response.msgField, function(prefix, val) {

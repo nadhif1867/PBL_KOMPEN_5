@@ -64,7 +64,7 @@
                     <small id="error-kuota" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Nama Admin</label>
+                    <label>Bidang Kompetensi</label>
                     <select name="id_bidkom" id="id_bidkom" class="form-control" required>
                         <option value="">- Pilih User -</option>
                         @foreach ($aBidangKompetensi as $b)

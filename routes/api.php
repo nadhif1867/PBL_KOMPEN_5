@@ -16,25 +16,24 @@ use App\Models\mTugasKompenModel;
 use App\Models\ProgresTugasModel;
 use App\Models\TugasMahasiswaModel;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/user', function (Request $request) {
+    return $request->user(); // Tidak menggunakan auth:sanctum
 });
 
-Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/user', function (Request $request) {
+    return $request->user(); // Tidak menggunakan middleware auth
 });
 
-Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+Route::post('/logout', [LogoutController::class, 'logout']);
 
-Route::get('/detailMHS/{id}', [DetailMHSController::class, 'getUserProfile'])
-    ->name('getUserProfile');
+Route::get('/detailMHS/{id}', [DetailMHSController::class, 'getUserProfile']);
 
-Route::get('/tugas', [TugasMahasiswaController::class, 'tugasSemua'])->name('tugasSemua');
+Route::get('/tugas', [TugasMahasiswaController::class, 'tugasSemua']);
 
-Route::get('/progres', [TugasKompenController::class, 'progresMahasiswa'])->name('progresMahasiswa');
+Route::get('/progres', [TugasKompenController::class, 'progresMahasiswa']);
 
-Route::get('/dashboardMHS/{id_mahasiswa}', [DashboardMahasiswaController::class, 'getDashboardMHS'])->name('getDashboardMHS');
+Route::get('/dashboardMHS/{id_mahasiswa}', [DashboardMahasiswaController::class, 'getDashboardMHS']);

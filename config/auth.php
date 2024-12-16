@@ -56,6 +56,10 @@ return [
             'driver' => 'session',
             'provider' => 'tendik',
         ],
+        'api' => [
+            'driver' => 'session', // Gunakan session-based authentication
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -117,6 +121,10 @@ return [
         ],
         'users' => [
             'driver' => 'token',
+            'provider' => 'users',
+        ],
+        'api' => [
+            'driver' => 'session', // Gunakan session-based authentication
             'provider' => 'users',
         ],
     ],

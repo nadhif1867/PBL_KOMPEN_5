@@ -12,6 +12,7 @@ use App\Http\Controllers\aMahasiswaKompenController;
 use App\Http\Controllers\aManageKompenController;
 use App\Http\Controllers\aManageMahasiswaKompenController;
 use App\Http\Controllers\aProfileController;
+use App\Http\Controllers\aReportKompenController;
 use App\Http\Controllers\aTendikController;
 use App\Http\Controllers\aTugasAdminController;
 use App\Http\Controllers\aTugasDosenController;
@@ -297,6 +298,10 @@ Route::group(['prefix' => 'aUpdateKompenSelesai'], function () {
     Route::post('/KompenDiterima/{idRiwayat}', [aUpdateKompenController::class, 'KompenDiterima'])->name('aUpdateKompen.KompenDiterima');
 });
 
+Route::group(['prefix' => 'aReportKompen'], function () {
+    Route::get('/', [aReportKompenController::class, 'index']);
+    Route::get('/export/{id_periode}', [aReportKompenController::class, 'exportPDF'])->name('report.exportPDF');
+});
 
 Route::group(['prefix' => 'aManageMahasiswaKompen'], function () {
     Route::get('/', [aManageMahasiswaKompenController::class, 'index']);

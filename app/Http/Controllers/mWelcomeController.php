@@ -9,11 +9,10 @@ class mWelcomeController extends Controller
 {
     public function index()
     {
-        // Hardcoded user ID
-        $userId = 4;
-        //$userId = auth()->user()->id;
 
-        $alphaData = AlphaModel::where('id_mahasiswa', $userId)->first();
+        // $userId = 5;
+        $mahasiswa = auth('mahasiswa')->user();
+        $alphaData = AlphaModel::where('id_mahasiswa', $mahasiswa->id_mahasiswa)->first();
 
         $breadcrumb = (object)[
             'title' => 'Overview Kompen',

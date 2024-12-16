@@ -11,7 +11,7 @@ class PeriodeAkademikModel extends Model
     use HasFactory;
 
     protected $table = 'm_periode_akademik'; // Mendefinisikan nama tabel
-    protected $primaryKey = 'id_periode_akademik'; // Mendefinisikan primary key
+    protected $primaryKey = 'id_periode'; // Mendefinisikan primary key
 
     protected $fillable = ['semester', 'tahun_ajaran'];
     public function periode(): HasMany

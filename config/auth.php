@@ -75,28 +75,47 @@ return [
     |
     */
 
+    // 'providers' => [
+    //     'admins' => [
+    //         'driver' => 'eloquent',
+    //         'model' => App\Models\AdminModel::class,
+    //         'table' => 'm_admin', // Tabel yang sesuai
+    //     ],
+    //     'mahasiswa' => [
+    //         'driver' => 'eloquent',
+    //         'model' => App\Models\MahasiswaModel::class,
+    //         'table' => 'm_mahasiswa',
+    //     ],
+    //     'dosen' => [
+    //         'driver' => 'eloquent',
+    //         'model' => App\Models\DosenModel::class,
+    //         'table' => 'm_dosen',
+    //     ],
+    //     'tendik' => [
+    //         'driver' => 'eloquent',
+    //         'model' => App\Models\TendikModel::class,
+    //         'table' => 'm_tendik',
+    //     ],
+    // ],
+
     'providers' => [
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\AdminModel::class,
-            'table' => 'm_admin', // Tabel yang sesuai
-        ],
-        'mahasiswa' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\MahasiswaModel::class,
-            'table' => 'm_mahasiswa',
-        ],
-        'dosen' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\DosenModel::class,
-            'table' => 'm_dosen',
-        ],
-        'tendik' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\TendikModel::class,
-            'table' => 'm_tendik',
-        ],
+    'admins' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\AdminModel::class,
     ],
+    'mahasiswa' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\MahasiswaModel::class,
+    ],
+    'dosen' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\DosenModel::class,
+    ],
+    'tendik' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\TendikModel::class,
+    ],
+],
 
     /*
     |--------------------------------------------------------------------------

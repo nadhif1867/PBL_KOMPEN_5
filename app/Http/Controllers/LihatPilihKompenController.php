@@ -36,10 +36,8 @@ class LihatPilihKompenController extends Controller
 
     public function getTugasReady()
     {
-        // Get the currently logged-in user's ID
-        // $userId = auth()->user()->id;
-        //paksa hardcoded
-        $userId = 4;
+
+        $userId = auth('mahasiswa')->id();
 
         $existingApplications = TugasKompenModel::where('id_mahasiswa', $userId)->get();
 
@@ -108,20 +106,22 @@ class LihatPilihKompenController extends Controller
                 'waktu_pengerjaan' => Carbon::parse($task->tanggal_mulai)->format('d-m-Y') . ' - ' . Carbon::parse($task->tanggal_selesai)->format('d-m-Y')
             ];
         }));
-
         return $tugas;
     }
 
     public function applyTugas($id)
     {
+        $userId = auth('mahasiswa')->id();
+
         if (strpos($id, 'admin_') === 0) {
             $taskId = substr($id, 6); // Remove 'admin_' prefix
             $task = TugasAdminModel::find($taskId);
 
             $tugasKompen = new TugasKompenModel();
             $tugasKompen->id_tugas_admin = $taskId;
-            $tugasKompen->id_mahasiswa = 4;
-            // $tugasKompen->id_mahasiswa = auth()->user()->id;
+
+            $tugasKompen->id_mahasiswa = $userId;
+
             $tugasKompen->status_penerimaan = 'request';
             $tugasKompen->tanggal_apply = Carbon::now();
             $tugasKompen->save();
@@ -135,8 +135,7 @@ class LihatPilihKompenController extends Controller
 
             $tugasKompen = new TugasKompenModel();
             $tugasKompen->id_tugas_dosen = $taskId;
-            $tugasKompen->id_mahasiswa = 4;
-            // $tugasKompen->id_mahasiswa = auth()->user()->id;
+            $tugasKompen->id_mahasiswa = $userId;
             $tugasKompen->status_penerimaan = 'request';
             $tugasKompen->tanggal_apply = Carbon::now();
             $tugasKompen->save();
@@ -145,13 +144,13 @@ class LihatPilihKompenController extends Controller
         }
 
         if (strpos($id, 'tendik_') === 0) {
-            $taskId = substr($id, 7); // Remove 'tendik_' prefix
+            $taskId = substr($id, 7);
             $task = TugasTendikModel::find($taskId);
 
             $tugasKompen = new TugasKompenModel();
             $tugasKompen->id_tugas_tendik = $taskId;
-            $tugasKompen->id_mahasiswa = 4;
-            // $tugasKompen->id_mahasiswa = auth()->user()->id;
+
+            $tugasKompen->id_mahasiswa = $userId;
             $tugasKompen->status_penerimaan = 'request';
             $tugasKompen->tanggal_apply = Carbon::now();
             $tugasKompen->save();

@@ -39,6 +39,9 @@ class aManageKompenController extends Controller
 
         return DataTables::of($aManageKompens)
             ->addIndexColumn()
+            ->addColumn('deadline', function($row){
+                return $row->tanggal_mulai. '  -  ' .$row->tanggal_selesai;
+            })
             ->addColumn('aksi', function ($aManageKompen) {
                 $btn = '<button onclick="modalAction(\'' . url('/aManageKompen/' . $aManageKompen->id_tugas_admin . '/show_ajax') . '\')" class="btn btn-info btn-sm" style="margin-right: 5px;">Detail</button>';
                 $btn .= '<button onclick="modalAction(\'' . url('/aManageKompen/' . $aManageKompen->id_tugas_admin . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';

@@ -13,7 +13,7 @@
         </div>
         <div class="info">
             <li class="nav" style="color: white;">
-                <p>Moch. Nadhif Alkautsar</p>
+                <p>{{ Auth::guard('dosen')->user()->nama ?? 'Guest' }}</p>
             </li>
             <li class="nav">
                 <a href="{{ url('/dProfile') }}" class="btn btn-block btn-sm btn-primary">Edit Profile</a>

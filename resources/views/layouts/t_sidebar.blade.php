@@ -13,10 +13,10 @@
         </div>
         <div class="info">
             <li class="nav" style="color: white;">
-                <p>Moch. Nadhif Alkautsar</p>
+                <p>{{ Auth::guard('tendik')->user()->nama ?? 'Guest' }}</p>
             </li>
             <li class="nav">
-                <a href="{{ url('/mProfile') }}" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
+                <a href="{{ url('/tProfile') }}" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
             </li>
         </div>
     </div>

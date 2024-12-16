@@ -90,25 +90,6 @@ class aUpdateKompenController extends Controller
         }
     }
 
-    // public function updateTugasSelesai($idProgres, Request $request)
-    // {
-    //     try {
-    //         $progresTugas = ProgresTugasModel::findOrFail($idProgres);
-    //         $progresTugas->status_progres = 'selesai';
-    //         $progresTugas->save();
-
-    //         return response()->json([
-    //             'success' => true,
-    //             'message' => 'Status progres berhasil diubah menjadi selesai.'
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Gagal mengubah status progres: ' . $e->getMessage()
-    //         ]);
-    //     }
-    // }
-
     public function KompenDiterima($idRiwayat)
     {
         try {
@@ -128,7 +109,6 @@ class aUpdateKompenController extends Controller
                 $jamKompen = $tugasKompen->tugasTendik->jam_kompen ?? 0;
             }
 
-            // Cari data alpha mahasiswa
             $alpha = AlphaModel::where('id_mahasiswa', $tugasKompen->id_mahasiswa)->first();
 
             if (!$alpha) {
@@ -136,7 +116,6 @@ class aUpdateKompenController extends Controller
                 return redirect()->back()->with('error', 'Data alpha tidak ditemukan.');
             }
 
-            // Log sebelum perubahan
             Log::info("Mahasiswa ID: " . $tugasKompen->id_mahasiswa);
             Log::info("Jam Kompen: $jamKompen");
             Log::info("Jumlah Alpha Sebelum: " . $alpha->jumlah_alpha);
@@ -147,11 +126,9 @@ class aUpdateKompenController extends Controller
             $alpha->kompen_dibayar += $jamKompen;
             $alpha->save();
 
-            // Ubah status riwayat kompen menjadi diterima
             $riwayat->status = 'diterima';
             $riwayat->save();
 
-            // Log setelah perubahan
             Log::info("Jumlah Alpha Sesudah: " . $alpha->jumlah_alpha);
             Log::info("Kompen Dibayar Sesudah: " . $alpha->kompen_dibayar);
 
@@ -161,50 +138,4 @@ class aUpdateKompenController extends Controller
             return redirect()->back()->with('error', 'Gagal menerima kompen: ' . $e->getMessage());
         }
     }
-
-    // public function kompenSelesai($idRiwayat, Request $request)
-    // {
-    //     try {
-    //         $riwayat = RiwayatKompenModel::findOrFail($idRiwayat);
-
-    //         $tugasKompen = TugasKompenModel::findOrFail($riwayat->id_tugas_kompen);
-
-    //         $jamKompen = 0;
-    //         if ($tugasKompen->id_tugas_admin) {
-    //             $jamKompen = $tugasKompen->tugasAdmin->jam_kompen ?? 0;
-    //         } elseif ($tugasKompen->id_tugas_dosen) {
-    //             $jamKompen = $tugasKompen->tugasDosen->jam_kompen ?? 0;
-    //         } elseif ($tugasKompen->id_tugas_tendik) {
-    //             $jamKompen = $tugasKompen->tugasTendik->jam_kompen ?? 0;
-    //         }
-
-    //         Log::info("Jam Kompen: $jamKompen");
-
-    //         $alpha = AlphaModel::where('id_mahasiswa', $tugasKompen->id_mahasiswa)->first();
-
-    //         if (!$alpha) {
-    //             Log::error("Alpha data not found for mahasiswa ID: " . $tugasKompen->id_mahasiswa);
-    //             return redirect()->back()->with('error', 'Data alpha tidak ditemukan.');
-    //         }
-
-    //         Log::info("Jumlah Alpha Sebelum: " . $alpha->jumlah_alpha);
-    //         Log::info("Kompen Dibayar Sebelum: " . $alpha->kompen_dibayar);
-
-    //         $alpha->jumlah_alpha = max(0, $alpha->jumlah_alpha - $jamKompen);
-    //         $alpha->kompen_dibayar += $jamKompen;
-
-    //         $alpha->save();
-
-    //         Log::info("Jumlah Alpha Sesudah: " . $alpha->jumlah_alpha);
-    //         Log::info("Kompen Dibayar Sesudah: " . $alpha->kompen_dibayar);
-
-    //         $riwayat->status = 'selesai';
-    //         $riwayat->save();
-
-    //         return redirect()->back()->with('success', 'Kompen selesai dan jumlah alpha berhasil dikurangi.');
-    //     } catch (\Exception $e) {
-    //         Log::error('Error: ' . $e->getMessage());
-    //         return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-    //     }
-    // }
 }

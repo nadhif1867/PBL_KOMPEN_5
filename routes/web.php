@@ -363,6 +363,7 @@ Route::group(['prefix' => 'dUpdateKompenSelesai'], function () {
     Route::post('/TugasSelesai/{idProgres}', [dUpdateKompenController::class, 'TugasSelesai'])->name('dUpdateKompen.TugasSelesai');
     Route::post('/KompenDiterima/{idRiwayat}', [dUpdateKompenController::class, 'KompenDiterima'])->name('dUpdateKompen.KompenDiterima');
 });
+
 // {{ mahasiswa }}
 // dashboard
 Route::get('/mahasiswa', [mWelcomeController::class, 'index'])->name('mahasiswa.dashboard');

@@ -14,7 +14,7 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            
+
             <table class="table table-bordered table-striped table-hover table-sm" id="table_user">
                 <thead>
                     <tr>
@@ -41,6 +41,7 @@
                                     {{ $progress->progres ?? '-' }}
                                 </span>
                             </td>
+
                             <td>
                                 <button class="btn btn-warning btn-sm edit-progress-btn"
                                     data-id="{{ $progress->id_tugas_kompen }}">

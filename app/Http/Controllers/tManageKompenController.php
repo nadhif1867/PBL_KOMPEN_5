@@ -15,12 +15,12 @@ class tManageKompenController extends Controller
     public function index()
     {
         $breadcrumb = (object)[
-            'title' => 'Manage Kompen',
+            'title' => 'Manage Data Kompen',
             'list' => ['Home', 'Manage Kompen']
         ];
 
         $page = (object)[
-            'title' => 'Manage Kompen',
+            'title' => 'Manage Data Kompen',
         ];
 
         $activeMenu = 'tManageKompen';
@@ -41,8 +41,8 @@ class tManageKompenController extends Controller
                 $btn = '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/show_ajax') . '\')" class="btn btn-info btn-sm" style="margin-right: 5px;">Detail</button>';
                 $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';
                 $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/delete_ajax') . '\')"  class="btn btn-danger btn-sm" style="margin-left: 5px;">Hapus</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/apply') . '\')"  class="btn btn-success btn-sm" style="margin-top: 5px;">Dikerjakan Oleh</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/close') . '\')"  class="btn btn-warning btn-sm" style="margin-top: 1px;">Tugas Ditutup</button> ';
+                // $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/apply') . '\')"  class="btn btn-success btn-sm" style="margin-top: 5px;">Dikerjakan Oleh</button> ';
+                // $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/close') . '\')"  class="btn btn-warning btn-sm" style="margin-top: 1px;">Tugas Ditutup</button> ';
                 return $btn;
             })
             ->rawColumns(['aksi'])
@@ -138,7 +138,7 @@ class tManageKompenController extends Controller
                 $check->update($request->all());
                 return response()->json([
                     'status' => true,
-                    'message' => 'Data user berhasil diupdate'
+                    'message' => 'Data berhasil diupdate'
                 ]);
             } else {
                 return response()->json([

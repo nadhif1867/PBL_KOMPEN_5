@@ -22,11 +22,10 @@
                     <th>Nama Tugas</th>
                     <th>Deskripsi</th>
                     <th>Status</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Tanggal Selesai</th>
+                    <th>Deadline</th>
                     <th>Pemberi Tugas</th>
                     <th>Jenis Kompen</th>  
-                                   
+                    <th>Aksi</th>       
                 </tr>
             </thead>
         </table>
@@ -79,12 +78,7 @@
                     searchable: false
                 },
                 {
-                    data: "tanggal_mulai",
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: "tanggal_selesai",
+                    data: "deadline",
                     orderable: false,
                     searchable: false
                 },
@@ -97,7 +91,12 @@
                     data: "jeniskompen.jenis_kompen",
                     orderable: false,
                     searchable: false
-                },         
+                },        
+                {
+                    data: "aksi",
+                    orderable: false,
+                    searchable: false
+                }, 
             ]
         });
 

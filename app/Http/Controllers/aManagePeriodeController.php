@@ -93,7 +93,7 @@ class aManagePeriodeController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Data periode berhasil disimpan'
+                'message' => 'Data berhasil disimpan'
             ]);
         } catch (\Exception $e) {
             return response()->json([

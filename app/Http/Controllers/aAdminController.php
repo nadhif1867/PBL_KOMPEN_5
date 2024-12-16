@@ -96,7 +96,7 @@ class aAdminController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Data admin berhasil disimpan'
+                'message' => 'Data berhasil disimpan'
             ]);
         }
         return redirect('/aAdmin');
@@ -145,7 +145,7 @@ class aAdminController extends Controller
                 $check->update($request->all());
                 return response()->json([
                     'status' => true,
-                    'message' => 'Data user berhasil diupdate'
+                    'message' => 'Data berhasil diupdate'
                 ]);
             } else {
                 return response()->json([

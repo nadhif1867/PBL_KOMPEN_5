@@ -19,7 +19,7 @@ class dDikerjakanOlehController extends Controller
         ];
 
         $page = (object)[
-            'title' => 'Manage Kompen',
+            'title' => 'Dikerjakan Oleh',
         ];
 
         $activeMenu = 'dDikerjakanOleh';

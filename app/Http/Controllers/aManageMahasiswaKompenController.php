@@ -16,12 +16,12 @@ class aManageMahasiswaKompenController extends Controller
     public function index()
     {
         $breadcrumb = (object)[
-            'title' => 'Manage Mahasiswa Kompen',
+            'title' => 'Manage Data Mahasiswa Kompen',
             'list' => ['Home', 'Mahasiswa Kompen']
         ];
 
         $page = (object)[
-            'title' => 'Manage Mahasiswa Kompen',
+            'title' => 'Manage Data Mahasiswa Kompen',
         ];
 
         $aMahasiswa = MahasiswaModel::all();
@@ -135,7 +135,7 @@ class aManageMahasiswaKompenController extends Controller
                 $check->update($request->all());
                 return response()->json([
                     'status' => true,
-                    'message' => 'Data user berhasil diupdate'
+                    'message' => 'Data berhasil diupdate'
                 ]);
             } else {
                 return response()->json([

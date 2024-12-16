@@ -17,12 +17,12 @@ class aManageKompenController extends Controller
     public function index()
     {
         $breadcrumb = (object)[
-            'title' => 'Manage Kompen',
+            'title' => 'Manage Data Kompen',
             'list' => ['Home', 'Manage Kompen']
         ];
 
         $page = (object)[
-            'title' => 'Manage Kompen',
+            'title' => 'Manage Data Kompen',
         ];
 
         $activeMenu = 'aManageKompen';
@@ -153,7 +153,7 @@ class aManageKompenController extends Controller
                 $check->update($request->all());
                 return response()->json([
                     'status' => true,
-                    'message' => 'Data user berhasil diupdate'
+                    'message' => 'Data berhasil diupdate'
                 ]);
             } else {
                 return response()->json([

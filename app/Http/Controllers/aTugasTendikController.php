@@ -44,10 +44,11 @@ class aTugasTendikController extends Controller
 
         return DataTables::of($aTugasTendiks)
             ->addIndexColumn()
+            ->addColumn('deadline', function($row){
+                return $row->tanggal_mulai. '-' .$row->tanggal_selesai;
+            })
             ->addColumn('aksi', function ($aTugasTendik) {
                 $btn = '<button onclick="modalAction(\'' . url('/aTugasTendik/' . $aTugasTendik->id_tugas_tendik . '/show_ajax') . '\')" class="btn btn-info btn-sm" style="margin-right: 5px;">Detail</button>';
-                $btn .= '<button onclick="modalAction(\'' . url('/aTugasTendik/' . $aTugasTendik->id_tugas_tendik . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/aTugasTendik/' . $aTugasTendik->id_tugas_tendik . '/delete_ajax') . '\')"  class="btn btn-danger btn-sm" style="margin-left: 5px;">Hapus</button> ';
                 return $btn;
             })
             ->rawColumns(['aksi'])

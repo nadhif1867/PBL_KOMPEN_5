@@ -217,6 +217,8 @@ Route::group(['prefix' => 'aMahasiswaKompen'], function () {
     Route::get('/{id}/show_ajax', [aMahasiswaKompenController::class, 'show_ajax']);
     Route::get('{id}/edit_ajax', [aMahasiswaKompenController::class, 'edit_ajax']);
     Route::put('/{id}/update_ajax', [aMahasiswaKompenController::class, 'update_ajax']);
+    Route::get('/import', [aMahasiswaKompenController::class, 'import']);
+Route::post('/import_ajax', [aMahasiswaKompenController::class, 'import_ajax']);
 });
 
 // manage bidang kompetensi

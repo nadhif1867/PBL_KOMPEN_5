@@ -26,8 +26,7 @@
                     <th>Kuota</th>
                     <th>Jam Kompen</th>
                     <th>Status</th>
-                    <th>Waktu Pengerjaan Mulai</th>
-                    <th>Waktu Pengerjaan Selesai</th>
+                    <th>Waktu Pengerjaan</th>
                     <th>Tag Kompetensi</th>
                     <th>Aksi</th>
                 </tr>
@@ -72,7 +71,7 @@
                     searchable: true
                 },
                 {
-                    data: "nama_tugas",
+                    data: "jeniskompen.jenis_kompen",
                     orderable: true,
                     searchable: true
                 },
@@ -97,12 +96,7 @@
                     searchable: true
                 },
                 {
-                    data: "tanggal_mulai",
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: "tanggal_selesai",
+                    data: "deadline",
                     orderable: true,
                     searchable: true
                 },

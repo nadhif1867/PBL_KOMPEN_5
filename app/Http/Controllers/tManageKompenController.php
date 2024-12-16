@@ -37,6 +37,9 @@ class tManageKompenController extends Controller
 
         return DataTables::of($tManageKompens)
             ->addIndexColumn()
+            ->addColumn('deadline', function($row){
+                return $row->tanggal_mulai. '  -  ' .$row->tanggal_selesai;
+            })
             ->addColumn('aksi', function ($tManageKompen) {
                 $btn = '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/show_ajax') . '\')" class="btn btn-info btn-sm" style="margin-right: 5px;">Detail</button>';
                 $btn .= '<button onclick="modalAction(\'' . url('/tManageKompen/' . $tManageKompen->id_tugas_tendik . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';

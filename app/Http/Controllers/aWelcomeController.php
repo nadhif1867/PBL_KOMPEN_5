@@ -5,8 +5,7 @@ use App\Models\AlphaModel;
 use App\Models\PeriodeAkademikModel;
 
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class aWelcomeController extends Controller
 {
@@ -20,6 +19,8 @@ class aWelcomeController extends Controller
 
         // Aktifkan menu "dashboard" untuk highlight di UI
         $activeMenu = 'dashboard';
+
+        $user = Auth::guard('admin')->user();
 
         // Statistik jumlah mahasiswa kompen
         $data = [
@@ -53,7 +54,8 @@ class aWelcomeController extends Controller
             'breadcrumb' => $breadcrumb,
             'activeMenu' => $activeMenu,
             'data' => $data,
-            'grafik' => $grafik 
+            'grafik' => $grafik, 
+            'user' => $user
         ]);
     }
 }

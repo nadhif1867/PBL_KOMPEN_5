@@ -3,16 +3,21 @@
         .sidebar {
             background-color: #0E1F43;
         }
+        .username {
+            color: white;
+            font-family:'Times New Roman', Times, serif
+        }
     </style>
 </head>
 <div class="sidebar">
     <!-- Profile Menu -->
-    <div class="user-panel mt-3 pb-3 d-flex">
+    <div class="user-panel mt-2 pb-3 d-flex">
         <div class="image">
             <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" alt="user" class="img-circle elevation-2">
         </div>
         <div class="info">
-            <div class=" text-center" style="color: white;">
+            <div class="username">
+            <h5>{{ $user->username }}</h5>
             </div>
             <li class="nav">
                 <a href="{{ url('/aProfile') }}" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
@@ -219,9 +224,15 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ url('/aManagePeriode') }}" class="nav-link {{ ($activeMenu =='aManagePeriode')? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-calendar"></i>
+                    <p>Manage Periode</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ url('/aJenisKompen') }}" class="nav-link {{ ($activeMenu =='aJenisKompen')? 'active' : '' }} ">
                     <i class="nav-icon fas fa-file"></i>
-                    <p>Manage Jenis Penugasan</p>
+                    <p>Jenis Penugasan</p>
                 </a>
             </li>
             <li class="nav-item">

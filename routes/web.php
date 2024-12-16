@@ -11,6 +11,7 @@ use App\Http\Controllers\aMahasiswaController;
 use App\Http\Controllers\aMahasiswaKompenController;
 use App\Http\Controllers\aManageKompenController;
 use App\Http\Controllers\aManageMahasiswaKompenController;
+use App\Http\Controllers\aManagePeriodeController;
 use App\Http\Controllers\aProfileController;
 use App\Http\Controllers\aReportKompenController;
 use App\Http\Controllers\aTendikController;
@@ -313,6 +314,19 @@ Route::group(['prefix' => 'aManageMahasiswaKompen'], function () {
     Route::delete('/{id}/delete_ajax', [aManageMahasiswaKompenController::class, 'delete_ajax']);
     Route::get('/import', [aManageMahasiswaKompenController::class, 'import']);
     Route::post('/import_ajax', [aManageMahasiswaKompenController::class, 'import_ajax']);
+});
+
+// Manage Periode
+Route::group(['prefix' => 'aManagePeriode'], function () {
+    Route::get('/', [aManagePeriodeController::class, 'index']);
+    Route::post('/list', [aManagePeriodeController::class, 'list']);
+    Route::get('/create_ajax', [aManagePeriodeController::class, 'create_ajax']);
+    Route::post('/ajax', [aManagePeriodeController::class, 'store_ajax']);
+    Route::get('/{id}/show_ajax', [aManagePeriodeController::class, 'show_ajax']);
+    Route::get('/{id}/edit_ajax', [aManagePeriodeController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [aManagePeriodeController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [aManagePeriodeController::class, 'confirm_ajax']);
+    Route::delete('/{id}/delete_ajax', [aManagePeriodeController::class, 'delete_ajax']);
 });
 
 // {{ dosen }}

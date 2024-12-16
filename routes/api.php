@@ -20,15 +20,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/register', [RegisterController::class, '__invoke'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
-Route::post('/login', [LoginController::class, '__invoke'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/logout', [LogoutController::class, '__invoke'])->name('logout');
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::get('/detailMHS/{id}', [DetailMHSController::class, 'getUserProfile'])
     ->name('getUserProfile');

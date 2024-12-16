@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('nip');
             $table->string('email');
+            $table->string('no_telepon');
             $table->string('nama');
             $table->string('avatar');
             $table->timestamps();

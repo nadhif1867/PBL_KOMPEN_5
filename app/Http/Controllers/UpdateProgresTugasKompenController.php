@@ -37,6 +37,7 @@ class UpdateProgresTugasKompenController extends Controller
 
         $progressData = ProgresTugasModel::select('id_tugas_kompen', 'progress')
             ->get();
+            // dd($progressData);
 
         // Ambil semua data tugas yang diterima oleh mahasiswa (status 'diterima')
         $tugasKompen = TugasKompenModel::select('id_tugas_kompen', 'id_mahasiswa', 'id_tugas_admin', 'id_tugas_dosen', 'id_tugas_tendik', 'status_penerimaan', 'tanggal_apply')

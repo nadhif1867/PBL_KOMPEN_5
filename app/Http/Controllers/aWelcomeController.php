@@ -20,9 +20,29 @@ class aWelcomeController extends Controller
         // Aktifkan menu "dashboard" untuk highlight di UI
         $activeMenu = 'dashboard';
 
+        $periods = PeriodeAkademikModel::all();
+
+        $grafik = [];
+
+        foreach ($periods as $period) {
+            $mahasiswaAlpha = AlphaModel::where('id_periode', $period->id_periode) // Gunakan id_periode
+                ->where('jumlah_alpha', '>', 0) // Mahasiswa yang memiliki alpha
+                ->count();
+
+            $mahasiswaKompenSelesai = AlphaModel::where('id_periode', $period->id_periode) // Gunakan id_periode
+                ->whereNotNull('kompen_dibayar') // Kolom kompen_dibayar tidak null
+                ->where('kompen_dibayar', '>', 0) // Kompen dibayar lebih besar dari 0
+                ->count();
+
+            $grafik[] = [
+                'periode' => $period->semester . ' ' . $period->tahun_ajaran, // Menggabungkan semester dan tahun ajaran
+                'jumlah_alpha' => $mahasiswaAlpha,
+                'jumlah_kompen_selesai' => $mahasiswaKompenSelesai,
+            ];
+        }
+
         $user = Auth::guard('admin')->user();
 
-        // Statistik jumlah mahasiswa kompen
         $data = [
             'totalMahasiswaAlpha' => AlphaModel::count('jumlah_alpha'),
             'mahasiswaSelesai' => AlphaModel::whereNotNull('kompen_dibayar')
@@ -30,13 +50,13 @@ class aWelcomeController extends Controller
                                 ->count(),
         ];
 
-        // Data untuk grafik rata-rata jumlah mahasiswa kompen per periode
-        $grafik = [
-            ['periode' => 'Genap 2022', 'jumlah' => ''],
-            ['periode' => 'Ganjil 2023', 'jumlah' => ''],
-            ['periode' => 'Genap 2023', 'jumlah' => ''],
-            ['periode' => 'Ganjil 2024', 'jumlah' =>'']
-        ];
+        // // Data untuk grafik rata-rata jumlah mahasiswa kompen per periode
+        // $grafik = [
+        //     ['periode' => 'Genap 2022', 'jumlah' => ''],
+        //     ['periode' => 'Ganjil 2023', 'jumlah' => ''],
+        //     ['periode' => 'Genap 2023', 'jumlah' => ''],
+        //     ['periode' => 'Ganjil 2024', 'jumlah' =>'']
+        // ];
 
         // $grafik = PeriodeAkademikModel::withCount(['periode as jumlah' => function ($query) {
         //     $query->whereHas('periode', function ($subQuery) {
@@ -54,8 +74,7 @@ class aWelcomeController extends Controller
             'breadcrumb' => $breadcrumb,
             'activeMenu' => $activeMenu,
             'data' => $data,
-            'grafik' => $grafik, 
-            'user' => $user
+            'grafik' => $grafik
         ]);
     }
 }

@@ -15,24 +15,24 @@ class LevelSeeder extends Seeder
     {
         $data = [
             [
-                'level_id' => 1,
-                'level_kode' => 'ADM',
-                'level_nama' => 'Administrator'
+                'id_level' => 1,
+                'kode_level' => 'ADM',
+                'nama_level' => 'Administrator'
             ],
             [
-                'level_id' => 2,
-                'level_kode' => 'DSN',
-                'level_nama' => 'Dosen'
+                'id_level' => 2,
+                'kode_level' => 'DSN',
+                'nama_level' => 'Dosen'
             ],
             [
-                'level_id' => 3,
-                'level_kode' => 'TDK',
-                'level_nama' => 'Tendik'
+                'id_level' => 3,
+                'kode_level' => 'TDK',
+                'nama_level' => 'Tendik'
             ],
             [
-                'level_id' => 4,
-                'level_kode' => 'MHS',
-                'level_nama' => 'Mahasiswa'
+                'id_level' => 4,
+                'kode_level' => 'MHS',
+                'nama_level' => 'Mahasiswa'
             ]
         ];
     }

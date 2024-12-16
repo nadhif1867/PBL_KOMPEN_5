@@ -22,11 +22,12 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
+        Schema::table('t_progres_tugas', function (Blueprint $table) {
+            $table->dropColumn('progress');
+        });
+
         Schema::dropIfExists('t_progres_tugas');
     }
 };

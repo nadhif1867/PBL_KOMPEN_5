@@ -49,9 +49,12 @@
                             <button type="submit" class="btn btn-success btn-sm">Tugas Selesai</button>
                         </form>
 
-                        <form action="{{ route('dUpdateKompen.KompenDiterima', $item['id_riwayat']) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('aUpdateKompen.KompenDiterima', $item['id_riwayat']) }}" method="POST" style="display:inline;">
                             @csrf
-                            <button type="submit" class="btn btn-primary btn-sm">Kompen Diterima</button>
+                            <button type="submit" class="btn btn-primary btn-sm"
+                                @if ($item['status'] == 'diterima') disabled @endif>
+                                Kompen Diterima
+                            </button>
                         </form>
                     </td>
 

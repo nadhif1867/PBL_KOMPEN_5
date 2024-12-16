@@ -295,7 +295,7 @@ Route::group(['prefix' => 'aDikerjakanOleh'], function () {
 
 Route::group(['prefix' => 'aUpdateKompenSelesai'], function () {
     Route::get('/', [aUpdateKompenController::class, 'index']);
-    Route::post('/TugasSelesai/{idProgres}', [aUpdateKompenController::class, 'updateTugasSelesai'])->name('aUpdateKompen.TugasSelesai');
+    Route::post('/TugasSelesai/{idProgres}', [aUpdateKompenController::class, 'TugasSelesai'])->name('aUpdateKompen.TugasSelesai');
     Route::post('/KompenDiterima/{idRiwayat}', [aUpdateKompenController::class, 'KompenDiterima'])->name('aUpdateKompen.KompenDiterima');
 });
 
@@ -379,6 +379,7 @@ Route::group(['prefix' => 'dUpdateKompenSelesai'], function () {
     Route::post('/TugasSelesai/{idProgres}', [dUpdateKompenController::class, 'TugasSelesai'])->name('dUpdateKompen.TugasSelesai');
     Route::post('/KompenDiterima/{idRiwayat}', [dUpdateKompenController::class, 'KompenDiterima'])->name('dUpdateKompen.KompenDiterima');
 });
+
 // {{ mahasiswa }}
 // dashboard
 Route::get('/mahasiswa', [mWelcomeController::class, 'index'])->name('mahasiswa.dashboard');

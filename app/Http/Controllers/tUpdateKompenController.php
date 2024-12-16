@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProgresTugasModel;
 use App\Models\RiwayatKompenModel;
+use App\Models\TugasKompenModel;
+use App\Models\AlphaModel;
+use App\Models\ProgresTugasModel;
+use Illuminate\Support\Facades\Log;
+
+
 use Illuminate\Http\Request;
 
 class tUpdateKompenController extends Controller
@@ -82,19 +87,6 @@ class tUpdateKompenController extends Controller
             return redirect()->back()->with('success', 'Status progres berhasil diubah menjadi selesai.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengubah status progres: ' . $e->getMessage());
-        }
-    }
-
-    public function KompenDiterima($idRiwayat)
-    {
-        try {
-            $riwayatKompen = RiwayatKompenModel::findOrFail($idRiwayat);
-            $riwayatKompen->status = 'diterima';
-            $riwayatKompen->save();
-
-            return redirect()->back()->with('success', 'Kompen berhasil diterima.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal mengubah status kompen: ' . $e->getMessage());
         }
     }
 }

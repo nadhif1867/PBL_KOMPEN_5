@@ -48,11 +48,6 @@
                             @csrf
                             <button type="submit" class="btn btn-success btn-sm">Tugas Selesai</button>
                         </form>
-
-                        <form action="{{ route('tUpdateKompen.KompenDiterima', $item['id_riwayat']) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-primary btn-sm">Kompen Diterima</button>
-                        </form>
                     </td>
 
                 </tr>

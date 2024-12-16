@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $tugas->pemberi_tugas }}</td>
-                    <td>{{ $tugas->jenisTugas->jenis_tugas ?? 'N/A' }}</td>
+                    <td>{{ $tugas->jenis_tugas ?? 'N/A' }}</td>
                     <td>{{ $tugas->deskripsi }}</td>
                     <td>{{ $tugas->kuota }}</td>
                     <td>{{ $tugas->jam_kompen }}</td>

@@ -34,7 +34,7 @@ class aWelcomeController extends Controller
             ['periode' => 'Genap 2022', 'jumlah' => ''],
             ['periode' => 'Ganjil 2023', 'jumlah' => ''],
             ['periode' => 'Genap 2023', 'jumlah' => ''],
-            ['periode' => 'Ganjil 2024', 'jumlah' => '']
+            ['periode' => 'Ganjil 2024', 'jumlah' =>'']
         ];
 
         // $grafik = PeriodeAkademikModel::withCount(['periode as jumlah' => function ($query) {
@@ -50,10 +50,10 @@ class aWelcomeController extends Controller
 
         // Mengirimkan data ke view a_welcome
         return view('a_welcome', [
-            'breadcrumb' => $breadcrumb, // Breadcrumb untuk navigasi
-            'activeMenu' => $activeMenu, // Menu aktif di UI
-            'data' => $data, // Statistik mahasiswa kompen
-            'grafik' => $grafik // Data untuk grafik
+            'breadcrumb' => $breadcrumb,
+            'activeMenu' => $activeMenu,
+            'data' => $data,
+            'grafik' => $grafik 
         ]);
     }
 }

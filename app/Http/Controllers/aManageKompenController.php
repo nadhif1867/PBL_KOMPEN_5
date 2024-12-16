@@ -43,8 +43,8 @@ class aManageKompenController extends Controller
                 $btn = '<button onclick="modalAction(\'' . url('/aManageKompen/' . $aManageKompen->id_tugas_admin . '/show_ajax') . '\')" class="btn btn-info btn-sm" style="margin-right: 5px;">Detail</button>';
                 $btn .= '<button onclick="modalAction(\'' . url('/aManageKompen/' . $aManageKompen->id_tugas_admin . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';
                 $btn .= '<button onclick="modalAction(\'' . url('/aManageKompen/' . $aManageKompen->id_tugas_admin . '/delete_ajax') . '\')"  class="btn btn-danger btn-sm" style="margin-left: 5px;">Hapus</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/aManageKompen/' . $aManageKompen->id_tugas_admin . '/apply') . '\')"  class="btn btn-success btn-sm" style="margin-top: 5px;">Dikerjakan Oleh</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/aManageKompen/' . $aManageKompen->id_tugas_admin . '/close') . '\')"  class="btn btn-warning btn-sm" style="margin-top: 1px;">Tugas Ditutup</button> ';
+                // $btn .= '<button onclick="modalAction(\'' . url('/aManageKompen/' . $aManageKompen->id_tugas_admin . '/apply') . '\')"  class="btn btn-success btn-sm" style="margin-top: 5px;">Dikerjakan Oleh</button> ';
+                // $btn .= '<button onclick="modalAction(\'' . url('/aManageKompen/' . $aManageKompen->id_tugas_admin . '/close') . '\')"  class="btn btn-warning btn-sm" style="margin-top: 1px;">Tugas Ditutup</button> ';
                 return $btn;
             })
             ->rawColumns(['aksi'])

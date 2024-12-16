@@ -135,7 +135,7 @@ class AuthController extends Controller
         return back()->withErrors(['loginError' => 'Username atau password salah.']);
     }
 
-    
+
     /**
      * Tampilkan halaman login dosen/tendik.
      */

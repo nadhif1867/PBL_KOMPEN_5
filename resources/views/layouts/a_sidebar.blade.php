@@ -213,7 +213,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/') }}" class="nav-link {{ ($activeMenu =='')? 'active' : '' }} ">
+                <a href="{{ url('/aReportKompen') }}" class="nav-link {{ ($activeMenu =='aReportKompen')? 'active' : '' }} ">
                     <i class="nav-icon fas fa-file-archive"></i>
                     <p>Report Kompen</p>
                 </a>

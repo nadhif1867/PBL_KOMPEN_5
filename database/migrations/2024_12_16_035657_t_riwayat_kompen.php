@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('t_riwayat_kompen', function (Blueprint $table) {
             $table->id('id_riwayat');
             $table->enum('status', array('diterima', 'belum_diterima'));
-            $table->string('file_upload');
+            $table->string('file_upload')->nullable();
             $table->unsignedBigInteger('id_progres_tugas')->index();
             $table->unsignedBigInteger('id_tugas_kompen')->index();
             $table->timestamps();

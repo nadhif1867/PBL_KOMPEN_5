@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BidangKompetensiModel;
 use App\Models\DosenModel;
 use App\Models\JenisKompenModel;
+use App\Models\PeriodeAkademikModel;
 use App\Models\TugasDosenModel;
 use App\Models\TugasKompenModel;
 use Illuminate\Http\Request;
@@ -58,11 +59,14 @@ class dManageKompenController extends Controller
         $aDosen = DosenModel::select('id_dosen', 'nama')->get();
         $aJenisKompen = JenisKompenModel::select('id_jenis_kompen', 'jenis_kompen')->get();
         $aBidangKompetensi = BidangKompetensiModel::select('id_bidkom', 'tag_bidkom')->get();
+        $aPeriodeAkademik = PeriodeAkademikModel::select('id_periode', 'tahun_ajaran')->get();
+
 
         return view('dManageKompen.create_ajax')
             ->with('aDosen', $aDosen)
             ->with('aJenisKompen', $aJenisKompen)
-            ->with('aBidangKompetensi', $aBidangKompetensi);
+            ->with('aBidangKompetensi', $aBidangKompetensi)
+            ->with('aPeriodeAkademik', $aPeriodeAkademik);
     }
 
     public function store_ajax(Request $request)
@@ -79,6 +83,7 @@ class dManageKompenController extends Controller
                 'kuota' => 'required|integer',
                 'id_bidkom' => 'required|integer',
                 'id_jenis_kompen' => 'required|integer',
+                'id_periode' => 'required|integer',
             ];
 
             $validator = Validator::make($request->all(), $rules);

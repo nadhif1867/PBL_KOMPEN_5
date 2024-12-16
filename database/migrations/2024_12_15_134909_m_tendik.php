@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('no_telepon');
             $table->string('nama');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->timestamps();
 
             $table->foreign('id_level')->references('id_level')->on('m_level');

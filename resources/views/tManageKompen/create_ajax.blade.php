@@ -80,6 +80,16 @@
                     </select>
                     <small id="error-id_jenis_kompen" class="error-text form-text text-danger"></small>
                 </div>
+                <div class="form-group">
+                    <label>Jenis Kompen</label>
+                    <select name="id_periode" id="id_periode" class="form-control" required>
+                        <option value="">- Pilih Periode -</option>
+                        @foreach ($aPeriodeAkademik as $p)
+                        <option value="{{ $p->id_periode }}">{{ $p->tahun_ajaran }}</option>
+                        @endforeach
+                    </select>
+                    <small id="error-id_periode" class="error-text form-text text-danger"></small>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
@@ -122,6 +132,10 @@
                     number: true,
                 },
                 id_jenis_kompen: {
+                    required: true,
+                    number: true,
+                },
+                id_periode: {
                     required: true,
                     number: true,
                 }

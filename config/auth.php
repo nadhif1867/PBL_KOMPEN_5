@@ -56,6 +56,10 @@ return [
             'driver' => 'session',
             'provider' => 'tendik',
         ],
+        'api' => [
+            'driver' => 'session', // Gunakan session-based authentication
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -99,23 +103,31 @@ return [
     // ],
 
     'providers' => [
-    'admins' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\AdminModel::class,
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminModel::class,
+        ],
+        'mahasiswa' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\MahasiswaModel::class,
+        ],
+        'dosen' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\DosenModel::class,
+        ],
+        'tendik' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\TendikModel::class,
+        ],
+        'users' => [
+            'driver' => 'token',
+            'provider' => 'users',
+        ],
+        'api' => [
+            'driver' => 'session', // Gunakan session-based authentication
+            'provider' => 'users',
+        ],
     ],
-    'mahasiswa' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\MahasiswaModel::class,
-    ],
-    'dosen' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\DosenModel::class,
-    ],
-    'tendik' => [
-        'driver' => 'eloquent',
-        'model' => App\Models\TendikModel::class,
-    ],
-],
 
     /*
     |--------------------------------------------------------------------------

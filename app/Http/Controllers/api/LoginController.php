@@ -9,7 +9,7 @@ use App\Models\UserModel;
 
 class LoginController extends Controller
 {
-    public function __invoke(Request $request)
+    public function login(Request $request)
     {
         // Validasi hanya untuk username dan password
         $request->validate([

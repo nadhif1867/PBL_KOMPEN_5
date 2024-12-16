@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('m_tugas_kompen', function (Blueprint $table) {
             $table->id('id_tugas_kompen');
             $table->unsignedBigInteger('id_mahasiswa')->index();
-            $table->unsignedBigInteger('id_tugas_admin')->nullable()->index(); 
+            $table->unsignedBigInteger('id_tugas_admin')->nullable()->index();
             $table->unsignedBigInteger('id_tugas_dosen')->nullable()->index();
             $table->unsignedBigInteger('id_tugas_tendik')->nullable()->index();
             $table->enum('status_penerimaan', array('request', 'diterima', 'dibuka'));

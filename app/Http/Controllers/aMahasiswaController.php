@@ -99,7 +99,7 @@ class aMahasiswaController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Data mahasiswa berhasil disimpan'
+                'message' => 'Data berhasil disimpan'
             ]);
         }
         return redirect('/aMahasiswa');
@@ -150,7 +150,7 @@ class aMahasiswaController extends Controller
                 $check->update($request->all());
                 return response()->json([
                     'status' => true,
-                    'message' => 'Data user berhasil diupdate'
+                    'message' => 'Data berhasil diupdate'
                 ]);
             } else {
                 return response()->json([

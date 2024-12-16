@@ -16,12 +16,12 @@ class dManageKompenController extends Controller
     public function index()
     {
         $breadcrumb = (object)[
-            'title' => 'Manage Kompen',
+            'title' => 'Manage Data Kompen',
             'list' => ['Home', 'Manage Kompen']
         ];
 
         $page = (object)[
-            'title' => 'Manage Kompen',
+            'title' => 'Manage Data Kompen',
         ];
 
         $activeMenu = 'dManageKompen';
@@ -42,8 +42,8 @@ class dManageKompenController extends Controller
                 $btn = '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/show_ajax') . '\')" class="btn btn-info btn-sm" style="margin-right: 5px;">Detail</button>';
                 $btn .= '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/edit_ajax') . '\')" class="btn btn-warning btn-sm">Edit</button> ';
                 $btn .= '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/delete_ajax') . '\')"  class="btn btn-danger btn-sm" style="margin-left: 5px;">Hapus</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/apply') . '\')"  class="btn btn-success btn-sm" style="margin-top: 5px;">Dikerjakan Oleh</button> ';
-                $btn .= '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/close') . '\')"  class="btn btn-warning btn-sm" style="margin-top: 1px;">Tugas Ditutup</button> ';
+                // $btn .= '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/apply') . '\')"  class="btn btn-success btn-sm" style="margin-top: 5px;">Dikerjakan Oleh</button> ';
+                // $btn .= '<button onclick="modalAction(\'' . url('/dManageKompen/' . $dManageKompen->id_tugas_dosen . '/close') . '\')"  class="btn btn-warning btn-sm" style="margin-top: 1px;">Tugas Ditutup</button> ';
                 return $btn;
             })
             ->rawColumns(['aksi'])

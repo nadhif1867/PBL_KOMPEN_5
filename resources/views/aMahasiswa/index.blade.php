@@ -5,7 +5,7 @@
     <div class="card-header">
         <h3 class="card-title">{{ $page->title }}</h3>
         <div class="card-tools">
-            <button onclick="modalAction('{{ url('aMahasiswa/create_ajax') }}')" class="btn btn-sm btn-success mt-1 fa fa-user">  Tambah</button>
+            <button onclick="modalAction('{{ url('aMahasiswa/create_ajax') }}')" class="btn btn-sm btn-success mt-1 fa fa-user"> Tambah</button>
         </div>
     </div>
     <div class="card-body">
@@ -19,13 +19,10 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Username</th>
+                    <th>Nama Lengkap</th>
                     <th>NIM</th>
-                    <th>Prodi</th>
+                    <th>Username</th>
                     <th>Email</th>
-                    <th>Tahun Masuk</th>
-                    <th>No Telepon</th>
-                    <th>Nama</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -64,7 +61,7 @@
                     searchable: false
                 },
                 {
-                    data: "username",
+                    data: "nama",
                     orderable: true,
                     searchable: true
                 },
@@ -74,27 +71,12 @@
                     searchable: true
                 },
                 {
-                    data: "prodi",
+                    data: "username",
                     orderable: true,
                     searchable: true
                 },
                 {
                     data: "email",
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: "tahun_masuk",
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: "no_telepon",
-                    orderable: true,
-                    searchable: true
-                },
-                {
-                    data: "nama",
                     orderable: true,
                     searchable: true
                 },

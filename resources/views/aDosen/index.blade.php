@@ -5,7 +5,7 @@
     <div class="card-header">
         <h3 class="card-title">{{ $page->title }}</h3>
         <div class="card-tools">
-            <button onclick="modalAction('{{ url('aDosen/create_ajax') }}')" class="btn btn-sm btn-success mt-1 fa fa-user">  Tambah</button>
+            <button onclick="modalAction('{{ url('aDosen/create_ajax') }}')" class="btn btn-sm btn-success mt-1 fa fa-user"> Tambah</button>
         </div>
     </div>
     <div class="card-body">
@@ -19,11 +19,10 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Username</th>
+                    <th>Nama Lengkap</th>
                     <th>NIP</th>
-                    <th>No Telepon</th>
+                    <th>Username</th>
                     <th>Email</th>
-                    <th>Nama</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -62,7 +61,7 @@
                     searchable: false
                 },
                 {
-                    data: "username",
+                    data: "nama",
                     orderable: true,
                     searchable: true
                 },
@@ -72,17 +71,12 @@
                     searchable: true
                 },
                 {
-                    data: "no_telepon",
+                    data: "username",
                     orderable: false,
                     searchable: false
                 },
                 {
                     data: "email",
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: "nama",
                     orderable: false,
                     searchable: false
                 },

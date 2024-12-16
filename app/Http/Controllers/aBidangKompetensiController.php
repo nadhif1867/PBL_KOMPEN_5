@@ -119,7 +119,7 @@ class aBidangKompetensiController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Data tendik berhasil disimpan'
+                'message' => 'Data berhasil disimpan'
             ]);
         }
         return redirect('/aBidangKompetensi');

@@ -12,9 +12,6 @@
             <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" alt="user" class="img-circle elevation-2">
         </div>
         <div class="info">
-            <li class="nav" style="color: white;">
-                <p>Moch. Nadhif Alkautsar</p>
-            </li>
             <li class="nav">
                 <a href="{{ url('/mProfile') }}" class="btn btn-block btn-sm btn-primary">Edit Profile</a>
             </li>
@@ -51,7 +48,7 @@
                 </a>
             </li>
             <li class="nav-item">
-            <a href="{{url('/')}}" class="btn btn-sm btn-danger">Logout</a>
+                <a href="{{url('/')}}" class="btn btn-sm btn-danger">Logout</a>
             </li>
         </ul>
     </nav>

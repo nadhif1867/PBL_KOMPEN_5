@@ -5,8 +5,7 @@ use App\Models\AlphaModel;
 use App\Models\PeriodeAkademikModel;
 
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class aWelcomeController extends Controller
 {
@@ -23,22 +22,18 @@ class aWelcomeController extends Controller
 
         $periods = PeriodeAkademikModel::all();
 
-        // Grafik untuk menampilkan jumlah mahasiswa berdasarkan periode
         $grafik = [];
 
         foreach ($periods as $period) {
-            // Hitung jumlah mahasiswa yang memiliki alpha pada periode ini
             $mahasiswaAlpha = AlphaModel::where('id_periode', $period->id_periode) // Gunakan id_periode
                 ->where('jumlah_alpha', '>', 0) // Mahasiswa yang memiliki alpha
                 ->count();
 
-            // Hitung jumlah mahasiswa yang sudah kompen dibayar pada periode ini
             $mahasiswaKompenSelesai = AlphaModel::where('id_periode', $period->id_periode) // Gunakan id_periode
                 ->whereNotNull('kompen_dibayar') // Kolom kompen_dibayar tidak null
                 ->where('kompen_dibayar', '>', 0) // Kompen dibayar lebih besar dari 0
                 ->count();
 
-            // Masukkan data periode dan jumlah mahasiswa alpha dan kompen selesai ke dalam array
             $grafik[] = [
                 'periode' => $period->semester . ' ' . $period->tahun_ajaran, // Menggabungkan semester dan tahun ajaran
                 'jumlah_alpha' => $mahasiswaAlpha,
@@ -46,7 +41,8 @@ class aWelcomeController extends Controller
             ];
         }
 
-        //Statistik jumlah mahasiswa kompen
+        $user = Auth::guard('admin')->user();
+
         $data = [
             'totalMahasiswaAlpha' => AlphaModel::count('jumlah_alpha'),
             'mahasiswaSelesai' => AlphaModel::whereNotNull('kompen_dibayar')

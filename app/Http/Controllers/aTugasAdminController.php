@@ -40,6 +40,14 @@ class aTugasAdminController extends Controller
 
         return DataTables::of($aTugasAdmins)
             ->addIndexColumn()
+            ->addColumn('deadline', function($row){
+                return $row->tanggal_mulai. '-' .$row->tanggal_selesai;
+            })
+            ->addColumn('aksi', function ($aTugasAdmin) {
+                $btn = '<button onclick="modalAction(\'' . url('/aTugasAdmin/' . $aTugasAdmin->id_tugas_admin . '/show_ajax') . '\')" class="btn btn-info btn-sm" style="margin-right: 5px;">Detail</button>';
+                return $btn;
+            })
+            ->rawColumns(['aksi'])
             ->make(true);
     }
 

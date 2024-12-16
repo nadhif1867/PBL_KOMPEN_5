@@ -3,6 +3,10 @@
         .sidebar {
             background-color: #0E1F43;
         }
+        .username {
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
     </style>
 </head>
 <div class="sidebar">
@@ -220,9 +224,15 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ url('/aManagePeriode') }}" class="nav-link {{ ($activeMenu =='aManagePeriode')? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-calendar"></i>
+                    <p>Manage Periode</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ url('/aJenisKompen') }}" class="nav-link {{ ($activeMenu =='aJenisKompen')? 'active' : '' }} ">
                     <i class="nav-icon fas fa-file"></i>
-                    <p>Manage Jenis Penugasan</p>
+                    <p>Jenis Penugasan</p>
                 </a>
             </li>
             <li class="nav-item">

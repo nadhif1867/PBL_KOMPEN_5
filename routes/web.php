@@ -216,8 +216,6 @@ Route::group(['prefix' => 'aMahasiswaKompen'], function () {
     Route::get('/{id}/show_ajax', [aMahasiswaKompenController::class, 'show_ajax']);
     Route::get('{id}/edit_ajax', [aMahasiswaKompenController::class, 'edit_ajax']);
     Route::put('/{id}/update_ajax', [aMahasiswaKompenController::class, 'update_ajax']);
-    Route::get('/import', [aMahasiswaKompenController::class, 'import']);
-    Route::post('/import_ajax', [aMahasiswaKompenController::class, 'import_ajax']);
 });
 
 // manage bidang kompetensi
@@ -313,6 +311,8 @@ Route::group(['prefix' => 'aManageMahasiswaKompen'], function () {
     Route::put('/{id}/update_ajax', [aManageMahasiswaKompenController::class, 'update_ajax']);
     Route::get('/{id}/delete_ajax', [aManageMahasiswaKompenController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [aManageMahasiswaKompenController::class, 'delete_ajax']);
+    Route::get('/import', [aManageMahasiswaKompenController::class, 'import']);
+    Route::post('/import_ajax', [aManageMahasiswaKompenController::class, 'import_ajax']);
 });
 
 // {{ dosen }}

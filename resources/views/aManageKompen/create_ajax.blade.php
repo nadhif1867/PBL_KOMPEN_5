@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label>Bidang Kompetensi</label>
                     <select name="id_bidkom" id="id_bidkom" class="form-control" required>
-                        <option value="">- Pilih User -</option>
+                        <option value="">- Pilih Bidang Kompetensi -</option>
                         @foreach ($aBidangKompetensi as $b)
                         <option value="{{ $b->id_bidkom }}">{{ $b->tag_bidkom }}</option>
                         @endforeach
@@ -82,6 +82,16 @@
                         @endforeach
                     </select>
                     <small id="error-id_jenis_kompen" class="error-text form-text text-danger"></small>
+                </div>
+                <div class="form-group">
+                    <label>Jenis Kompen</label>
+                    <select name="id_periode" id="id_periode" class="form-control" required>
+                        <option value="">- Pilih Periode -</option>
+                        @foreach ($aPeriodeAkademik as $p)
+                        <option value="{{ $p->id_periode }}">{{ $p->tahun_ajaran }}</option>
+                        @endforeach
+                    </select>
+                    <small id="error-id_periode" class="error-text form-text text-danger"></small>
                 </div>
             </div>
             <div class="modal-footer">
@@ -125,6 +135,10 @@
                     number: true,
                 },
                 id_jenis_kompen: {
+                    required: true,
+                    number: true,
+                },
+                id_periode: {
                     required: true,
                     number: true,
                 }

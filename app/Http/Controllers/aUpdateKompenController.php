@@ -77,37 +77,37 @@ class aUpdateKompenController extends Controller
         ]);
     }
 
-    // public function TugasSelesai($idProgres)
-    // {
-    //     try {
-    //         $progresTugas = ProgresTugasModel::findOrFail($idProgres);
-    //         $progresTugas->status_progres = 'selesai';
-    //         $progresTugas->save();
-
-    //         return redirect()->back()->with('success', 'Status progres berhasil diubah menjadi selesai.');
-    //     } catch (\Exception $e) {
-    //         return redirect()->back()->with('error', 'Gagal mengubah status progres: ' . $e->getMessage());
-    //     }
-    // }
-
-    public function updateTugasSelesai($idProgres, Request $request)
+    public function TugasSelesai($idProgres)
     {
         try {
             $progresTugas = ProgresTugasModel::findOrFail($idProgres);
             $progresTugas->status_progres = 'selesai';
             $progresTugas->save();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'Status progres berhasil diubah menjadi selesai.'
-            ]);
+            return redirect()->back()->with('success', 'Status progres berhasil diubah menjadi selesai.');
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Gagal mengubah status progres: ' . $e->getMessage()
-            ]);
+            return redirect()->back()->with('error', 'Gagal mengubah status progres: ' . $e->getMessage());
         }
     }
+
+    // public function updateTugasSelesai($idProgres, Request $request)
+    // {
+    //     try {
+    //         $progresTugas = ProgresTugasModel::findOrFail($idProgres);
+    //         $progresTugas->status_progres = 'selesai';
+    //         $progresTugas->save();
+
+    //         return response()->json([
+    //             'success' => true,
+    //             'message' => 'Status progres berhasil diubah menjadi selesai.'
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Gagal mengubah status progres: ' . $e->getMessage()
+    //         ]);
+    //     }
+    // }
 
     public function KompenDiterima($idRiwayat)
     {

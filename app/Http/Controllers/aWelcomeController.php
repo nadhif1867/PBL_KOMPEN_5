@@ -31,10 +31,10 @@ class aWelcomeController extends Controller
 
         // Data untuk grafik rata-rata jumlah mahasiswa kompen per periode
         $grafik = [
-            ['periode' => 'Genap 2022', 'jumlah' => 50],
-            ['periode' => 'Ganjil 2023', 'jumlah' => 75],
-            ['periode' => 'Genap 2023', 'jumlah' => 100],
-            ['periode' => 'Ganjil 2024', 'jumlah' => 80]
+            ['periode' => 'Genap 2022', 'jumlah' => ''],
+            ['periode' => 'Ganjil 2023', 'jumlah' => ''],
+            ['periode' => 'Genap 2023', 'jumlah' => ''],
+            ['periode' => 'Ganjil 2024', 'jumlah' => '']
         ];
 
         // $grafik = PeriodeAkademikModel::withCount(['periode as jumlah' => function ($query) {

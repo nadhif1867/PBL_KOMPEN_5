@@ -14,7 +14,7 @@ class MahasiswaModel extends Authenticatable
     protected $table = 'm_mahasiswa'; // Mendefinisikan nama tabel
     protected $primaryKey = 'id_mahasiswa'; // Mendefinisikan primary key
 
-    protected $fillable = ['id_level', 'username', 'password', 'nim', 'prodi', 'email', 'tahun_masuk', 'no_telepon', 'nama', 'avatar'];
+    protected $fillable = ['id_level', 'username', 'password', 'nim', 'prodi', 'email','kelas', 'semester', 'tahun_masuk', 'no_telepon', 'nama', 'avatar'];
 
     protected $hidden = ['password'];
 

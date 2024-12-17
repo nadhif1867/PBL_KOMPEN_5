@@ -53,6 +53,8 @@ class AuthController extends Controller
             'password'     => 'required|string|confirmed|min:5|max:50',
             'nama'         => 'required|string|max:100',
             'email'        => 'required|email|unique:m_mahasiswa,email|max:100',
+            'kelas'        => 'required|string|min:3',
+            'semester'     => 'required|string|min:5',
             'nim'          => 'required|numeric|digits:9|unique:m_mahasiswa,nim',
             'prodi'        => 'required|string|max:100',
             'tahun_masuk'  => 'required|numeric|min:1900|max:' . date('Y'),

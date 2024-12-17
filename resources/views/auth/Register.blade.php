@@ -168,6 +168,8 @@
             <input type="password" name="password" class="form-control" placeholder="Password" required minlength="5">
             <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password" required>
             <input type="text" name="nim" class="form-control" placeholder="NIM" required pattern="[0-9]{9}">
+            <input type="text" name="kelas" class="form-control" placeholde="Kelas" required>
+            <input type="text" name="semester" class="form-control" placeholde="Semester" required>
             <input type="text" name="prodi" class="form-control" placeholder="Program Studi" required>
             <input type="email" name="email" class="form-control" placeholder="Email" required>
             <input type="number" name="tahun_masuk" class="form-control" placeholder="Tahun Masuk" required min="1900" max="{{ date('Y') }}">

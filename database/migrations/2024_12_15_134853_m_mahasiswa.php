@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('no_telepon');
             $table->string('avatar')->nullable();
-            $table->string('kelas');
-            $table->string('semester');
+            $table->string('kelas')->nullable();
+            $table->string('semester')->nullable();
             $table->timestamps();
 
             $table->foreign('id_level')->references('id_level')->on('m_level');

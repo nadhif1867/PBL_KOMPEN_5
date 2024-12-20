@@ -48,12 +48,10 @@ class LihatPilihKompenController extends Controller
         $tugasDosen = TugasDosenModel::where('status', 'dibuka')->get();
         $tugasTendik = TugasTendikModel::where('status', 'dibuka')->get();
 
-
         $tugas = $tugas->merge($tugasAdmin->map(function ($task) use ($existingApplications) {
             $existingApplication = $existingApplications->first(function ($app) use ($task) {
                 return $app->id_tugas_admin == $task->id_tugas_admin;
             });
-
             $jenisKompen = JenisKompenModel::find($task->id_jenis_kompen);
             return (object)[
                 'id_tugas_kompen' => 'admin_' . $task->id_tugas_admin,
@@ -76,7 +74,6 @@ class LihatPilihKompenController extends Controller
                 return $app->id_tugas_dosen == $task->id_tugas_dosen;
             });
             $jenisKompen = JenisKompenModel::find($task->id_jenis_kompen);
-
             return (object)[
                 'id_tugas_kompen' => 'dosen_' . $task->id_tugas_dosen,
                 'pemberi_tugas' =>  $task->dosen->nama ?? 'Unknown Dosen',
@@ -92,7 +89,6 @@ class LihatPilihKompenController extends Controller
                 'waktu_pengerjaan' => Carbon::parse($task->tanggal_mulai)->format('d-m-Y') . ' - ' . Carbon::parse($task->tanggal_selesai)->format('d-m-Y')
             ];
         }));
-        
         $tugas = $tugas->merge($tugasTendik->map(function ($task) use ($existingApplications) {
             $existingApplication = $existingApplications->first(function ($app) use ($task) {
                 return $app->id_tugas_tendik == $task->id_tugas_tendik;

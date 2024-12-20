@@ -126,6 +126,7 @@ return [
         'api' => [
             'driver' => 'session', // Gunakan session-based authentication
             'provider' => 'users',
+            'hash' => false,
         ],
     ],
 

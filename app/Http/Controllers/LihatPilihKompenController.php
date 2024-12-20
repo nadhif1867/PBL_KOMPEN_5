@@ -92,7 +92,7 @@ class LihatPilihKompenController extends Controller
                 'waktu_pengerjaan' => Carbon::parse($task->tanggal_mulai)->format('d-m-Y') . ' - ' . Carbon::parse($task->tanggal_selesai)->format('d-m-Y')
             ];
         }));
-
+        
         $tugas = $tugas->merge($tugasTendik->map(function ($task) use ($existingApplications) {
             $existingApplication = $existingApplications->first(function ($app) use ($task) {
                 return $app->id_tugas_tendik == $task->id_tugas_tendik;

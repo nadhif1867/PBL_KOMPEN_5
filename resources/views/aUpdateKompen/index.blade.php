@@ -7,10 +7,26 @@
     </div>
     <div class="card-body">
         @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <script>
+            setTimeout(() => {
+                document.querySelector('.alert-success').classList.remove('fade');
+            }, 500);
+        </script>
         @endif
         @if (session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <script>
+            setTimeout(() => {
+                document.querySelector('.alert-danger').classList.remove('fade');
+            }, 500);
+        </script>
         @endif
 
         <table class="table table-bordered table-striped table-hover table-sm">
@@ -44,28 +60,25 @@
                         @endif
                     </td>
                     <td class="text-center">
-                        <form action="{{ route('aUpdateKompen.TugasSelesai', $item['id_progres_tugas']) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-success btn-sm">Tugas Selesai</button>
-                        </form>
-
-                        {{-- <form action="{{ route('aUpdateKompen.KompenDiterima', $item['id_riwayat']) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-primary btn-sm">Kompen Diterima</button>
-                        </form> --}}
-                        <form action="{{ route('aUpdateKompen.KompenDiterima', $item['id_riwayat']) }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit" class="btn btn-primary btn-sm"
-                                @if ($item['status'] == 'diterima') disabled @endif>
-                                Kompen Diterima
-                            </button>
-                        </form>
+                        @if ($item['status'] === 'selesai')
+                            <span class="badge bg-success">Selesai</span>
+                        @else
+                            <form action="{{ route('aUpdateKompen.TugasSelesai', $item['id_progres_tugas']) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-success btn-sm">Tugas Selesai</button>
+                            </form>
+                            <form action="{{ route('aUpdateKompen.KompenDiterima', $item['id_riwayat']) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-primary btn-sm"
+                                    @if ($item['status'] === 'diterima') disabled @endif>
+                                    Kompen Diterima
+                                </button>
+                            </form>
+                        @endif
                     </td>
-
                 </tr>
                 @endforeach
             </tbody>
-
         </table>
     </div>
 </div>

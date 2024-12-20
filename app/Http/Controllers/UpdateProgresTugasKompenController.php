@@ -39,13 +39,11 @@ class UpdateProgresTugasKompenController extends Controller
             ->get();
             // dd($progressData);
 
-        // Ambil semua data tugas yang diterima oleh mahasiswa (status 'diterima')
         $tugasKompen = TugasKompenModel::select('id_tugas_kompen', 'id_mahasiswa', 'id_tugas_admin', 'id_tugas_dosen', 'id_tugas_tendik', 'status_penerimaan', 'tanggal_apply')
             ->where('id_mahasiswa', $userId)
             ->where('status_penerimaan', 'diterima')
             ->get();
 
-        // Gabungkan data dari tabel progres tugas dan tugas
         $data = [];
         foreach ($progressData as $progress) {
             $tugas = $tugasKompen->first(function ($item) use ($progress) {
@@ -114,24 +112,45 @@ class UpdateProgresTugasKompenController extends Controller
         return view('mUpdateProgresTugasKompen.update_progres', compact('task'));
     }
 
+    // public function updateProgress(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'progress' => 'required|string|max:255'
+    //     ]);
+
+    //     $task = ProgresTugasModel::where('id_tugas_kompen', $id)->first();
+    //     if (!$task) {
+    //         return response()->json(['error' => 'Task not found'], 404);
+    //     }
+
+    //     // Update progress
+    //     $task->progress = $request->input('progress');
+    //     $task->save();
+
+    //     return response()->json(['success' => true, 'message' => 'Progress updated successfully']);
+    // }
+
     public function updateProgress(Request $request, $id)
-    {
-        $request->validate([
-            'progress' => 'required|string|max:255'
-        ]);
+{
+    $request->validate([
+        'progress' => 'required|numeric|min:0|max:100',
+    ], [
+        'progress.required' => 'Progres tidak boleh kosong.',
+        'progress.numeric' => 'Progres harus berupa angka.',
+        'progress.min' => 'Nilai progres tidak valid, harus antara 0-100%',
+        'progress.max' => 'Nilai progres tidak valid, harus antara 0-100%',
+    ]);
 
-        $task = ProgresTugasModel::where('id_tugas_kompen', $id)->first();
-        if (!$task) {
-            return response()->json(['error' => 'Task not found'], 404);
-        }
-
-        // Update progress
-        $task->progress = $request->input('progress');
-        $task->save();
-
-        return response()->json(['success' => true, 'message' => 'Progress updated successfully']);
+    $task = ProgresTugasModel::where('id_tugas_kompen', $id)->first();
+    if (!$task) {
+        return response()->json(['message' => 'Tugas tidak ditemukan.'], 404);
     }
 
+    $task->progress = $request->input('progress');
+    $task->save();
+
+    return response()->json(['success' => true, 'message' => 'Update Progres Tugas Kompen']);
+}
     public function qrcodeGenerate($id)
 {
     // Ambil data tugas berdasarkan ID
